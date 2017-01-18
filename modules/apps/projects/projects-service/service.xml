@@ -2,13 +2,12 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
 
 <service-builder package-path="com.liferay.gs.hack">
-	<namespace>FOO</namespace>
-	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
-	<entity local-service="true" name="Foo" remote-service="true" uuid="true">
+	<namespace>GS</namespace>
+	<entity local-service="true" name="Project" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
 
-		<column name="fooId" primary="true" type="long" />
+		<column name="projectId" primary="true" type="long" />
 
 		<!-- Group instance -->
 
@@ -24,27 +23,103 @@
 
 		<!-- Other fields -->
 
-		<column name="field1" type="String" />
-		<column name="field2" type="boolean" />
-		<column name="field3" type="int" />
-		<column name="field4" type="Date" />
-		<column name="field5" type="String" />
+		<column name="clientId" type="long" />
+		<column name="name" type="String" />
+		<column name="startDate" type="Date" />
+		<column name="endDate" type="Date" />
+		<column name="active" type="boolean" />
 
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="field1" />
+			<order-column name="startDate" />
 		</order>
 
 		<!-- Finder methods -->
 
-		<finder name="Field2" return-type="Collection">
-			<finder-column name="field2" />
+		<finder name="ClientId" return-type="Collection">
+			<finder-column name="clientId" />
+		</finder>
+
+		<finder name="Name" return-type="Project">
+			<finder-column name="name" />
+		</finder>
+
+		<finder name="active" return-type="Collection">
+			<finder-column name="active" />
+		</finder>
+
+		<finder name="clientId_active" return-type="Collection">
+			<finder-column name="clientId" />
+			<finder-column name="active" />
 		</finder>
 
 		<!-- References -->
 
 		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
 		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+
+	<entity local-service="true" name="ProjectUser" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="projectUserId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="projectId" type="long" />
+		<column name="employeeId" type="long" />
+		<column name="roleId" type="long" />
+
+		<column name="billRate" type="double" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="projectId" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="ProjectId" return-type="Collection">
+			<finder-column name="projectId" />
+		</finder>
+
+		<finder name="EmployeeId" return-type="Collection">
+			<finder-column name="employeeId" />
+		</finder>
+
+		<finder name="RoleId" return-type="Collection">
+			<finder-column name="roleId" />
+		</finder>
+
+		<finder name="Project_Employee" return-type="ProjectUser">
+			<finder-column name="projectId" />
+			<finder-column name="employeeId" />
+		</finder>
+
+		<finder name="Project_Role" return-type="Collection">
+			<finder-column name="projectId" />
+			<finder-column name="roleId" />
+		</finder>
+
+		<finder name="Project_Employee_Role" return-type="ProjectUser">
+			<finder-column name="projectId" />
+			<finder-column name="employeeId" />
+			<finder-column name="roleId" />
+		</finder>
 	</entity>
 </service-builder>
