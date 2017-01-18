@@ -1,0 +1,9 @@
+Bundle-Name: clients-api
+Bundle-SymbolicName: com.liferay.gs.hack.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.gs.hack.exception,\
+	com.liferay.gs.hack.model,\
+	com.liferay.gs.hack.service,\
+	com.liferay.gs.hack.service.persistence
+-includeresource: META-INF/service.xml=../clients-service/service.xml
