@@ -1,0 +1,6 @@
+Bundle-SymbolicName: reports.web
+Bundle-Version: 1.0.0
+Require-Capability: soy;filter:="(type=metal)"
+Include-Resource: package.json,\
+	META-INF/resources/js/Chart.js = node_modules/chart.js/dist/Chart.js
+Web-ContextPath: /reports-web
