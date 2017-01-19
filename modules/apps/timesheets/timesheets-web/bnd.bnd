@@ -1,0 +1,3 @@
+Bundle-Name: timesheets-web
+Bundle-SymbolicName: com.liferay.gs.hack.timesheets.portlet
+Bundle-Version: 1.0.0
