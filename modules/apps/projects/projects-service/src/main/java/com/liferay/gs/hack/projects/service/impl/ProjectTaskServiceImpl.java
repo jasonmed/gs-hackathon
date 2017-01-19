@@ -72,6 +72,7 @@ public class ProjectTaskServiceImpl extends ProjectTaskServiceBaseImpl {
 			companyId, clientId);
 	}
 
-	@ServiceReference
+
+	@ServiceReference (type = OrganizationLocalService.class)
 	private OrganizationLocalService _organizationLocalService;
 }
