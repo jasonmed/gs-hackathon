@@ -634,260 +634,6 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "projectTask.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "projectTask.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(projectTask.uuid IS NULL OR projectTask.uuid = '')";
-	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, ProjectTaskImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() },
-			ProjectTaskModelImpl.UUID_COLUMN_BITMASK |
-			ProjectTaskModelImpl.GROUPID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
-			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() });
-
-	/**
-	 * Returns the project task where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchProjectTaskException} if it could not be found.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching project task
-	 * @throws NoSuchProjectTaskException if a matching project task could not be found
-	 */
-	@Override
-	public ProjectTask findByUUID_G(String uuid, long groupId)
-		throws NoSuchProjectTaskException {
-		ProjectTask projectTask = fetchByUUID_G(uuid, groupId);
-
-		if (projectTask == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("uuid=");
-			msg.append(uuid);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchProjectTaskException(msg.toString());
-		}
-
-		return projectTask;
-	}
-
-	/**
-	 * Returns the project task where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the matching project task, or <code>null</code> if a matching project task could not be found
-	 */
-	@Override
-	public ProjectTask fetchByUUID_G(String uuid, long groupId) {
-		return fetchByUUID_G(uuid, groupId, true);
-	}
-
-	/**
-	 * Returns the project task where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching project task, or <code>null</code> if a matching project task could not be found
-	 */
-	@Override
-	public ProjectTask fetchByUUID_G(String uuid, long groupId,
-		boolean retrieveFromCache) {
-		Object[] finderArgs = new Object[] { uuid, groupId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(FINDER_PATH_FETCH_BY_UUID_G,
-					finderArgs, this);
-		}
-
-		if (result instanceof ProjectTask) {
-			ProjectTask projectTask = (ProjectTask)result;
-
-			if (!Objects.equals(uuid, projectTask.getUuid()) ||
-					(groupId != projectTask.getGroupId())) {
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_PROJECTTASK_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				List<ProjectTask> list = q.list();
-
-				if (list.isEmpty()) {
-					finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, list);
-				}
-				else {
-					ProjectTask projectTask = list.get(0);
-
-					result = projectTask;
-
-					cacheResult(projectTask);
-
-					if ((projectTask.getUuid() == null) ||
-							!projectTask.getUuid().equals(uuid) ||
-							(projectTask.getGroupId() != groupId)) {
-						finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, projectTask);
-					}
-				}
-			}
-			catch (Exception e) {
-				finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (ProjectTask)result;
-		}
-	}
-
-	/**
-	 * Removes the project task where uuid = &#63; and groupId = &#63; from the database.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the project task that was removed
-	 */
-	@Override
-	public ProjectTask removeByUUID_G(String uuid, long groupId)
-		throws NoSuchProjectTaskException {
-		ProjectTask projectTask = findByUUID_G(uuid, groupId);
-
-		return remove(projectTask);
-	}
-
-	/**
-	 * Returns the number of project tasks where uuid = &#63; and groupId = &#63;.
-	 *
-	 * @param uuid the uuid
-	 * @param groupId the group ID
-	 * @return the number of matching project tasks
-	 */
-	@Override
-	public int countByUUID_G(String uuid, long groupId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID_G;
-
-		Object[] finderArgs = new Object[] { uuid, groupId };
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_PROJECTTASK_WHERE);
-
-			boolean bindUuid = false;
-
-			if (uuid == null) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-			}
-			else if (uuid.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-			}
-			else {
-				bindUuid = true;
-
-				query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-			}
-
-			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (bindUuid) {
-					qPos.add(uuid);
-				}
-
-				qPos.add(groupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "projectTask.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "projectTask.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(projectTask.uuid IS NULL OR projectTask.uuid = '') AND ";
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "projectTask.groupId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID_C = new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, ProjectTaskImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByUuid_C",
@@ -1475,84 +1221,86 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	private static final String _FINDER_COLUMN_UUID_C_UUID_2 = "projectTask.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_C_UUID_3 = "(projectTask.uuid IS NULL OR projectTask.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_C_COMPANYID_2 = "projectTask.companyId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PROJECTID =
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANIZATIONID =
 		new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, ProjectTaskImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByProjectId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByOrganizationId",
 			new String[] {
 				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID =
 		new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, ProjectTaskImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByProjectId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByOrganizationId",
 			new String[] { Long.class.getName() },
-			ProjectTaskModelImpl.PROJECTID_COLUMN_BITMASK |
+			ProjectTaskModelImpl.ORGANIZATIONID_COLUMN_BITMASK |
 			ProjectTaskModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_PROJECTID = new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_ORGANIZATIONID = new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByProjectId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByOrganizationId",
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the project tasks where projectId = &#63;.
+	 * Returns all the project tasks where organizationId = &#63;.
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @return the matching project tasks
 	 */
 	@Override
-	public List<ProjectTask> findByProjectId(long projectId) {
-		return findByProjectId(projectId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+	public List<ProjectTask> findByOrganizationId(long organizationId) {
+		return findByOrganizationId(organizationId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the project tasks where projectId = &#63;.
+	 * Returns a range of all the project tasks where organizationId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProjectTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param start the lower bound of the range of project tasks
 	 * @param end the upper bound of the range of project tasks (not inclusive)
 	 * @return the range of matching project tasks
 	 */
 	@Override
-	public List<ProjectTask> findByProjectId(long projectId, int start, int end) {
-		return findByProjectId(projectId, start, end, null);
+	public List<ProjectTask> findByOrganizationId(long organizationId,
+		int start, int end) {
+		return findByOrganizationId(organizationId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the project tasks where projectId = &#63;.
+	 * Returns an ordered range of all the project tasks where organizationId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProjectTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param start the lower bound of the range of project tasks
 	 * @param end the upper bound of the range of project tasks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching project tasks
 	 */
 	@Override
-	public List<ProjectTask> findByProjectId(long projectId, int start,
-		int end, OrderByComparator<ProjectTask> orderByComparator) {
-		return findByProjectId(projectId, start, end, orderByComparator, true);
+	public List<ProjectTask> findByOrganizationId(long organizationId,
+		int start, int end, OrderByComparator<ProjectTask> orderByComparator) {
+		return findByOrganizationId(organizationId, start, end,
+			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the project tasks where projectId = &#63;.
+	 * Returns an ordered range of all the project tasks where organizationId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProjectTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param start the lower bound of the range of project tasks
 	 * @param end the upper bound of the range of project tasks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1560,8 +1308,8 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	 * @return the ordered range of matching project tasks
 	 */
 	@Override
-	public List<ProjectTask> findByProjectId(long projectId, int start,
-		int end, OrderByComparator<ProjectTask> orderByComparator,
+	public List<ProjectTask> findByOrganizationId(long organizationId,
+		int start, int end, OrderByComparator<ProjectTask> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1570,12 +1318,16 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID;
-			finderArgs = new Object[] { projectId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID;
+			finderArgs = new Object[] { organizationId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PROJECTID;
-			finderArgs = new Object[] { projectId, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ORGANIZATIONID;
+			finderArgs = new Object[] {
+					organizationId,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<ProjectTask> list = null;
@@ -1586,7 +1338,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (ProjectTask projectTask : list) {
-					if ((projectId != projectTask.getProjectId())) {
+					if ((organizationId != projectTask.getOrganizationId())) {
 						list = null;
 
 						break;
@@ -1608,7 +1360,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 			query.append(_SQL_SELECT_PROJECTTASK_WHERE);
 
-			query.append(_FINDER_COLUMN_PROJECTID_PROJECTID_2);
+			query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1630,7 +1382,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(projectId);
+				qPos.add(organizationId);
 
 				if (!pagination) {
 					list = (List<ProjectTask>)QueryUtil.list(q, getDialect(),
@@ -1663,18 +1415,18 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	}
 
 	/**
-	 * Returns the first project task in the ordered set where projectId = &#63;.
+	 * Returns the first project task in the ordered set where organizationId = &#63;.
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching project task
 	 * @throws NoSuchProjectTaskException if a matching project task could not be found
 	 */
 	@Override
-	public ProjectTask findByProjectId_First(long projectId,
+	public ProjectTask findByOrganizationId_First(long organizationId,
 		OrderByComparator<ProjectTask> orderByComparator)
 		throws NoSuchProjectTaskException {
-		ProjectTask projectTask = fetchByProjectId_First(projectId,
+		ProjectTask projectTask = fetchByOrganizationId_First(organizationId,
 				orderByComparator);
 
 		if (projectTask != null) {
@@ -1685,8 +1437,8 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("projectId=");
-		msg.append(projectId);
+		msg.append("organizationId=");
+		msg.append(organizationId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1694,16 +1446,16 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	}
 
 	/**
-	 * Returns the first project task in the ordered set where projectId = &#63;.
+	 * Returns the first project task in the ordered set where organizationId = &#63;.
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching project task, or <code>null</code> if a matching project task could not be found
 	 */
 	@Override
-	public ProjectTask fetchByProjectId_First(long projectId,
+	public ProjectTask fetchByOrganizationId_First(long organizationId,
 		OrderByComparator<ProjectTask> orderByComparator) {
-		List<ProjectTask> list = findByProjectId(projectId, 0, 1,
+		List<ProjectTask> list = findByOrganizationId(organizationId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1714,18 +1466,18 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	}
 
 	/**
-	 * Returns the last project task in the ordered set where projectId = &#63;.
+	 * Returns the last project task in the ordered set where organizationId = &#63;.
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching project task
 	 * @throws NoSuchProjectTaskException if a matching project task could not be found
 	 */
 	@Override
-	public ProjectTask findByProjectId_Last(long projectId,
+	public ProjectTask findByOrganizationId_Last(long organizationId,
 		OrderByComparator<ProjectTask> orderByComparator)
 		throws NoSuchProjectTaskException {
-		ProjectTask projectTask = fetchByProjectId_Last(projectId,
+		ProjectTask projectTask = fetchByOrganizationId_Last(organizationId,
 				orderByComparator);
 
 		if (projectTask != null) {
@@ -1736,8 +1488,8 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("projectId=");
-		msg.append(projectId);
+		msg.append("organizationId=");
+		msg.append(organizationId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1745,23 +1497,23 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	}
 
 	/**
-	 * Returns the last project task in the ordered set where projectId = &#63;.
+	 * Returns the last project task in the ordered set where organizationId = &#63;.
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching project task, or <code>null</code> if a matching project task could not be found
 	 */
 	@Override
-	public ProjectTask fetchByProjectId_Last(long projectId,
+	public ProjectTask fetchByOrganizationId_Last(long organizationId,
 		OrderByComparator<ProjectTask> orderByComparator) {
-		int count = countByProjectId(projectId);
+		int count = countByOrganizationId(organizationId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<ProjectTask> list = findByProjectId(projectId, count - 1, count,
-				orderByComparator);
+		List<ProjectTask> list = findByOrganizationId(organizationId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1771,17 +1523,17 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	}
 
 	/**
-	 * Returns the project tasks before and after the current project task in the ordered set where projectId = &#63;.
+	 * Returns the project tasks before and after the current project task in the ordered set where organizationId = &#63;.
 	 *
 	 * @param projectTaskId the primary key of the current project task
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next project task
 	 * @throws NoSuchProjectTaskException if a project task with the primary key could not be found
 	 */
 	@Override
-	public ProjectTask[] findByProjectId_PrevAndNext(long projectTaskId,
-		long projectId, OrderByComparator<ProjectTask> orderByComparator)
+	public ProjectTask[] findByOrganizationId_PrevAndNext(long projectTaskId,
+		long organizationId, OrderByComparator<ProjectTask> orderByComparator)
 		throws NoSuchProjectTaskException {
 		ProjectTask projectTask = findByPrimaryKey(projectTaskId);
 
@@ -1792,13 +1544,13 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 			ProjectTask[] array = new ProjectTaskImpl[3];
 
-			array[0] = getByProjectId_PrevAndNext(session, projectTask,
-					projectId, orderByComparator, true);
+			array[0] = getByOrganizationId_PrevAndNext(session, projectTask,
+					organizationId, orderByComparator, true);
 
 			array[1] = projectTask;
 
-			array[2] = getByProjectId_PrevAndNext(session, projectTask,
-					projectId, orderByComparator, false);
+			array[2] = getByOrganizationId_PrevAndNext(session, projectTask,
+					organizationId, orderByComparator, false);
 
 			return array;
 		}
@@ -1810,8 +1562,8 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 		}
 	}
 
-	protected ProjectTask getByProjectId_PrevAndNext(Session session,
-		ProjectTask projectTask, long projectId,
+	protected ProjectTask getByOrganizationId_PrevAndNext(Session session,
+		ProjectTask projectTask, long organizationId,
 		OrderByComparator<ProjectTask> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1826,7 +1578,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 		query.append(_SQL_SELECT_PROJECTTASK_WHERE);
 
-		query.append(_FINDER_COLUMN_PROJECTID_PROJECTID_2);
+		query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1896,7 +1648,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(projectId);
+		qPos.add(organizationId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(projectTask);
@@ -1917,29 +1669,29 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	}
 
 	/**
-	 * Removes all the project tasks where projectId = &#63; from the database.
+	 * Removes all the project tasks where organizationId = &#63; from the database.
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 */
 	@Override
-	public void removeByProjectId(long projectId) {
-		for (ProjectTask projectTask : findByProjectId(projectId,
+	public void removeByOrganizationId(long organizationId) {
+		for (ProjectTask projectTask : findByOrganizationId(organizationId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(projectTask);
 		}
 	}
 
 	/**
-	 * Returns the number of project tasks where projectId = &#63;.
+	 * Returns the number of project tasks where organizationId = &#63;.
 	 *
-	 * @param projectId the project ID
+	 * @param organizationId the organization ID
 	 * @return the number of matching project tasks
 	 */
 	@Override
-	public int countByProjectId(long projectId) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_PROJECTID;
+	public int countByOrganizationId(long organizationId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ORGANIZATIONID;
 
-		Object[] finderArgs = new Object[] { projectId };
+		Object[] finderArgs = new Object[] { organizationId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1948,7 +1700,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 			query.append(_SQL_COUNT_PROJECTTASK_WHERE);
 
-			query.append(_FINDER_COLUMN_PROJECTID_PROJECTID_2);
+			query.append(_FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2);
 
 			String sql = query.toString();
 
@@ -1961,7 +1713,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(projectId);
+				qPos.add(organizationId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1980,7 +1732,7 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_PROJECTID_PROJECTID_2 = "projectTask.projectId = ?";
+	private static final String _FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2 = "projectTask.organizationId = ?";
 
 	public ProjectTaskPersistenceImpl() {
 		setModelClass(ProjectTask.class);
@@ -1995,10 +1747,6 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	public void cacheResult(ProjectTask projectTask) {
 		entityCache.putResult(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskImpl.class, projectTask.getPrimaryKey(), projectTask);
-
-		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { projectTask.getUuid(), projectTask.getGroupId() },
-			projectTask);
 
 		projectTask.resetOriginalValues();
 	}
@@ -2052,8 +1800,6 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		clearUniqueFindersCache((ProjectTaskModelImpl)projectTask);
 	}
 
 	@Override
@@ -2064,59 +1810,6 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 		for (ProjectTask projectTask : projectTasks) {
 			entityCache.removeResult(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 				ProjectTaskImpl.class, projectTask.getPrimaryKey());
-
-			clearUniqueFindersCache((ProjectTaskModelImpl)projectTask);
-		}
-	}
-
-	protected void cacheUniqueFindersCache(
-		ProjectTaskModelImpl projectTaskModelImpl, boolean isNew) {
-		if (isNew) {
-			Object[] args = new Object[] {
-					projectTaskModelImpl.getUuid(),
-					projectTaskModelImpl.getGroupId()
-				};
-
-			finderCache.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
-				Long.valueOf(1));
-			finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
-				projectTaskModelImpl);
-		}
-		else {
-			if ((projectTaskModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						projectTaskModelImpl.getUuid(),
-						projectTaskModelImpl.getGroupId()
-					};
-
-				finderCache.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
-					Long.valueOf(1));
-				finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
-					projectTaskModelImpl);
-			}
-		}
-	}
-
-	protected void clearUniqueFindersCache(
-		ProjectTaskModelImpl projectTaskModelImpl) {
-		Object[] args = new Object[] {
-				projectTaskModelImpl.getUuid(),
-				projectTaskModelImpl.getGroupId()
-			};
-
-		finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-		finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-		if ((projectTaskModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-			args = new Object[] {
-					projectTaskModelImpl.getOriginalUuid(),
-					projectTaskModelImpl.getOriginalGroupId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-			finderCache.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 		}
 	}
 
@@ -2330,19 +2023,21 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 			}
 
 			if ((projectTaskModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						projectTaskModelImpl.getOriginalProjectId()
+						projectTaskModelImpl.getOriginalOrganizationId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_PROJECTID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID,
 					args);
 
-				args = new Object[] { projectTaskModelImpl.getProjectId() };
+				args = new Object[] { projectTaskModelImpl.getOrganizationId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_PROJECTID, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATIONID,
+					args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ORGANIZATIONID,
 					args);
 			}
 		}
@@ -2350,9 +2045,6 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 		entityCache.putResult(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskImpl.class, projectTask.getPrimaryKey(), projectTask,
 			false);
-
-		clearUniqueFindersCache(projectTaskModelImpl);
-		cacheUniqueFindersCache(projectTaskModelImpl, isNew);
 
 		projectTask.resetOriginalValues();
 
@@ -2371,14 +2063,14 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 		projectTaskImpl.setUuid(projectTask.getUuid());
 		projectTaskImpl.setProjectTaskId(projectTask.getProjectTaskId());
-		projectTaskImpl.setGroupId(projectTask.getGroupId());
+		projectTaskImpl.setOrganizationId(projectTask.getOrganizationId());
 		projectTaskImpl.setCompanyId(projectTask.getCompanyId());
 		projectTaskImpl.setUserId(projectTask.getUserId());
 		projectTaskImpl.setUserName(projectTask.getUserName());
 		projectTaskImpl.setCreateDate(projectTask.getCreateDate());
 		projectTaskImpl.setModifiedDate(projectTask.getModifiedDate());
-		projectTaskImpl.setProjectId(projectTask.getProjectId());
 		projectTaskImpl.setName(projectTask.getName());
+		projectTaskImpl.setDescription(projectTask.getDescription());
 
 		return projectTaskImpl;
 	}

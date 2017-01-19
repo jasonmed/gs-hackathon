@@ -21,7 +21,6 @@ import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
-import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.ShardedModel;
 import com.liferay.portal.kernel.model.StagedAuditedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -44,8 +43,8 @@ import java.util.Date;
  * @generated
  */
 @ProviderType
-public interface ProjectTaskModel extends BaseModel<ProjectTask>, GroupedModel,
-	ShardedModel, StagedAuditedModel {
+public interface ProjectTaskModel extends BaseModel<ProjectTask>, ShardedModel,
+	StagedAuditedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -98,20 +97,18 @@ public interface ProjectTaskModel extends BaseModel<ProjectTask>, GroupedModel,
 	public void setProjectTaskId(long projectTaskId);
 
 	/**
-	 * Returns the group ID of this project task.
+	 * Returns the organization ID of this project task.
 	 *
-	 * @return the group ID of this project task
+	 * @return the organization ID of this project task
 	 */
-	@Override
-	public long getGroupId();
+	public long getOrganizationId();
 
 	/**
-	 * Sets the group ID of this project task.
+	 * Sets the organization ID of this project task.
 	 *
-	 * @param groupId the group ID of this project task
+	 * @param organizationId the organization ID of this project task
 	 */
-	@Override
-	public void setGroupId(long groupId);
+	public void setOrganizationId(long organizationId);
 
 	/**
 	 * Returns the company ID of this project task.
@@ -211,20 +208,6 @@ public interface ProjectTaskModel extends BaseModel<ProjectTask>, GroupedModel,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the project ID of this project task.
-	 *
-	 * @return the project ID of this project task
-	 */
-	public long getProjectId();
-
-	/**
-	 * Sets the project ID of this project task.
-	 *
-	 * @param projectId the project ID of this project task
-	 */
-	public void setProjectId(long projectId);
-
-	/**
 	 * Returns the name of this project task.
 	 *
 	 * @return the name of this project task
@@ -238,6 +221,21 @@ public interface ProjectTaskModel extends BaseModel<ProjectTask>, GroupedModel,
 	 * @param name the name of this project task
 	 */
 	public void setName(String name);
+
+	/**
+	 * Returns the description of this project task.
+	 *
+	 * @return the description of this project task
+	 */
+	@AutoEscape
+	public String getDescription();
+
+	/**
+	 * Sets the description of this project task.
+	 *
+	 * @param description the description of this project task
+	 */
+	public void setDescription(String description);
 
 	@Override
 	public boolean isNew();

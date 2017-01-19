@@ -174,56 +174,6 @@ public interface ProjectTaskPersistence extends BasePersistence<ProjectTask> {
 	public int countByUuid(java.lang.String uuid);
 
 	/**
-	* Returns the project task where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchProjectTaskException} if it could not be found.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching project task
-	* @throws NoSuchProjectTaskException if a matching project task could not be found
-	*/
-	public ProjectTask findByUUID_G(java.lang.String uuid, long groupId)
-		throws NoSuchProjectTaskException;
-
-	/**
-	* Returns the project task where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the matching project task, or <code>null</code> if a matching project task could not be found
-	*/
-	public ProjectTask fetchByUUID_G(java.lang.String uuid, long groupId);
-
-	/**
-	* Returns the project task where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @param retrieveFromCache whether to retrieve from the finder cache
-	* @return the matching project task, or <code>null</code> if a matching project task could not be found
-	*/
-	public ProjectTask fetchByUUID_G(java.lang.String uuid, long groupId,
-		boolean retrieveFromCache);
-
-	/**
-	* Removes the project task where uuid = &#63; and groupId = &#63; from the database.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the project task that was removed
-	*/
-	public ProjectTask removeByUUID_G(java.lang.String uuid, long groupId)
-		throws NoSuchProjectTaskException;
-
-	/**
-	* Returns the number of project tasks where uuid = &#63; and groupId = &#63;.
-	*
-	* @param uuid the uuid
-	* @param groupId the group ID
-	* @return the number of matching project tasks
-	*/
-	public int countByUUID_G(java.lang.String uuid, long groupId);
-
-	/**
 	* Returns all the project tasks where uuid = &#63; and companyId = &#63;.
 	*
 	* @param uuid the uuid
@@ -371,136 +321,136 @@ public interface ProjectTaskPersistence extends BasePersistence<ProjectTask> {
 	public int countByUuid_C(java.lang.String uuid, long companyId);
 
 	/**
-	* Returns all the project tasks where projectId = &#63;.
+	* Returns all the project tasks where organizationId = &#63;.
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @return the matching project tasks
 	*/
-	public java.util.List<ProjectTask> findByProjectId(long projectId);
+	public java.util.List<ProjectTask> findByOrganizationId(long organizationId);
 
 	/**
-	* Returns a range of all the project tasks where projectId = &#63;.
+	* Returns a range of all the project tasks where organizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProjectTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param start the lower bound of the range of project tasks
 	* @param end the upper bound of the range of project tasks (not inclusive)
 	* @return the range of matching project tasks
 	*/
-	public java.util.List<ProjectTask> findByProjectId(long projectId,
-		int start, int end);
+	public java.util.List<ProjectTask> findByOrganizationId(
+		long organizationId, int start, int end);
 
 	/**
-	* Returns an ordered range of all the project tasks where projectId = &#63;.
+	* Returns an ordered range of all the project tasks where organizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProjectTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param start the lower bound of the range of project tasks
 	* @param end the upper bound of the range of project tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching project tasks
 	*/
-	public java.util.List<ProjectTask> findByProjectId(long projectId,
-		int start, int end,
+	public java.util.List<ProjectTask> findByOrganizationId(
+		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<ProjectTask> orderByComparator);
 
 	/**
-	* Returns an ordered range of all the project tasks where projectId = &#63;.
+	* Returns an ordered range of all the project tasks where organizationId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ProjectTaskModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param start the lower bound of the range of project tasks
 	* @param end the upper bound of the range of project tasks (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching project tasks
 	*/
-	public java.util.List<ProjectTask> findByProjectId(long projectId,
-		int start, int end,
+	public java.util.List<ProjectTask> findByOrganizationId(
+		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator<ProjectTask> orderByComparator,
 		boolean retrieveFromCache);
 
 	/**
-	* Returns the first project task in the ordered set where projectId = &#63;.
+	* Returns the first project task in the ordered set where organizationId = &#63;.
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching project task
 	* @throws NoSuchProjectTaskException if a matching project task could not be found
 	*/
-	public ProjectTask findByProjectId_First(long projectId,
+	public ProjectTask findByOrganizationId_First(long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<ProjectTask> orderByComparator)
 		throws NoSuchProjectTaskException;
 
 	/**
-	* Returns the first project task in the ordered set where projectId = &#63;.
+	* Returns the first project task in the ordered set where organizationId = &#63;.
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching project task, or <code>null</code> if a matching project task could not be found
 	*/
-	public ProjectTask fetchByProjectId_First(long projectId,
+	public ProjectTask fetchByOrganizationId_First(long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<ProjectTask> orderByComparator);
 
 	/**
-	* Returns the last project task in the ordered set where projectId = &#63;.
+	* Returns the last project task in the ordered set where organizationId = &#63;.
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching project task
 	* @throws NoSuchProjectTaskException if a matching project task could not be found
 	*/
-	public ProjectTask findByProjectId_Last(long projectId,
+	public ProjectTask findByOrganizationId_Last(long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<ProjectTask> orderByComparator)
 		throws NoSuchProjectTaskException;
 
 	/**
-	* Returns the last project task in the ordered set where projectId = &#63;.
+	* Returns the last project task in the ordered set where organizationId = &#63;.
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching project task, or <code>null</code> if a matching project task could not be found
 	*/
-	public ProjectTask fetchByProjectId_Last(long projectId,
+	public ProjectTask fetchByOrganizationId_Last(long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<ProjectTask> orderByComparator);
 
 	/**
-	* Returns the project tasks before and after the current project task in the ordered set where projectId = &#63;.
+	* Returns the project tasks before and after the current project task in the ordered set where organizationId = &#63;.
 	*
 	* @param projectTaskId the primary key of the current project task
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next project task
 	* @throws NoSuchProjectTaskException if a project task with the primary key could not be found
 	*/
-	public ProjectTask[] findByProjectId_PrevAndNext(long projectTaskId,
-		long projectId,
+	public ProjectTask[] findByOrganizationId_PrevAndNext(long projectTaskId,
+		long organizationId,
 		com.liferay.portal.kernel.util.OrderByComparator<ProjectTask> orderByComparator)
 		throws NoSuchProjectTaskException;
 
 	/**
-	* Removes all the project tasks where projectId = &#63; from the database.
+	* Removes all the project tasks where organizationId = &#63; from the database.
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	*/
-	public void removeByProjectId(long projectId);
+	public void removeByOrganizationId(long organizationId);
 
 	/**
-	* Returns the number of project tasks where projectId = &#63;.
+	* Returns the number of project tasks where organizationId = &#63;.
 	*
-	* @param projectId the project ID
+	* @param organizationId the organization ID
 	* @return the number of matching project tasks
 	*/
-	public int countByProjectId(long projectId);
+	public int countByOrganizationId(long organizationId);
 
 	/**
 	* Caches the project task in the entity cache if it is enabled.

@@ -94,15 +94,15 @@ public class ProjectTaskLocalServiceUtil {
 	}
 
 	/**
-	* Returns the project task matching the UUID and group.
+	* Returns the project task with the matching UUID and company.
 	*
 	* @param uuid the project task's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching project task, or <code>null</code> if a matching project task could not be found
 	*/
-	public static com.liferay.gs.hack.projects.model.ProjectTask fetchProjectTaskByUuidAndGroupId(
-		java.lang.String uuid, long groupId) {
-		return getService().fetchProjectTaskByUuidAndGroupId(uuid, groupId);
+	public static com.liferay.gs.hack.projects.model.ProjectTask fetchProjectTaskByUuidAndCompanyId(
+		java.lang.String uuid, long companyId) {
+		return getService().fetchProjectTaskByUuidAndCompanyId(uuid, companyId);
 	}
 
 	/**
@@ -119,17 +119,17 @@ public class ProjectTaskLocalServiceUtil {
 	}
 
 	/**
-	* Returns the project task matching the UUID and group.
+	* Returns the project task with the matching UUID and company.
 	*
 	* @param uuid the project task's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching project task
 	* @throws PortalException if a matching project task could not be found
 	*/
-	public static com.liferay.gs.hack.projects.model.ProjectTask getProjectTaskByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
+	public static com.liferay.gs.hack.projects.model.ProjectTask getProjectTaskByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getProjectTaskByUuidAndGroupId(uuid, groupId);
+		return getService().getProjectTaskByUuidAndCompanyId(uuid, companyId);
 	}
 
 	/**
@@ -243,6 +243,11 @@ public class ProjectTaskLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.gs.hack.projects.model.ProjectTask> findByOrganizationId(
+		long organizationId) {
+		return getService().findByOrganizationId(organizationId);
+	}
+
 	/**
 	* Returns a range of all the project tasks.
 	*
@@ -257,36 +262,6 @@ public class ProjectTaskLocalServiceUtil {
 	public static java.util.List<com.liferay.gs.hack.projects.model.ProjectTask> getProjectTasks(
 		int start, int end) {
 		return getService().getProjectTasks(start, end);
-	}
-
-	/**
-	* Returns all the project tasks matching the UUID and company.
-	*
-	* @param uuid the UUID of the project tasks
-	* @param companyId the primary key of the company
-	* @return the matching project tasks, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.gs.hack.projects.model.ProjectTask> getProjectTasksByUuidAndCompanyId(
-		java.lang.String uuid, long companyId) {
-		return getService().getProjectTasksByUuidAndCompanyId(uuid, companyId);
-	}
-
-	/**
-	* Returns a range of project tasks matching the UUID and company.
-	*
-	* @param uuid the UUID of the project tasks
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of project tasks
-	* @param end the upper bound of the range of project tasks (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching project tasks, or an empty list if no matches were found
-	*/
-	public static java.util.List<com.liferay.gs.hack.projects.model.ProjectTask> getProjectTasksByUuidAndCompanyId(
-		java.lang.String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.gs.hack.projects.model.ProjectTask> orderByComparator) {
-		return getService()
-				   .getProjectTasksByUuidAndCompanyId(uuid, companyId, start,
-			end, orderByComparator);
 	}
 
 	/**

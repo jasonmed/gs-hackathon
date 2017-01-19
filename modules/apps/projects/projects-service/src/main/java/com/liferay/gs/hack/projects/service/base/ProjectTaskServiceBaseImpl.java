@@ -16,9 +16,7 @@ package com.liferay.gs.hack.projects.service.base;
 
 import com.liferay.gs.hack.projects.model.ProjectTask;
 import com.liferay.gs.hack.projects.service.ProjectTaskService;
-import com.liferay.gs.hack.projects.service.persistence.ProjectPersistence;
 import com.liferay.gs.hack.projects.service.persistence.ProjectTaskPersistence;
-import com.liferay.gs.hack.projects.service.persistence.ProjectUserPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -54,62 +52,6 @@ public abstract class ProjectTaskServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.liferay.gs.hack.projects.service.ProjectTaskServiceUtil} to access the project task remote service.
 	 */
-
-	/**
-	 * Returns the project local service.
-	 *
-	 * @return the project local service
-	 */
-	public com.liferay.gs.hack.projects.service.ProjectLocalService getProjectLocalService() {
-		return projectLocalService;
-	}
-
-	/**
-	 * Sets the project local service.
-	 *
-	 * @param projectLocalService the project local service
-	 */
-	public void setProjectLocalService(
-		com.liferay.gs.hack.projects.service.ProjectLocalService projectLocalService) {
-		this.projectLocalService = projectLocalService;
-	}
-
-	/**
-	 * Returns the project remote service.
-	 *
-	 * @return the project remote service
-	 */
-	public com.liferay.gs.hack.projects.service.ProjectService getProjectService() {
-		return projectService;
-	}
-
-	/**
-	 * Sets the project remote service.
-	 *
-	 * @param projectService the project remote service
-	 */
-	public void setProjectService(
-		com.liferay.gs.hack.projects.service.ProjectService projectService) {
-		this.projectService = projectService;
-	}
-
-	/**
-	 * Returns the project persistence.
-	 *
-	 * @return the project persistence
-	 */
-	public ProjectPersistence getProjectPersistence() {
-		return projectPersistence;
-	}
-
-	/**
-	 * Sets the project persistence.
-	 *
-	 * @param projectPersistence the project persistence
-	 */
-	public void setProjectPersistence(ProjectPersistence projectPersistence) {
-		this.projectPersistence = projectPersistence;
-	}
 
 	/**
 	 * Returns the project task local service.
@@ -165,63 +107,6 @@ public abstract class ProjectTaskServiceBaseImpl extends BaseServiceImpl
 	public void setProjectTaskPersistence(
 		ProjectTaskPersistence projectTaskPersistence) {
 		this.projectTaskPersistence = projectTaskPersistence;
-	}
-
-	/**
-	 * Returns the project user local service.
-	 *
-	 * @return the project user local service
-	 */
-	public com.liferay.gs.hack.projects.service.ProjectUserLocalService getProjectUserLocalService() {
-		return projectUserLocalService;
-	}
-
-	/**
-	 * Sets the project user local service.
-	 *
-	 * @param projectUserLocalService the project user local service
-	 */
-	public void setProjectUserLocalService(
-		com.liferay.gs.hack.projects.service.ProjectUserLocalService projectUserLocalService) {
-		this.projectUserLocalService = projectUserLocalService;
-	}
-
-	/**
-	 * Returns the project user remote service.
-	 *
-	 * @return the project user remote service
-	 */
-	public com.liferay.gs.hack.projects.service.ProjectUserService getProjectUserService() {
-		return projectUserService;
-	}
-
-	/**
-	 * Sets the project user remote service.
-	 *
-	 * @param projectUserService the project user remote service
-	 */
-	public void setProjectUserService(
-		com.liferay.gs.hack.projects.service.ProjectUserService projectUserService) {
-		this.projectUserService = projectUserService;
-	}
-
-	/**
-	 * Returns the project user persistence.
-	 *
-	 * @return the project user persistence
-	 */
-	public ProjectUserPersistence getProjectUserPersistence() {
-		return projectUserPersistence;
-	}
-
-	/**
-	 * Sets the project user persistence.
-	 *
-	 * @param projectUserPersistence the project user persistence
-	 */
-	public void setProjectUserPersistence(
-		ProjectUserPersistence projectUserPersistence) {
-		this.projectUserPersistence = projectUserPersistence;
 	}
 
 	/**
@@ -423,24 +308,12 @@ public abstract class ProjectTaskServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.gs.hack.projects.service.ProjectLocalService.class)
-	protected com.liferay.gs.hack.projects.service.ProjectLocalService projectLocalService;
-	@BeanReference(type = com.liferay.gs.hack.projects.service.ProjectService.class)
-	protected com.liferay.gs.hack.projects.service.ProjectService projectService;
-	@BeanReference(type = ProjectPersistence.class)
-	protected ProjectPersistence projectPersistence;
 	@BeanReference(type = com.liferay.gs.hack.projects.service.ProjectTaskLocalService.class)
 	protected com.liferay.gs.hack.projects.service.ProjectTaskLocalService projectTaskLocalService;
 	@BeanReference(type = ProjectTaskService.class)
 	protected ProjectTaskService projectTaskService;
 	@BeanReference(type = ProjectTaskPersistence.class)
 	protected ProjectTaskPersistence projectTaskPersistence;
-	@BeanReference(type = com.liferay.gs.hack.projects.service.ProjectUserLocalService.class)
-	protected com.liferay.gs.hack.projects.service.ProjectUserLocalService projectUserLocalService;
-	@BeanReference(type = com.liferay.gs.hack.projects.service.ProjectUserService.class)
-	protected com.liferay.gs.hack.projects.service.ProjectUserService projectUserService;
-	@BeanReference(type = ProjectUserPersistence.class)
-	protected ProjectUserPersistence projectUserPersistence;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)

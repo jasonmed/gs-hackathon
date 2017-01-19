@@ -3,126 +3,6 @@
 
 <service-builder package-path="com.liferay.gs.hack.projects">
     <namespace>PS</namespace>
-    <entity local-service="true" name="Project" remote-service="true" uuid="true">
-
-        <!-- PK fields -->
-
-        <column name="projectId" primary="true" type="long" />
-
-        <!-- Group instance -->
-
-        <column name="groupId" type="long" />
-
-        <!-- Audit fields -->
-
-        <column name="companyId" type="long" />
-        <column name="userId" type="long" />
-        <column name="userName" type="String" />
-        <column name="createDate" type="Date" />
-        <column name="modifiedDate" type="Date" />
-
-        <!-- Other fields -->
-
-        <column name="clientId" type="long" />
-        <column name="name" type="String" />
-        <column name="startDate" type="Date" />
-        <column name="endDate" type="Date" />
-        <column name="active" type="boolean" />
-
-        <!-- Order -->
-
-        <order by="asc">
-            <order-column name="startDate" />
-        </order>
-
-        <!-- Finder methods -->
-
-        <finder name="ClientId" return-type="Collection">
-            <finder-column name="clientId" />
-        </finder>
-
-        <finder name="Name" return-type="Project">
-            <finder-column name="name" />
-        </finder>
-
-        <finder name="active" return-type="Collection">
-            <finder-column name="active" />
-        </finder>
-
-        <finder name="clientId_active" return-type="Collection">
-            <finder-column name="clientId" />
-            <finder-column name="active" />
-        </finder>
-
-        <!-- References -->
-
-        <reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
-        <reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
-    </entity>
-
-    <entity local-service="true" name="ProjectUser" remote-service="true" uuid="true">
-
-        <!-- PK fields -->
-
-        <column name="projectUserId" primary="true" type="long" />
-
-        <!-- Group instance -->
-
-        <column name="groupId" type="long" />
-
-        <!-- Audit fields -->
-
-        <column name="companyId" type="long" />
-        <column name="userId" type="long" />
-        <column name="userName" type="String" />
-        <column name="createDate" type="Date" />
-        <column name="modifiedDate" type="Date" />
-
-        <!-- Other fields -->
-
-        <column name="projectId" type="long" />
-        <column name="employeeId" type="long" />
-        <column name="roleId" type="long" />
-
-        <column name="billRate" type="double" />
-
-        <!-- Order -->
-
-        <order by="asc">
-            <order-column name="projectId" />
-        </order>
-
-        <!-- Finder methods -->
-
-        <finder name="ProjectId" return-type="Collection">
-            <finder-column name="projectId" />
-        </finder>
-
-        <finder name="EmployeeId" return-type="Collection">
-            <finder-column name="employeeId" />
-        </finder>
-
-        <finder name="RoleId" return-type="Collection">
-            <finder-column name="roleId" />
-        </finder>
-
-        <finder name="Project_Employee" return-type="ProjectUser">
-            <finder-column name="projectId" />
-            <finder-column name="employeeId" />
-        </finder>
-
-        <finder name="Project_Role" return-type="Collection">
-            <finder-column name="projectId" />
-            <finder-column name="roleId" />
-        </finder>
-
-        <finder name="Project_Employee_Role" return-type="ProjectUser">
-            <finder-column name="projectId" />
-            <finder-column name="employeeId" />
-            <finder-column name="roleId" />
-        </finder>
-    </entity>
-
     <entity local-service="true" name="ProjectTask" remote-service="true" uuid="true">
 
         <!-- PK fields -->
@@ -131,7 +11,7 @@
 
         <!-- Group instance -->
 
-        <column name="groupId" type="long" />
+        <column name="organizationId" type="long" />
 
         <!-- Audit fields -->
 
@@ -143,8 +23,8 @@
 
         <!-- Other fields -->
 
-        <column name="projectId" type="long" />
         <column name="name" type="String" />
+        <column name="description" type="String" />
 
         <!-- Order -->
 
@@ -154,8 +34,8 @@
 
         <!-- Finder methods -->
 
-        <finder name="ProjectId" return-type="Collection">
-            <finder-column name="projectId" />
+        <finder name="OrganizationId" return-type="Collection">
+            <finder-column name="organizationId" />
         </finder>
 
     </entity>

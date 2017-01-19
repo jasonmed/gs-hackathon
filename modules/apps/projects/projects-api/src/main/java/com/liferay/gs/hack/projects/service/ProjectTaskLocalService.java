@@ -105,15 +105,15 @@ public interface ProjectTaskLocalService extends BaseLocalService,
 	public ProjectTask fetchProjectTask(long projectTaskId);
 
 	/**
-	* Returns the project task matching the UUID and group.
+	* Returns the project task with the matching UUID and company.
 	*
 	* @param uuid the project task's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching project task, or <code>null</code> if a matching project task could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public ProjectTask fetchProjectTaskByUuidAndGroupId(java.lang.String uuid,
-		long groupId);
+	public ProjectTask fetchProjectTaskByUuidAndCompanyId(
+		java.lang.String uuid, long companyId);
 
 	/**
 	* Returns the project task with the primary key.
@@ -127,16 +127,16 @@ public interface ProjectTaskLocalService extends BaseLocalService,
 		throws PortalException;
 
 	/**
-	* Returns the project task matching the UUID and group.
+	* Returns the project task with the matching UUID and company.
 	*
 	* @param uuid the project task's UUID
-	* @param groupId the primary key of the group
+	* @param companyId the primary key of the company
 	* @return the matching project task
 	* @throws PortalException if a matching project task could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public ProjectTask getProjectTaskByUuidAndGroupId(java.lang.String uuid,
-		long groupId) throws PortalException;
+	public ProjectTask getProjectTaskByUuidAndCompanyId(java.lang.String uuid,
+		long companyId) throws PortalException;
 
 	/**
 	* Updates the project task in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
@@ -225,6 +225,8 @@ public interface ProjectTaskLocalService extends BaseLocalService,
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
+	public List<ProjectTask> findByOrganizationId(long organizationId);
+
 	/**
 	* Returns a range of all the project tasks.
 	*
@@ -238,32 +240,6 @@ public interface ProjectTaskLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<ProjectTask> getProjectTasks(int start, int end);
-
-	/**
-	* Returns all the project tasks matching the UUID and company.
-	*
-	* @param uuid the UUID of the project tasks
-	* @param companyId the primary key of the company
-	* @return the matching project tasks, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<ProjectTask> getProjectTasksByUuidAndCompanyId(
-		java.lang.String uuid, long companyId);
-
-	/**
-	* Returns a range of project tasks matching the UUID and company.
-	*
-	* @param uuid the UUID of the project tasks
-	* @param companyId the primary key of the company
-	* @param start the lower bound of the range of project tasks
-	* @param end the upper bound of the range of project tasks (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the range of matching project tasks, or an empty list if no matches were found
-	*/
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<ProjectTask> getProjectTasksByUuidAndCompanyId(
-		java.lang.String uuid, long companyId, int start, int end,
-		OrderByComparator<ProjectTask> orderByComparator);
 
 	/**
 	* Returns the number of rows matching the dynamic query.

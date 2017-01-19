@@ -36,14 +36,14 @@ public class ProjectTaskSoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setProjectTaskId(model.getProjectTaskId());
-		soapModel.setGroupId(model.getGroupId());
+		soapModel.setOrganizationId(model.getOrganizationId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setProjectId(model.getProjectId());
 		soapModel.setName(model.getName());
+		soapModel.setDescription(model.getDescription());
 
 		return soapModel;
 	}
@@ -112,12 +112,12 @@ public class ProjectTaskSoap implements Serializable {
 		_projectTaskId = projectTaskId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
+	public long getOrganizationId() {
+		return _organizationId;
 	}
 
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
+	public void setOrganizationId(long organizationId) {
+		_organizationId = organizationId;
 	}
 
 	public long getCompanyId() {
@@ -160,14 +160,6 @@ public class ProjectTaskSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getProjectId() {
-		return _projectId;
-	}
-
-	public void setProjectId(long projectId) {
-		_projectId = projectId;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -176,14 +168,22 @@ public class ProjectTaskSoap implements Serializable {
 		_name = name;
 	}
 
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
 	private String _uuid;
 	private long _projectTaskId;
-	private long _groupId;
+	private long _organizationId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _projectId;
 	private String _name;
+	private String _description;
 }

@@ -16,7 +16,10 @@ package com.liferay.gs.hack.projects.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.gs.hack.projects.model.ProjectTask;
 import com.liferay.gs.hack.projects.service.base.ProjectTaskLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the project task local service.
@@ -39,4 +42,8 @@ public class ProjectTaskLocalServiceImpl extends ProjectTaskLocalServiceBaseImpl
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.gs.hack.projects.service.ProjectTaskLocalServiceUtil} to access the project task local service.
 	 */
+
+	public List<ProjectTask> findByOrganizationId(long organizationId) {
+	    return projectTaskPersistence.findByOrganizationId(organizationId);
+    }
 }

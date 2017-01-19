@@ -24,9 +24,7 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.gs.hack.projects.model.ProjectTask;
 import com.liferay.gs.hack.projects.service.ProjectTaskLocalService;
-import com.liferay.gs.hack.projects.service.persistence.ProjectPersistence;
 import com.liferay.gs.hack.projects.service.persistence.ProjectTaskPersistence;
-import com.liferay.gs.hack.projects.service.persistence.ProjectUserPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -222,16 +220,16 @@ public abstract class ProjectTaskLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the project task matching the UUID and group.
+	 * Returns the project task with the matching UUID and company.
 	 *
 	 * @param uuid the project task's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching project task, or <code>null</code> if a matching project task could not be found
 	 */
 	@Override
-	public ProjectTask fetchProjectTaskByUuidAndGroupId(String uuid,
-		long groupId) {
-		return projectTaskPersistence.fetchByUUID_G(uuid, groupId);
+	public ProjectTask fetchProjectTaskByUuidAndCompanyId(String uuid,
+		long companyId) {
+		return projectTaskPersistence.fetchByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**
@@ -350,48 +348,17 @@ public abstract class ProjectTaskLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns all the project tasks matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the project tasks
-	 * @param companyId the primary key of the company
-	 * @return the matching project tasks, or an empty list if no matches were found
-	 */
-	@Override
-	public List<ProjectTask> getProjectTasksByUuidAndCompanyId(String uuid,
-		long companyId) {
-		return projectTaskPersistence.findByUuid_C(uuid, companyId);
-	}
-
-	/**
-	 * Returns a range of project tasks matching the UUID and company.
-	 *
-	 * @param uuid the UUID of the project tasks
-	 * @param companyId the primary key of the company
-	 * @param start the lower bound of the range of project tasks
-	 * @param end the upper bound of the range of project tasks (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the range of matching project tasks, or an empty list if no matches were found
-	 */
-	@Override
-	public List<ProjectTask> getProjectTasksByUuidAndCompanyId(String uuid,
-		long companyId, int start, int end,
-		OrderByComparator<ProjectTask> orderByComparator) {
-		return projectTaskPersistence.findByUuid_C(uuid, companyId, start, end,
-			orderByComparator);
-	}
-
-	/**
-	 * Returns the project task matching the UUID and group.
+	 * Returns the project task with the matching UUID and company.
 	 *
 	 * @param uuid the project task's UUID
-	 * @param groupId the primary key of the group
+	 * @param companyId the primary key of the company
 	 * @return the matching project task
 	 * @throws PortalException if a matching project task could not be found
 	 */
 	@Override
-	public ProjectTask getProjectTaskByUuidAndGroupId(String uuid, long groupId)
-		throws PortalException {
-		return projectTaskPersistence.findByUUID_G(uuid, groupId);
+	public ProjectTask getProjectTaskByUuidAndCompanyId(String uuid,
+		long companyId) throws PortalException {
+		return projectTaskPersistence.findByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**
@@ -433,43 +400,6 @@ public abstract class ProjectTaskLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the project local service.
-	 *
-	 * @return the project local service
-	 */
-	public com.liferay.gs.hack.projects.service.ProjectLocalService getProjectLocalService() {
-		return projectLocalService;
-	}
-
-	/**
-	 * Sets the project local service.
-	 *
-	 * @param projectLocalService the project local service
-	 */
-	public void setProjectLocalService(
-		com.liferay.gs.hack.projects.service.ProjectLocalService projectLocalService) {
-		this.projectLocalService = projectLocalService;
-	}
-
-	/**
-	 * Returns the project persistence.
-	 *
-	 * @return the project persistence
-	 */
-	public ProjectPersistence getProjectPersistence() {
-		return projectPersistence;
-	}
-
-	/**
-	 * Sets the project persistence.
-	 *
-	 * @param projectPersistence the project persistence
-	 */
-	public void setProjectPersistence(ProjectPersistence projectPersistence) {
-		this.projectPersistence = projectPersistence;
-	}
-
-	/**
 	 * Returns the project task local service.
 	 *
 	 * @return the project task local service
@@ -505,44 +435,6 @@ public abstract class ProjectTaskLocalServiceBaseImpl
 	public void setProjectTaskPersistence(
 		ProjectTaskPersistence projectTaskPersistence) {
 		this.projectTaskPersistence = projectTaskPersistence;
-	}
-
-	/**
-	 * Returns the project user local service.
-	 *
-	 * @return the project user local service
-	 */
-	public com.liferay.gs.hack.projects.service.ProjectUserLocalService getProjectUserLocalService() {
-		return projectUserLocalService;
-	}
-
-	/**
-	 * Sets the project user local service.
-	 *
-	 * @param projectUserLocalService the project user local service
-	 */
-	public void setProjectUserLocalService(
-		com.liferay.gs.hack.projects.service.ProjectUserLocalService projectUserLocalService) {
-		this.projectUserLocalService = projectUserLocalService;
-	}
-
-	/**
-	 * Returns the project user persistence.
-	 *
-	 * @return the project user persistence
-	 */
-	public ProjectUserPersistence getProjectUserPersistence() {
-		return projectUserPersistence;
-	}
-
-	/**
-	 * Sets the project user persistence.
-	 *
-	 * @param projectUserPersistence the project user persistence
-	 */
-	public void setProjectUserPersistence(
-		ProjectUserPersistence projectUserPersistence) {
-		this.projectUserPersistence = projectUserPersistence;
 	}
 
 	/**
@@ -710,18 +602,10 @@ public abstract class ProjectTaskLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.liferay.gs.hack.projects.service.ProjectLocalService.class)
-	protected com.liferay.gs.hack.projects.service.ProjectLocalService projectLocalService;
-	@BeanReference(type = ProjectPersistence.class)
-	protected ProjectPersistence projectPersistence;
 	@BeanReference(type = ProjectTaskLocalService.class)
 	protected ProjectTaskLocalService projectTaskLocalService;
 	@BeanReference(type = ProjectTaskPersistence.class)
 	protected ProjectTaskPersistence projectTaskPersistence;
-	@BeanReference(type = com.liferay.gs.hack.projects.service.ProjectUserLocalService.class)
-	protected com.liferay.gs.hack.projects.service.ProjectUserLocalService projectUserLocalService;
-	@BeanReference(type = ProjectUserPersistence.class)
-	protected ProjectUserPersistence projectUserPersistence;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = com.liferay.portal.kernel.service.ClassNameLocalService.class)

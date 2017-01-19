@@ -72,8 +72,8 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 		sb.append(uuid);
 		sb.append(", projectTaskId=");
 		sb.append(projectTaskId);
-		sb.append(", groupId=");
-		sb.append(groupId);
+		sb.append(", organizationId=");
+		sb.append(organizationId);
 		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", userId=");
@@ -84,10 +84,10 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", projectId=");
-		sb.append(projectId);
 		sb.append(", name=");
 		sb.append(name);
+		sb.append(", description=");
+		sb.append(description);
 		sb.append("}");
 
 		return sb.toString();
@@ -105,7 +105,7 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 		}
 
 		projectTaskImpl.setProjectTaskId(projectTaskId);
-		projectTaskImpl.setGroupId(groupId);
+		projectTaskImpl.setOrganizationId(organizationId);
 		projectTaskImpl.setCompanyId(companyId);
 		projectTaskImpl.setUserId(userId);
 
@@ -130,13 +130,18 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 			projectTaskImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		projectTaskImpl.setProjectId(projectId);
-
 		if (name == null) {
 			projectTaskImpl.setName(StringPool.BLANK);
 		}
 		else {
 			projectTaskImpl.setName(name);
+		}
+
+		if (description == null) {
+			projectTaskImpl.setDescription(StringPool.BLANK);
+		}
+		else {
+			projectTaskImpl.setDescription(description);
 		}
 
 		projectTaskImpl.resetOriginalValues();
@@ -150,7 +155,7 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 
 		projectTaskId = objectInput.readLong();
 
-		groupId = objectInput.readLong();
+		organizationId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
 
@@ -158,9 +163,8 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-
-		projectId = objectInput.readLong();
 		name = objectInput.readUTF();
+		description = objectInput.readUTF();
 	}
 
 	@Override
@@ -175,7 +179,7 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 
 		objectOutput.writeLong(projectTaskId);
 
-		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(organizationId);
 
 		objectOutput.writeLong(companyId);
 
@@ -191,24 +195,29 @@ public class ProjectTaskCacheModel implements CacheModel<ProjectTask>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(projectId);
-
 		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
 			objectOutput.writeUTF(name);
 		}
+
+		if (description == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(description);
+		}
 	}
 
 	public String uuid;
 	public long projectTaskId;
-	public long groupId;
+	public long organizationId;
 	public long companyId;
 	public long userId;
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long projectId;
 	public String name;
+	public String description;
 }

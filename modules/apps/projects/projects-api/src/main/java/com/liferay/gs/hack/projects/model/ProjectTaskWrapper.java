@@ -62,14 +62,14 @@ public class ProjectTaskWrapper implements ProjectTask,
 
 		attributes.put("uuid", getUuid());
 		attributes.put("projectTaskId", getProjectTaskId());
-		attributes.put("groupId", getGroupId());
+		attributes.put("organizationId", getOrganizationId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("projectId", getProjectId());
 		attributes.put("name", getName());
+		attributes.put("description", getDescription());
 
 		return attributes;
 	}
@@ -88,10 +88,10 @@ public class ProjectTaskWrapper implements ProjectTask,
 			setProjectTaskId(projectTaskId);
 		}
 
-		Long groupId = (Long)attributes.get("groupId");
+		Long organizationId = (Long)attributes.get("organizationId");
 
-		if (groupId != null) {
-			setGroupId(groupId);
+		if (organizationId != null) {
+			setOrganizationId(organizationId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -124,16 +124,16 @@ public class ProjectTaskWrapper implements ProjectTask,
 			setModifiedDate(modifiedDate);
 		}
 
-		Long projectId = (Long)attributes.get("projectId");
-
-		if (projectId != null) {
-			setProjectId(projectId);
-		}
-
 		String name = (String)attributes.get("name");
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String description = (String)attributes.get("description");
+
+		if (description != null) {
+			setDescription(description);
 		}
 	}
 
@@ -190,6 +190,16 @@ public class ProjectTaskWrapper implements ProjectTask,
 	@Override
 	public java.lang.Object clone() {
 		return new ProjectTaskWrapper((ProjectTask)_projectTask.clone());
+	}
+
+	/**
+	* Returns the description of this project task.
+	*
+	* @return the description of this project task
+	*/
+	@Override
+	public java.lang.String getDescription() {
+		return _projectTask.getDescription();
 	}
 
 	/**
@@ -273,13 +283,13 @@ public class ProjectTaskWrapper implements ProjectTask,
 	}
 
 	/**
-	* Returns the group ID of this project task.
+	* Returns the organization ID of this project task.
 	*
-	* @return the group ID of this project task
+	* @return the organization ID of this project task
 	*/
 	@Override
-	public long getGroupId() {
-		return _projectTask.getGroupId();
+	public long getOrganizationId() {
+		return _projectTask.getOrganizationId();
 	}
 
 	/**
@@ -290,16 +300,6 @@ public class ProjectTaskWrapper implements ProjectTask,
 	@Override
 	public long getPrimaryKey() {
 		return _projectTask.getPrimaryKey();
-	}
-
-	/**
-	* Returns the project ID of this project task.
-	*
-	* @return the project ID of this project task
-	*/
-	@Override
-	public long getProjectId() {
-		return _projectTask.getProjectId();
 	}
 
 	/**
@@ -352,6 +352,16 @@ public class ProjectTaskWrapper implements ProjectTask,
 		_projectTask.setCreateDate(createDate);
 	}
 
+	/**
+	* Sets the description of this project task.
+	*
+	* @param description the description of this project task
+	*/
+	@Override
+	public void setDescription(java.lang.String description) {
+		_projectTask.setDescription(description);
+	}
+
 	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
 		_projectTask.setExpandoBridgeAttributes(expandoBridge);
@@ -366,16 +376,6 @@ public class ProjectTaskWrapper implements ProjectTask,
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_projectTask.setExpandoBridgeAttributes(serviceContext);
-	}
-
-	/**
-	* Sets the group ID of this project task.
-	*
-	* @param groupId the group ID of this project task
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_projectTask.setGroupId(groupId);
 	}
 
 	/**
@@ -404,6 +404,16 @@ public class ProjectTaskWrapper implements ProjectTask,
 	}
 
 	/**
+	* Sets the organization ID of this project task.
+	*
+	* @param organizationId the organization ID of this project task
+	*/
+	@Override
+	public void setOrganizationId(long organizationId) {
+		_projectTask.setOrganizationId(organizationId);
+	}
+
+	/**
 	* Sets the primary key of this project task.
 	*
 	* @param primaryKey the primary key of this project task
@@ -416,16 +426,6 @@ public class ProjectTaskWrapper implements ProjectTask,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_projectTask.setPrimaryKeyObj(primaryKeyObj);
-	}
-
-	/**
-	* Sets the project ID of this project task.
-	*
-	* @param projectId the project ID of this project task
-	*/
-	@Override
-	public void setProjectId(long projectId) {
-		_projectTask.setProjectId(projectId);
 	}
 
 	/**

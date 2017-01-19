@@ -75,31 +75,31 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "projectTaskId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
+			{ "organizationId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "projectId", Types.BIGINT },
-			{ "name", Types.VARCHAR }
+			{ "name", Types.VARCHAR },
+			{ "description", Types.VARCHAR }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
 	static {
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("projectTaskId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("organizationId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("projectId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table PS_ProjectTask (uuid_ VARCHAR(75) null,projectTaskId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,projectId LONG,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table PS_ProjectTask (uuid_ VARCHAR(75) null,projectTaskId LONG not null primary key,organizationId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table PS_ProjectTask";
 	public static final String ORDER_BY_JPQL = " ORDER BY projectTask.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY PS_ProjectTask.name ASC";
@@ -116,10 +116,9 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 				"value.object.column.bitmask.enabled.com.liferay.gs.hack.projects.model.ProjectTask"),
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
-	public static final long PROJECTID_COLUMN_BITMASK = 4L;
-	public static final long UUID_COLUMN_BITMASK = 8L;
-	public static final long NAME_COLUMN_BITMASK = 16L;
+	public static final long ORGANIZATIONID_COLUMN_BITMASK = 2L;
+	public static final long UUID_COLUMN_BITMASK = 4L;
+	public static final long NAME_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -136,14 +135,14 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 
 		model.setUuid(soapModel.getUuid());
 		model.setProjectTaskId(soapModel.getProjectTaskId());
-		model.setGroupId(soapModel.getGroupId());
+		model.setOrganizationId(soapModel.getOrganizationId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setProjectId(soapModel.getProjectId());
 		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
 
 		return model;
 	}
@@ -210,14 +209,14 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 
 		attributes.put("uuid", getUuid());
 		attributes.put("projectTaskId", getProjectTaskId());
-		attributes.put("groupId", getGroupId());
+		attributes.put("organizationId", getOrganizationId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("projectId", getProjectId());
 		attributes.put("name", getName());
+		attributes.put("description", getDescription());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -239,10 +238,10 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 			setProjectTaskId(projectTaskId);
 		}
 
-		Long groupId = (Long)attributes.get("groupId");
+		Long organizationId = (Long)attributes.get("organizationId");
 
-		if (groupId != null) {
-			setGroupId(groupId);
+		if (organizationId != null) {
+			setOrganizationId(organizationId);
 		}
 
 		Long companyId = (Long)attributes.get("companyId");
@@ -275,16 +274,16 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 			setModifiedDate(modifiedDate);
 		}
 
-		Long projectId = (Long)attributes.get("projectId");
-
-		if (projectId != null) {
-			setProjectId(projectId);
-		}
-
 		String name = (String)attributes.get("name");
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String description = (String)attributes.get("description");
+
+		if (description != null) {
+			setDescription(description);
 		}
 	}
 
@@ -325,25 +324,25 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 
 	@JSON
 	@Override
-	public long getGroupId() {
-		return _groupId;
+	public long getOrganizationId() {
+		return _organizationId;
 	}
 
 	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
+	public void setOrganizationId(long organizationId) {
+		_columnBitmask |= ORGANIZATIONID_COLUMN_BITMASK;
 
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
+		if (!_setOriginalOrganizationId) {
+			_setOriginalOrganizationId = true;
 
-			_originalGroupId = _groupId;
+			_originalOrganizationId = _organizationId;
 		}
 
-		_groupId = groupId;
+		_organizationId = organizationId;
 	}
 
-	public long getOriginalGroupId() {
-		return _originalGroupId;
+	public long getOriginalOrganizationId() {
+		return _originalOrganizationId;
 	}
 
 	@JSON
@@ -442,29 +441,6 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 
 	@JSON
 	@Override
-	public long getProjectId() {
-		return _projectId;
-	}
-
-	@Override
-	public void setProjectId(long projectId) {
-		_columnBitmask |= PROJECTID_COLUMN_BITMASK;
-
-		if (!_setOriginalProjectId) {
-			_setOriginalProjectId = true;
-
-			_originalProjectId = _projectId;
-		}
-
-		_projectId = projectId;
-	}
-
-	public long getOriginalProjectId() {
-		return _originalProjectId;
-	}
-
-	@JSON
-	@Override
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -479,6 +455,22 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 		_columnBitmask = -1L;
 
 		_name = name;
+	}
+
+	@JSON
+	@Override
+	public String getDescription() {
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
+	}
+
+	@Override
+	public void setDescription(String description) {
+		_description = description;
 	}
 
 	@Override
@@ -520,14 +512,14 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 
 		projectTaskImpl.setUuid(getUuid());
 		projectTaskImpl.setProjectTaskId(getProjectTaskId());
-		projectTaskImpl.setGroupId(getGroupId());
+		projectTaskImpl.setOrganizationId(getOrganizationId());
 		projectTaskImpl.setCompanyId(getCompanyId());
 		projectTaskImpl.setUserId(getUserId());
 		projectTaskImpl.setUserName(getUserName());
 		projectTaskImpl.setCreateDate(getCreateDate());
 		projectTaskImpl.setModifiedDate(getModifiedDate());
-		projectTaskImpl.setProjectId(getProjectId());
 		projectTaskImpl.setName(getName());
+		projectTaskImpl.setDescription(getDescription());
 
 		projectTaskImpl.resetOriginalValues();
 
@@ -590,19 +582,15 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 
 		projectTaskModelImpl._originalUuid = projectTaskModelImpl._uuid;
 
-		projectTaskModelImpl._originalGroupId = projectTaskModelImpl._groupId;
+		projectTaskModelImpl._originalOrganizationId = projectTaskModelImpl._organizationId;
 
-		projectTaskModelImpl._setOriginalGroupId = false;
+		projectTaskModelImpl._setOriginalOrganizationId = false;
 
 		projectTaskModelImpl._originalCompanyId = projectTaskModelImpl._companyId;
 
 		projectTaskModelImpl._setOriginalCompanyId = false;
 
 		projectTaskModelImpl._setModifiedDate = false;
-
-		projectTaskModelImpl._originalProjectId = projectTaskModelImpl._projectId;
-
-		projectTaskModelImpl._setOriginalProjectId = false;
 
 		projectTaskModelImpl._columnBitmask = 0;
 	}
@@ -621,7 +609,7 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 
 		projectTaskCacheModel.projectTaskId = getProjectTaskId();
 
-		projectTaskCacheModel.groupId = getGroupId();
+		projectTaskCacheModel.organizationId = getOrganizationId();
 
 		projectTaskCacheModel.companyId = getCompanyId();
 
@@ -653,14 +641,20 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 			projectTaskCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		projectTaskCacheModel.projectId = getProjectId();
-
 		projectTaskCacheModel.name = getName();
 
 		String name = projectTaskCacheModel.name;
 
 		if ((name != null) && (name.length() == 0)) {
 			projectTaskCacheModel.name = null;
+		}
+
+		projectTaskCacheModel.description = getDescription();
+
+		String description = projectTaskCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
+			projectTaskCacheModel.description = null;
 		}
 
 		return projectTaskCacheModel;
@@ -674,8 +668,8 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 		sb.append(getUuid());
 		sb.append(", projectTaskId=");
 		sb.append(getProjectTaskId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
+		sb.append(", organizationId=");
+		sb.append(getOrganizationId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -686,10 +680,10 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", projectId=");
-		sb.append(getProjectId());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", description=");
+		sb.append(getDescription());
 		sb.append("}");
 
 		return sb.toString();
@@ -712,8 +706,8 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 		sb.append(getProjectTaskId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
+			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
+		sb.append(getOrganizationId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -736,12 +730,12 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>projectId</column-name><column-value><![CDATA[");
-		sb.append(getProjectId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -756,9 +750,9 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 	private String _uuid;
 	private String _originalUuid;
 	private long _projectTaskId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
+	private long _organizationId;
+	private long _originalOrganizationId;
+	private boolean _setOriginalOrganizationId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
@@ -767,10 +761,8 @@ public class ProjectTaskModelImpl extends BaseModelImpl<ProjectTask>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _projectId;
-	private long _originalProjectId;
-	private boolean _setOriginalProjectId;
 	private String _name;
+	private String _description;
 	private long _columnBitmask;
 	private ProjectTask _escapedModel;
 }
