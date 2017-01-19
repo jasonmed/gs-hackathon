@@ -243,6 +243,11 @@ public class TimesheetApprovalLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.gs.hack.timesheets.model.TimesheetApproval> getTimesheetApprovalByTimesheetId(
+		long timesheetId) {
+		return getService().getTimesheetApprovalByTimesheetId(timesheetId);
+	}
+
 	/**
 	* Returns a range of all the timesheet approvals.
 	*

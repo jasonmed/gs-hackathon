@@ -258,6 +258,12 @@ public class TimesheetApprovalLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.gs.hack.timesheets.model.TimesheetApproval> getTimesheetApprovalByTimesheetId(
+		long timesheetId) {
+		return _timesheetApprovalLocalService.getTimesheetApprovalByTimesheetId(timesheetId);
+	}
+
 	/**
 	* Returns a range of all the timesheet approvals.
 	*

@@ -39,8 +39,7 @@ public class TimesheetDetailsWebPortlet extends MVCPortlet {
 		long timesheetId = timesheet.getTimesheetId();
 
 		List<TimesheetTaskDuration> timesheetTaskDurations =
-			_timesheetTaskDurationLocalService.
-				getTimesheetTaskDurationByTimesheetId(timesheetId);
+			_timesheetTaskDurationLocalService.findByTimesheetId(timesheetId);
 
 		renderRequest.setAttribute("timesheetTaskDurations", timesheetTaskDurations);
 
