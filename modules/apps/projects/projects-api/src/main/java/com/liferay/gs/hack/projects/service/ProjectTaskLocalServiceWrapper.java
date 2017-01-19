@@ -33,6 +33,11 @@ public class ProjectTaskLocalServiceWrapper implements ProjectTaskLocalService,
 		_projectTaskLocalService = projectTaskLocalService;
 	}
 
+	@Override
+	public boolean isExistingTask(long ptojectId, java.lang.String name) {
+		return _projectTaskLocalService.isExistingTask(ptojectId, name);
+	}
+
 	/**
 	* Adds the project task to the database. Also notifies the appropriate model listeners.
 	*
@@ -143,6 +148,14 @@ public class ProjectTaskLocalServiceWrapper implements ProjectTaskLocalService,
 	public com.liferay.gs.hack.projects.model.ProjectTask updateProjectTask(
 		com.liferay.gs.hack.projects.model.ProjectTask projectTask) {
 		return _projectTaskLocalService.updateProjectTask(projectTask);
+	}
+
+	@Override
+	public com.liferay.gs.hack.projects.model.ProjectTask updateProjectTask(
+		long companyId, long userId, long organizationId,
+		java.lang.String name, java.lang.String description) {
+		return _projectTaskLocalService.updateProjectTask(companyId, userId,
+			organizationId, name, description);
 	}
 
 	@Override

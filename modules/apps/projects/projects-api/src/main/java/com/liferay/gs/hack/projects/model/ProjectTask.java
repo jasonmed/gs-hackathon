@@ -53,4 +53,6 @@ public interface ProjectTask extends ProjectTaskModel, PersistedModel {
 				return ProjectTask.class;
 			}
 		};
+
+	public com.liferay.portal.kernel.model.Organization getClient();
 }

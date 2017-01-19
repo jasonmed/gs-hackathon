@@ -453,6 +453,58 @@ public interface ProjectTaskPersistence extends BasePersistence<ProjectTask> {
 	public int countByOrganizationId(long organizationId);
 
 	/**
+	* Returns the project task where organizationId = &#63; and name = &#63; or throws a {@link NoSuchProjectTaskException} if it could not be found.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the matching project task
+	* @throws NoSuchProjectTaskException if a matching project task could not be found
+	*/
+	public ProjectTask findByOrganization_Name(long organizationId,
+		java.lang.String name) throws NoSuchProjectTaskException;
+
+	/**
+	* Returns the project task where organizationId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the matching project task, or <code>null</code> if a matching project task could not be found
+	*/
+	public ProjectTask fetchByOrganization_Name(long organizationId,
+		java.lang.String name);
+
+	/**
+	* Returns the project task where organizationId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching project task, or <code>null</code> if a matching project task could not be found
+	*/
+	public ProjectTask fetchByOrganization_Name(long organizationId,
+		java.lang.String name, boolean retrieveFromCache);
+
+	/**
+	* Removes the project task where organizationId = &#63; and name = &#63; from the database.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the project task that was removed
+	*/
+	public ProjectTask removeByOrganization_Name(long organizationId,
+		java.lang.String name) throws NoSuchProjectTaskException;
+
+	/**
+	* Returns the number of project tasks where organizationId = &#63; and name = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the number of matching project tasks
+	*/
+	public int countByOrganization_Name(long organizationId,
+		java.lang.String name);
+
+	/**
 	* Caches the project task in the entity cache if it is enabled.
 	*
 	* @param projectTask the project task

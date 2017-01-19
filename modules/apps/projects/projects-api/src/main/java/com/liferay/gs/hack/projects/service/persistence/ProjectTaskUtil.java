@@ -605,6 +605,72 @@ public class ProjectTaskUtil {
 	}
 
 	/**
+	* Returns the project task where organizationId = &#63; and name = &#63; or throws a {@link NoSuchProjectTaskException} if it could not be found.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the matching project task
+	* @throws NoSuchProjectTaskException if a matching project task could not be found
+	*/
+	public static ProjectTask findByOrganization_Name(long organizationId,
+		java.lang.String name)
+		throws com.liferay.gs.hack.projects.exception.NoSuchProjectTaskException {
+		return getPersistence().findByOrganization_Name(organizationId, name);
+	}
+
+	/**
+	* Returns the project task where organizationId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the matching project task, or <code>null</code> if a matching project task could not be found
+	*/
+	public static ProjectTask fetchByOrganization_Name(long organizationId,
+		java.lang.String name) {
+		return getPersistence().fetchByOrganization_Name(organizationId, name);
+	}
+
+	/**
+	* Returns the project task where organizationId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @param retrieveFromCache whether to retrieve from the finder cache
+	* @return the matching project task, or <code>null</code> if a matching project task could not be found
+	*/
+	public static ProjectTask fetchByOrganization_Name(long organizationId,
+		java.lang.String name, boolean retrieveFromCache) {
+		return getPersistence()
+				   .fetchByOrganization_Name(organizationId, name,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the project task where organizationId = &#63; and name = &#63; from the database.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the project task that was removed
+	*/
+	public static ProjectTask removeByOrganization_Name(long organizationId,
+		java.lang.String name)
+		throws com.liferay.gs.hack.projects.exception.NoSuchProjectTaskException {
+		return getPersistence().removeByOrganization_Name(organizationId, name);
+	}
+
+	/**
+	* Returns the number of project tasks where organizationId = &#63; and name = &#63;.
+	*
+	* @param organizationId the organization ID
+	* @param name the name
+	* @return the number of matching project tasks
+	*/
+	public static int countByOrganization_Name(long organizationId,
+		java.lang.String name) {
+		return getPersistence().countByOrganization_Name(organizationId, name);
+	}
+
+	/**
 	* Caches the project task in the entity cache if it is enabled.
 	*
 	* @param projectTask the project task
