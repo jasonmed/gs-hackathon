@@ -1,8 +1,8 @@
-<%@ page import="com.liferay.portal.kernel.model.Organization" %>
-<%@ page
-		import="com.liferay.gs.hack.tasks.web.portlet.ClientProjectProviderUtil" %>
-<%@ page import="java.util.List" %>
 <%@ include file="/init.jsp" %>
+
+<%@ page import="com.liferay.portal.kernel.model.Organization" %>
+<%@ page import="com.liferay.gs.hack.tasks.web.portlet.ClientProjectProviderUtil" %>
+<%@ page import="java.util.List" %>
 
 <%
 List<Organization> clients = ClientProjectProviderUtil.getAllClients();
@@ -37,15 +37,36 @@ List<Organization> clients = ClientProjectProviderUtil.getAllClients();
 
 	</aui:select>
 
-	<aui:select label="select-a-project" name="projectId" required="true" showEmptyOption="false">
-
-		//TODO : display list of projects from ClientProjectProviderUtil
-
-		<%--<aui:option label="<%= project.getName() %>" value="<%= project.getOrganizationId() %>" />--%>
-
-	</aui:select>
+	<aui:select label="select-a-project" name="projectId" required="true" showEmptyOption="false" />
 
 	<aui:button name="saveButton" primary="false" type="submit" value="update" />
-
-
 </aui:form>
+
+<aui:script use="aui-base,event-valuechange">
+	var clientIdSelect = A.one('#<portlet:namespace/>clientId');
+	var projectIdSelect = A.one('#<portlet:namespace/>projectId');
+		
+	clientIdSelect.on(
+		'valuechange',
+		function(event) {
+			var ct = event.currentTarget;
+			
+			if (event.newVal != event.prevVal){
+				projectIdSelect.all('option').remove();
+				
+				Liferay.Service(
+					'/ps.projecttask/get-all-projects',
+					{
+						companyId: themeDisplay.getCompanyId(),
+						clientId: ct.attr('value');
+					},
+					function(data) {
+						var option = A.Node.create('<option/>');
+
+						console.log(data);
+					}
+				);
+			}
+		}
+	);
+</aui:script>
