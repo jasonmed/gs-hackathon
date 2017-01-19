@@ -19,6 +19,9 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.gs.hack.projects.model.ProjectTask;
 import com.liferay.gs.hack.projects.service.base.ProjectTaskLocalServiceBaseImpl;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Date;
 import java.util.List;
@@ -91,4 +94,5 @@ public class ProjectTaskLocalServiceImpl extends ProjectTaskLocalServiceBaseImpl
 
 		return true;
 	}
+
 }
