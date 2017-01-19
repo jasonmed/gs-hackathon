@@ -14,6 +14,9 @@ import org.osgi.service.component.annotations.Reference;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+/**
+ * @author Prathima Shreenath
+ */
 @Component(
 	immediate = true,
 	property = {
