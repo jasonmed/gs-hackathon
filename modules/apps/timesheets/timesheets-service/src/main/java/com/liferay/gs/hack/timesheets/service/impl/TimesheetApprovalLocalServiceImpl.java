@@ -16,7 +16,8 @@ package com.liferay.gs.hack.timesheets.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.gs.hack.timesheets.service.base.TimesheetApprovalLocalServiceBaseImpl;
+import com.liferay.gs.hack.model.TimesheetApproval;
+import com.liferay.gs.hack.service.base.TimesheetApprovalLocalServiceBaseImpl;
 
 /**
  * The implementation of the timesheet approval local service.
@@ -40,4 +41,8 @@ public class TimesheetApprovalLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.gs.hack.timesheets.service.TimesheetApprovalLocalServiceUtil} to access the timesheet approval local service.
 	 */
+
+	public List<TimesheetApproval> getTimesheetApprovalByTimesheetId(long timesheetId) {
+		return timesheetApprovalPersistence.fe
+	}
 }

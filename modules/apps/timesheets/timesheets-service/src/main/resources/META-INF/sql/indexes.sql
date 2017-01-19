@@ -5,6 +5,7 @@ create index IX_50184F4E on TS_Timesheet (userId, startDate);
 create index IX_EF5D80C on TS_Timesheet (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_8FECF18E on TS_Timesheet (uuid_[$COLUMN_LENGTH:75$], groupId);
 
+create index IX_69DBF082 on TS_TimesheetApproval (timesheetId);
 create index IX_B68FA0EF on TS_TimesheetApproval (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_90199731 on TS_TimesheetApproval (uuid_[$COLUMN_LENGTH:75$], groupId);
 
