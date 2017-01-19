@@ -1,7 +1,7 @@
 package com.liferay.gs.hack.timesheets.portlet.command;
 
-import com.liferay.gs.hack.service.TimesheetLocalService;
 import com.liferay.gs.hack.timesheets.portlet.TimesheetPortletKeys;
+import com.liferay.gs.hack.timesheets.service.TimesheetLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
