@@ -43,6 +43,17 @@ public class ProjectTaskServiceWrapper implements ProjectTaskService,
 	}
 
 	@Override
+	public java.util.List<com.liferay.portal.kernel.model.Organization> getAllClients() {
+		return _projectTaskService.getAllClients();
+	}
+
+	@Override
+	public java.util.List<com.liferay.portal.kernel.model.Organization> getAllProjects(
+		long companyId, long clientId) {
+		return _projectTaskService.getAllProjects(companyId, clientId);
+	}
+
+	@Override
 	public ProjectTaskService getWrappedService() {
 		return _projectTaskService;
 	}
