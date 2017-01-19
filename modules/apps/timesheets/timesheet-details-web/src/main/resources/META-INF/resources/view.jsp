@@ -12,7 +12,7 @@
 			<c:forEach items="${timesheetTaskDurations}" var="taskDuration">
 				<tr>
 					<td><fmt:formatDate pattern="MMM dd, yyyy" value="${taskDuration.taskDate}"/></td>
-					<td>${}</td>
+					<td></td>
 					<td>${taskDuration.duration}</td>
 					<td>${taskDuration.comment}</td>
 				</tr>
