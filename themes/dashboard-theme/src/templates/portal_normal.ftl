@@ -10,6 +10,18 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	<@liferay_util["include"] page=top_head_include />
+	
+	<link rel="apple-touch-icon" sizes="76x76" href="${images_folder}/apple-touch-icon.png">
+	
+	<link rel="icon" type="image/png" href="${images_folder}/favicon-32x32.png" sizes="32x32">
+	
+	<link rel="icon" type="image/png" href="${images_folder}/favicon-16x16.png" sizes="16x16">
+	
+	<link rel="manifest" href="${images_folder}/manifest.json">
+	
+	<link rel="mask-icon" href="${images_folder}/safari-pinned-tab.svg" color="#5bbad5">
+	
+	<meta name="theme-color" content="#ffffff">
 </head>
 
 <body class="${css_class}">
