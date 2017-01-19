@@ -41,6 +41,11 @@ public class ReportsServiceLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.gs.hack.reports.service.impl.ReportsServiceLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static java.lang.Double generateUserTaskTime(long userId,
+		long projectTaskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().generateUserTaskTime(userId, projectTaskId);
+	}
 
 	/**
 	* Returns the OSGi service identifier.
@@ -49,6 +54,30 @@ public class ReportsServiceLocalServiceUtil {
 	*/
 	public static java.lang.String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> generateClientReport(
+		long clientOrganizationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().generateClientReport(clientOrganizationId);
+	}
+
+	public static java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> generateProjectReport(
+		long projectOrganizationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().generateProjectReport(projectOrganizationId);
+	}
+
+	public static java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> generateTaskReport(
+		long projectTaskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().generateTaskReport(projectTaskId);
+	}
+
+	public static java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> mergeReport(
+		java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> totalReport,
+		java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> report) {
+		return getService().mergeReport(totalReport, report);
 	}
 
 	public static ReportsServiceLocalService getService() {

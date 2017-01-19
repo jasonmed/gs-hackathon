@@ -9,6 +9,7 @@ create index IX_69DBF082 on TS_TimesheetApproval (timesheetId);
 create index IX_B68FA0EF on TS_TimesheetApproval (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_90199731 on TS_TimesheetApproval (uuid_[$COLUMN_LENGTH:75$], groupId);
 
+create index IX_4B743F4C on TS_TimesheetTask (projectTaskId);
 create index IX_9CC60C00 on TS_TimesheetTask (timesheetId);
 create index IX_AFC10431 on TS_TimesheetTask (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_896EE2F3 on TS_TimesheetTask (uuid_[$COLUMN_LENGTH:75$], groupId);

@@ -16,7 +16,24 @@ package com.liferay.gs.hack.reports.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.gs.hack.projects.model.ProjectTask;
+import com.liferay.gs.hack.projects.service.ProjectTaskLocalService;
 import com.liferay.gs.hack.reports.service.base.ReportsServiceLocalServiceBaseImpl;
+import com.liferay.gs.hack.timesheets.model.Timesheet;
+import com.liferay.gs.hack.timesheets.model.TimesheetTask;
+import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
+import com.liferay.gs.hack.timesheets.service.TimesheetLocalService;
+import com.liferay.gs.hack.timesheets.service.TimesheetTaskLocalService;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.spring.extender.service.ServiceReference;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * The implementation of the reports service local service.
@@ -40,4 +57,117 @@ public class ReportsServiceLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.gs.hack.reports.service.ReportsServiceLocalServiceUtil} to access the reports service local service.
 	 */
+
+	public Double generateUserTaskTime(long userId, long projectTaskId) throws PortalException {
+		double total = 0;
+
+		List<Timesheet> timesheets = _timesheetLocalService.findByUserId(userId);
+
+		for (Timesheet timesheet : timesheets) {
+			List<TimesheetTask> timesheetTasks =
+				_timesheetTaskLocalService.findByTimesheetId(
+					timesheet.getTimesheetId());
+
+			for (TimesheetTask timesheetTask : timesheetTasks) {
+				if (timesheetTask.getProjectTaskId() == projectTaskId) {
+					List<TimesheetTaskDuration> durations =
+						timesheetTask.getTimesheetTaskDurations();
+
+					for (TimesheetTaskDuration duration : durations) {
+						total += duration.getDuration();
+					}
+				}
+			}
+		}
+
+		return total;
+	}
+
+	public Map<User, Double> generateTaskReport(
+			long projectTaskId)
+		throws PortalException {
+
+		Map<User, Double> projectReport = new HashMap<User, Double>();
+
+		List<TimesheetTask> timesheetTasks =
+			_timesheetTaskLocalService.findByProjectTaskId(projectTaskId);
+
+		for (TimesheetTask timesheetTask : timesheetTasks) {
+			User user = userLocalService.getUser(timesheetTask.getUserId());
+
+			double total = generateUserTaskTime(
+				timesheetTask.getUserId(), projectTaskId);
+
+			projectReport.put(user, total);
+		}
+
+		return projectReport;
+	}
+
+	public Map<User, Double> generateProjectReport(
+			long projectOrganizationId)
+		throws PortalException{
+
+		Map<User, Double> projectReport = new HashMap<User, Double>();
+
+		List<ProjectTask> projectTasks =
+			_projectTaskLocalService.findByOrganizationId(
+				projectOrganizationId);
+
+		for (ProjectTask projectTask : projectTasks) {
+			Map<User, Double> projectTaskReport =
+				generateTaskReport(projectTask.getProjectTaskId());
+
+			projectReport = mergeReport(projectReport, projectTaskReport);
+		}
+
+		return projectReport;
+
+	}
+
+	public Map<User, Double> generateClientReport(
+			long clientOrganizationId)
+		throws PortalException {
+
+		Organization client =
+			OrganizationLocalServiceUtil.getOrganization(
+				clientOrganizationId);
+
+		Map<User, Double> clientReport = new HashMap<User, Double>();
+
+		List<Organization> projects = client.getSuborganizations();
+
+		for (Organization project : projects) {
+			Map<User, Double> projectReport =
+				generateProjectReport(project.getOrganizationId());
+
+			clientReport = mergeReport(clientReport, projectReport);
+		}
+
+		return clientReport;
+	}
+
+	public Map<User, Double> mergeReport(Map<User, Double> totalReport, Map<User, Double> report) {
+		for (Map.Entry<User, Double> reportEntry : report.entrySet()) {
+			if (!totalReport.containsKey(reportEntry.getKey())) {
+				totalReport.put(reportEntry.getKey(), 0d);
+			}
+
+			double totalTime =
+				totalReport.get(reportEntry.getValue()) +
+					reportEntry.getValue();
+
+			totalReport.put(reportEntry.getKey(), totalTime);
+		}
+
+		return totalReport;
+	}
+
+	@ServiceReference
+	private TimesheetLocalService _timesheetLocalService;
+	@ServiceReference
+	private TimesheetTaskLocalService _timesheetTaskLocalService;
+
+	@ServiceReference
+	private ProjectTaskLocalService _projectTaskLocalService;
 }

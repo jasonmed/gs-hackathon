@@ -117,9 +117,10 @@ public class TimesheetTaskModelImpl extends BaseModelImpl<TimesheetTask>
 			true);
 	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 	public static final long GROUPID_COLUMN_BITMASK = 2L;
-	public static final long TIMESHEETID_COLUMN_BITMASK = 4L;
-	public static final long UUID_COLUMN_BITMASK = 8L;
-	public static final long CREATEDATE_COLUMN_BITMASK = 16L;
+	public static final long PROJECTTASKID_COLUMN_BITMASK = 4L;
+	public static final long TIMESHEETID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 16L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -389,7 +390,19 @@ public class TimesheetTaskModelImpl extends BaseModelImpl<TimesheetTask>
 
 	@Override
 	public void setProjectTaskId(long projectTaskId) {
+		_columnBitmask |= PROJECTTASKID_COLUMN_BITMASK;
+
+		if (!_setOriginalProjectTaskId) {
+			_setOriginalProjectTaskId = true;
+
+			_originalProjectTaskId = _projectTaskId;
+		}
+
 		_projectTaskId = projectTaskId;
+	}
+
+	public long getOriginalProjectTaskId() {
+		return _originalProjectTaskId;
 	}
 
 	@JSON
@@ -611,6 +624,10 @@ public class TimesheetTaskModelImpl extends BaseModelImpl<TimesheetTask>
 
 		timesheetTaskModelImpl._setOriginalTimesheetId = false;
 
+		timesheetTaskModelImpl._originalProjectTaskId = timesheetTaskModelImpl._projectTaskId;
+
+		timesheetTaskModelImpl._setOriginalProjectTaskId = false;
+
 		timesheetTaskModelImpl._originalCompanyId = timesheetTaskModelImpl._companyId;
 
 		timesheetTaskModelImpl._setOriginalCompanyId = false;
@@ -780,6 +797,8 @@ public class TimesheetTaskModelImpl extends BaseModelImpl<TimesheetTask>
 	private long _originalTimesheetId;
 	private boolean _setOriginalTimesheetId;
 	private long _projectTaskId;
+	private long _originalProjectTaskId;
+	private boolean _setOriginalProjectTaskId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;

@@ -243,6 +243,11 @@ public class TimesheetTaskLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.gs.hack.timesheets.model.TimesheetTask> findByProjectTaskId(
+		long projectTaskId) {
+		return getService().findByProjectTaskId(projectTaskId);
+	}
+
 	public static java.util.List<com.liferay.gs.hack.timesheets.model.TimesheetTask> findByTimesheetId(
 		long timesheetId) {
 		return getService().findByTimesheetId(timesheetId);

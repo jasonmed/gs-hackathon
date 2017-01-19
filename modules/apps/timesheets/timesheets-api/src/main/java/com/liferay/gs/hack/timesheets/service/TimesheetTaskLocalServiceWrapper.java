@@ -258,6 +258,12 @@ public class TimesheetTaskLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.gs.hack.timesheets.model.TimesheetTask> findByProjectTaskId(
+		long projectTaskId) {
+		return _timesheetTaskLocalService.findByProjectTaskId(projectTaskId);
+	}
+
+	@Override
 	public java.util.List<com.liferay.gs.hack.timesheets.model.TimesheetTask> findByTimesheetId(
 		long timesheetId) {
 		return _timesheetTaskLocalService.findByTimesheetId(timesheetId);

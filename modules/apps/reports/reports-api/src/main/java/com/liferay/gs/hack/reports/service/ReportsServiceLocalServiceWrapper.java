@@ -34,6 +34,13 @@ public class ReportsServiceLocalServiceWrapper
 		_reportsServiceLocalService = reportsServiceLocalService;
 	}
 
+	@Override
+	public java.lang.Double generateUserTaskTime(long userId, long projectTaskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _reportsServiceLocalService.generateUserTaskTime(userId,
+			projectTaskId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -42,6 +49,34 @@ public class ReportsServiceLocalServiceWrapper
 	@Override
 	public java.lang.String getOSGiServiceIdentifier() {
 		return _reportsServiceLocalService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> generateClientReport(
+		long clientOrganizationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _reportsServiceLocalService.generateClientReport(clientOrganizationId);
+	}
+
+	@Override
+	public java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> generateProjectReport(
+		long projectOrganizationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _reportsServiceLocalService.generateProjectReport(projectOrganizationId);
+	}
+
+	@Override
+	public java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> generateTaskReport(
+		long projectTaskId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _reportsServiceLocalService.generateTaskReport(projectTaskId);
+	}
+
+	@Override
+	public java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> mergeReport(
+		java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> totalReport,
+		java.util.Map<com.liferay.portal.kernel.model.User, java.lang.Double> report) {
+		return _reportsServiceLocalService.mergeReport(totalReport, report);
 	}
 
 	@Override

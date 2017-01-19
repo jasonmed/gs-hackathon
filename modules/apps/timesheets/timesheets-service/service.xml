@@ -107,6 +107,9 @@
 		<finder name="TimesheetId" return-type="Collection">
 			<finder-column name="timesheetId" />
 		</finder>
+		<finder name="ProjectTaskId" return-type="Collection">
+			<finder-column name="projectTaskId" />
+		</finder>
 
 	</entity>
 

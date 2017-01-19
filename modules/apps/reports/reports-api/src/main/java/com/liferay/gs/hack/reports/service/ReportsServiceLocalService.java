@@ -18,9 +18,12 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Transactional;
+
+import java.util.Map;
 
 /**
  * Provides the local service interface for ReportsService. Methods of this
@@ -43,6 +46,8 @@ public interface ReportsServiceLocalService extends BaseLocalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ReportsServiceLocalServiceUtil} to access the reports service local service. Add custom service methods to {@link com.liferay.gs.hack.reports.service.impl.ReportsServiceLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.Double generateUserTaskTime(long userId, long projectTaskId)
+		throws PortalException;
 
 	/**
 	* Returns the OSGi service identifier.
@@ -50,4 +55,17 @@ public interface ReportsServiceLocalService extends BaseLocalService {
 	* @return the OSGi service identifier
 	*/
 	public java.lang.String getOSGiServiceIdentifier();
+
+	public Map<User, java.lang.Double> generateClientReport(
+		long clientOrganizationId) throws PortalException;
+
+	public Map<User, java.lang.Double> generateProjectReport(
+		long projectOrganizationId) throws PortalException;
+
+	public Map<User, java.lang.Double> generateTaskReport(long projectTaskId)
+		throws PortalException;
+
+	public Map<User, java.lang.Double> mergeReport(
+		Map<User, java.lang.Double> totalReport,
+		Map<User, java.lang.Double> report);
 }

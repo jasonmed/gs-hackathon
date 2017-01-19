@@ -47,4 +47,8 @@ public class TimesheetTaskLocalServiceImpl
 	public List<TimesheetTask> findByTimesheetId(long timesheetId) {
 		return timesheetTaskPersistence.findByTimesheetId(timesheetId);
 	}
+
+	public List<TimesheetTask> findByProjectTaskId(long projectTaskId) {
+		return timesheetTaskPersistence.findByProjectTaskId(projectTaskId);
+	}
 }
