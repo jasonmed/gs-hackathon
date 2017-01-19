@@ -1,18 +1,20 @@
 package com.liferay.gs.hack.client.project.registration.portlet.action;
 
 import com.liferay.gs.hack.client.project.registration.portlet.constants.ClientProjectRegistrationConstants;
-import com.liferay.gs.hack.model.Project;
-import com.liferay.gs.hack.service.ProjectLocalService;
+import com.liferay.gs.hack.projects.model.Project;
+import com.liferay.gs.hack.projects.service.ProjectLocalService;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
+
+import java.util.List;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import java.util.List;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Prathima Shreenath
@@ -26,6 +28,7 @@ import java.util.List;
 	service = MVCRenderCommand.class
 )
 public class ViewProjectsMVCRenderCommand implements MVCRenderCommand {
+
 	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -36,7 +39,7 @@ public class ViewProjectsMVCRenderCommand implements MVCRenderCommand {
 		return "/project/view.jsp";
 	}
 
-	private void processProjectsView(
+	protected void processProjectsView(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		PortletURL iteratorURL = renderResponse.createRenderURL();
@@ -53,7 +56,6 @@ public class ViewProjectsMVCRenderCommand implements MVCRenderCommand {
 		renderRequest.setAttribute("projects", activeProjects);
 		renderRequest.setAttribute("projectsCount", projectsCount);
 		renderRequest.setAttribute("searchContainer", searchContainer);
-
 	}
 
 	@Reference
