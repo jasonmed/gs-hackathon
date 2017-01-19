@@ -1,0 +1,8 @@
+Bundle-Name: reportss-api
+Bundle-SymbolicName: com.liferay.gs.hack.reports.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.gs.hack.reports.exception,\
+	com.liferay.gs.hack.reports.model,\
+	com.liferay.gs.hack.reports.service,\
+-includeresource: META-INF/service.xml=../reports-service/service.xml
