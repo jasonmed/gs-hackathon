@@ -8,4 +8,5 @@ public class ClientProjectRegistrationConstants {
 	public static final String PORTLET_NAME =
 		"com_liferay_gs_hack_client_project_registration_portlet_" +
 			"ClientProjectRegistrationPortlet";
+
 }
