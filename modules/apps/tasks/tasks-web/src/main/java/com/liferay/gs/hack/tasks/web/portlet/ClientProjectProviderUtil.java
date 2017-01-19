@@ -19,7 +19,7 @@ public class ClientProjectProviderUtil {
 			OrganizationLocalServiceUtil.getOrganizations(-1, -1);
 
 		for (Organization organization : organizations) {
-			if (!organization.isParentable()) {
+			if (organization.getParentOrganizationId() == 0) {
 
 				clients.add(organization);
 			}
