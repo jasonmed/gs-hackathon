@@ -1,5 +1,5 @@
-Bundle-Name: clients-service
-Bundle-SymbolicName: com.liferay.gs.hack.service
+Bundle-Name: GS HACK - Clients Service
+Bundle-SymbolicName: com.liferay.gs.hack.client.service
 Bundle-Version: 1.0.0
 Liferay-Require-SchemaVersion: 1.0.0
 Liferay-Service: true

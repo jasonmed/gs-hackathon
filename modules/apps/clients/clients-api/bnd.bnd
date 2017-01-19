@@ -1,5 +1,5 @@
-Bundle-Name: clients-api
-Bundle-SymbolicName: com.liferay.gs.hack.api
+Bundle-Name: GS HACK - Clients API
+Bundle-SymbolicName: com.liferay.gs.hack.client.api
 Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.gs.hack.exception,\
