@@ -44,8 +44,8 @@ public class ViewTimesheetMVCRenderCommand implements MVCRenderCommand {
 					List<TimesheetTaskDuration> timesheetTaskDurations = _timesheetTaskDurationLocalService.findByTimesheetTaskId(timesheetTaskId);
 					timesheetTask.setTimesheetTaskDurations(timesheetTaskDurations);
 				}
+				renderRequest.setAttribute("timesheetTasks", timesheetTasks);
 			}
-
 		}
 		return "/view.jsp";
 	}
