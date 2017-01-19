@@ -37,9 +37,6 @@ public class ReportsViewMVCRenderCommand
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
 
-		// TODO:
-        // Fetch reports
-
 		return "/view.jsp";
 	}
 }
