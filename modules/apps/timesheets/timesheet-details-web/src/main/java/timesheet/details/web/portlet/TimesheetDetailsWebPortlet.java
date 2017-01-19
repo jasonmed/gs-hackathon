@@ -1,15 +1,11 @@
 package timesheet.details.web.portlet;
 
-import com.liferay.gs.hack.model.Timesheet;
-import com.liferay.gs.hack.model.TimesheetApproval;
-import com.liferay.gs.hack.model.TimesheetTaskDuration;
-import com.liferay.gs.hack.service.TimesheetApprovalLocalService;
-import com.liferay.gs.hack.service.TimesheetLocalService;
-import com.liferay.gs.hack.service.TimesheetService;
-import com.liferay.gs.hack.service.TimesheetTaskDurationLocalService;
-import com.liferay.gs.hack.service.TimesheetTaskDurationService;
-import com.liferay.gs.hack.service.TimesheetTaskLocalService;
-import com.liferay.gs.hack.service.TimesheetTaskService;
+import com.liferay.gs.hack.timesheets.model.Timesheet;
+import com.liferay.gs.hack.timesheets.model.TimesheetApproval;
+import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
+import com.liferay.gs.hack.timesheets.service.TimesheetApprovalLocalService;
+import com.liferay.gs.hack.timesheets.service.TimesheetLocalService;
+import com.liferay.gs.hack.timesheets.service.TimesheetTaskDurationLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import javax.portlet.Portlet;
@@ -39,17 +35,21 @@ import java.util.List;
 public class TimesheetDetailsWebPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		Timesheet timesheet = _timesheetLocalService.getTimesheet(0);
+		Timesheet timesheet = _timesheetLocalService.fetchTimesheet(0);
+		long timesheetId = timesheet.getTimesheetId();
 
 		List<TimesheetTaskDuration> timesheetTaskDurations =
 			_timesheetTaskDurationLocalService.
-				getTimesheetTaskDurationByTimesheetId(
-					timesheet.getTimesheetId());
+				getTimesheetTaskDurationByTimesheetId(timesheetId);
 
-		List<TimesheetApproval> timesheetApprovals = _timesheetApprovalLocalService.gettime
+		renderRequest.setAttribute("timesheetTaskDurations", timesheetTaskDurations);
+
+		List<TimesheetApproval> timesheetApprovals = _timesheetApprovalLocalService.getTimesheetApprovalByTimesheetId(timesheetId);
+
+		renderRequest.setAttribute("timesheetApprovals", timesheetApprovals);
+
 		super.doView(renderRequest, renderResponse);
 	}
-
 
 	TimesheetLocalService _timesheetLocalService;
 

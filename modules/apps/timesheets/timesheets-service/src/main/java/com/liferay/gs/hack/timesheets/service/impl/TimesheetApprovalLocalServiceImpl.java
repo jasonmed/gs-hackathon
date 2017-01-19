@@ -16,8 +16,10 @@ package com.liferay.gs.hack.timesheets.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.gs.hack.model.TimesheetApproval;
-import com.liferay.gs.hack.service.base.TimesheetApprovalLocalServiceBaseImpl;
+import com.liferay.gs.hack.timesheets.model.TimesheetApproval;
+import com.liferay.gs.hack.timesheets.service.base.TimesheetApprovalLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the timesheet approval local service.
@@ -43,6 +45,6 @@ public class TimesheetApprovalLocalServiceImpl
 	 */
 
 	public List<TimesheetApproval> getTimesheetApprovalByTimesheetId(long timesheetId) {
-		return timesheetApprovalPersistence.fe
+		return timesheetApprovalPersistence.findByTimesheetId(timesheetId);
 	}
 }
