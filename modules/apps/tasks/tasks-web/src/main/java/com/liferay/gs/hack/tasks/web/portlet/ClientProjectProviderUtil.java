@@ -3,6 +3,7 @@ package com.liferay.gs.hack.tasks.web.portlet;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class ClientProjectProviderUtil {
 
 	public static List<Organization> getAllClients() {
 
-		List<Organization> clients = Collections.emptyList();
+		List<Organization> clients = new ArrayList<Organization>();
 
 		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getOrganizations(-1, -1);
