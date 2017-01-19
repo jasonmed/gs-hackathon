@@ -1,0 +1,63 @@
+.navigation-container {
+    background-color: $gray;
+    color: #FFF;
+    padding: 10px;
+    
+    a {
+        color: inherit;
+    }
+}
+
+.site-name {
+    display: inline-block;
+}
+
+.site-logo {
+    display: inline-block;
+}
+
+.user-bar {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    padding-left: 5px;
+    width: 100%;
+    
+    .user-avatar-image {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+.nav-item {
+    border-radius: 5px;
+    padding: 10px 5px;
+    margin-bottom: 5px;
+    
+    &:hover, 
+    &:focus {
+        a {
+            color: #FFF;
+            text-decoration: none;
+        }
+    }
+    
+    &.selected {
+        background-color: $gray-darker;
+        
+        a {
+            color: #FFF;
+        }
+    }
+    
+    a {
+        display: block;
+        color: #CECECE;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+#navigation {
+    margin-top: 1em;
+}

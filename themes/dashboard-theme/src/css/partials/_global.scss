@@ -1,0 +1,11 @@
+html,
+body,
+#wrapper,
+.flex-container,
+body > div[id*="senna_surface"] {
+	height: 100%;
+}
+
+#wrapper {
+	padding-top: 0;
+}
