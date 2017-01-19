@@ -8,36 +8,31 @@
 List<Organization> clients = ClientProjectProviderUtil.getAllClients();
 %>
 
-<p>
-	<b><liferay-ui:message key="tasks_web_TasksWeb.caption"/></b>
-</p>
-
 <liferay-ui:error key="Task with this name already exists for this project" message="Task with this name already exists for this project" />
 
 <portlet:actionURL name="/task/update" var="updateTaskURL" />
 
 
 <aui:form action="${updateTaskURL}" method="POST">
-
-	<aui:input label="task-name" name="name" required="true" />
-
-	<aui:input label="task-description" name="description" />
-
-	<aui:select label="select-a-client" name="clientId" required="true" showEmptyOption="false">
+	<aui:select label="select-a-client" name="clientId" required="true" showEmptyOption="true">
 
 	<%
-		for(Organization client : clients) {
+	for(Organization client : clients) {
 	%>
 
-	<aui:option label="<%= client.getName() %>" value="<%= client.getOrganizationId() %>" />
+		<aui:option label="<%= client.getName() %>" value="<%= client.getOrganizationId() %>" />
 
 	<%
-		}
+	}
 	%>
 
 	</aui:select>
 
 	<aui:select label="select-a-project" name="projectId" required="true" showEmptyOption="false" />
+	
+	<aui:input label="task-name" name="name" required="true" />
+
+	<aui:input label="task-description" name="description" />
 
 	<aui:button name="saveButton" primary="false" type="submit" value="update" />
 </aui:form>
@@ -58,12 +53,19 @@ List<Organization> clients = ClientProjectProviderUtil.getAllClients();
 					'/ps.projecttask/get-all-projects',
 					{
 						companyId: themeDisplay.getCompanyId(),
-						clientId: ct.attr('value');
+						clientId: ct.attr('value')
 					},
 					function(data) {
-						var option = A.Node.create('<option/>');
-
-						console.log(data);
+						data.forEach(
+							function(item) {
+								var option = A.Node.create('<option/>');
+								
+								option.text(item.name);
+								option.val(item.organizationId);
+								
+								option.appendTo(projectIdSelect);
+							}
+						);
 					}
 				);
 			}
