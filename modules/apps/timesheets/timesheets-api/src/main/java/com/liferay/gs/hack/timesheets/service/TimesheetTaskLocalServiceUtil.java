@@ -53,6 +53,12 @@ public class TimesheetTaskLocalServiceUtil {
 		return getService().addTimesheetTask(timesheetTask);
 	}
 
+	public static com.liferay.gs.hack.timesheets.model.TimesheetTask createTimesheetTask(
+		long timesheetId, long projectTaskId, boolean billable) {
+		return getService()
+				   .createTimesheetTask(timesheetId, projectTaskId, billable);
+	}
+
 	/**
 	* Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	*

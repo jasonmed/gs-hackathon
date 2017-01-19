@@ -51,4 +51,13 @@ public class TimesheetTaskLocalServiceImpl
 	public List<TimesheetTask> findByProjectTaskId(long projectTaskId) {
 		return timesheetTaskPersistence.findByProjectTaskId(projectTaskId);
 	}
+
+	public TimesheetTask createTimesheetTask(long timesheetId, long projectTaskId, boolean billable) {
+		long timesheetTaskId = counterLocalService.increment();
+		TimesheetTask timesheetTask = super.createTimesheetTask(timesheetTaskId);
+		timesheetTask.setTimesheetId(timesheetId);
+		timesheetTask.setProjectTaskId(projectTaskId);
+		timesheetTask.setBillable(billable);
+		return super.addTimesheetTask(timesheetTask);
+	}
 }

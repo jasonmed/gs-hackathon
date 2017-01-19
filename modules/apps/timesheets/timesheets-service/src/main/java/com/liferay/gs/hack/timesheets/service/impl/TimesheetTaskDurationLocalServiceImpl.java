@@ -51,4 +51,15 @@ public class TimesheetTaskDurationLocalServiceImpl
 	public List<TimesheetTaskDuration> findByTimesheetTaskId(long timesheetTaskId) {
 		return timesheetTaskDurationPersistence.findByTimesheetTaskId(timesheetTaskId);
 	}
+
+	public TimesheetTaskDuration createTimesheetTaskDuration(long timesheetId, long timesheetTaskId, double duration, String comment, int day) {
+		long timesheetTaskDurationId = counterLocalService.increment();
+		TimesheetTaskDuration timesheetTaskDuration = super.createTimesheetTaskDuration(timesheetTaskDurationId);
+		timesheetTaskDuration.setTimesheetId(timesheetId);
+		timesheetTaskDuration.setTimesheetTaskId(timesheetTaskId);
+		timesheetTaskDuration.setDuration(duration);
+		timesheetTaskDuration.setComment(comment);
+		timesheetTaskDuration.setDay(day);
+		return super.addTimesheetTaskDuration(timesheetTaskDuration);
+	}
 }

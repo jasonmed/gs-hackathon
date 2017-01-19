@@ -64,6 +64,12 @@ public class TimesheetLocalServiceUtil {
 		return getService().createTimesheet(timesheetId);
 	}
 
+	public static com.liferay.gs.hack.timesheets.model.Timesheet createTimesheet(
+		long userId, java.util.Date startDate, java.util.Date endDate,
+		java.lang.String status) {
+		return getService().createTimesheet(userId, startDate, endDate, status);
+	}
+
 	/**
 	* Deletes the timesheet from the database. Also notifies the appropriate model listeners.
 	*

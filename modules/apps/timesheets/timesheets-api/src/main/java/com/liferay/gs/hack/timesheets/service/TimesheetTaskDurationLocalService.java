@@ -74,6 +74,9 @@ public interface TimesheetTaskDurationLocalService extends BaseLocalService,
 	public TimesheetTaskDuration addTimesheetTaskDuration(
 		TimesheetTaskDuration timesheetTaskDuration);
 
+	public TimesheetTaskDuration createTimesheetTaskDuration(long timesheetId,
+		long timesheetTaskId, double duration, java.lang.String comment, int day);
+
 	/**
 	* Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	*

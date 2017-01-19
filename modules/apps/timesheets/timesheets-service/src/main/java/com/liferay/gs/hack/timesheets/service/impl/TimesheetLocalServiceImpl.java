@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.gs.hack.timesheets.model.Timesheet;
 import com.liferay.gs.hack.timesheets.service.base.TimesheetLocalServiceBaseImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,4 +47,14 @@ public class TimesheetLocalServiceImpl extends TimesheetLocalServiceBaseImpl {
 	public List<Timesheet> findByUserId(long userId) {
 	    return timesheetPersistence.findByUserId(userId);
     }
+
+    public Timesheet createTimesheet(long userId, Date startDate, Date endDate, String status) {
+		long timesheetId = counterLocalService.increment();
+		Timesheet timesheet = super.createTimesheet(timesheetId);
+		timesheet.setUserId(userId);
+		timesheet.setStartDate(startDate);
+		timesheet.setEndDate(endDate);
+		timesheet.setStatus(status);
+		return super.addTimesheet(timesheet);
+	}
 }

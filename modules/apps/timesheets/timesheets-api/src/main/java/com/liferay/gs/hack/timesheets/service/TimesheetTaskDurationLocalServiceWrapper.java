@@ -46,6 +46,14 @@ public class TimesheetTaskDurationLocalServiceWrapper
 		return _timesheetTaskDurationLocalService.addTimesheetTaskDuration(timesheetTaskDuration);
 	}
 
+	@Override
+	public com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration createTimesheetTaskDuration(
+		long timesheetId, long timesheetTaskId, double duration,
+		java.lang.String comment, int day) {
+		return _timesheetTaskDurationLocalService.createTimesheetTaskDuration(timesheetId,
+			timesheetTaskId, duration, comment, day);
+	}
+
 	/**
 	* Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	*

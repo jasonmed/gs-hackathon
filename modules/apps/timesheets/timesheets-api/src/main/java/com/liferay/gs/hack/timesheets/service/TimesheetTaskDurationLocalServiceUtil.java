@@ -53,6 +53,14 @@ public class TimesheetTaskDurationLocalServiceUtil {
 		return getService().addTimesheetTaskDuration(timesheetTaskDuration);
 	}
 
+	public static com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration createTimesheetTaskDuration(
+		long timesheetId, long timesheetTaskId, double duration,
+		java.lang.String comment, int day) {
+		return getService()
+				   .createTimesheetTaskDuration(timesheetId, timesheetTaskId,
+			duration, comment, day);
+	}
+
 	/**
 	* Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	*

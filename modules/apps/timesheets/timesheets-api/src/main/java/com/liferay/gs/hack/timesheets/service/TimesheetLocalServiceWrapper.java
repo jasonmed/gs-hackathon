@@ -57,6 +57,14 @@ public class TimesheetLocalServiceWrapper implements TimesheetLocalService,
 		return _timesheetLocalService.createTimesheet(timesheetId);
 	}
 
+	@Override
+	public com.liferay.gs.hack.timesheets.model.Timesheet createTimesheet(
+		long userId, java.util.Date startDate, java.util.Date endDate,
+		java.lang.String status) {
+		return _timesheetLocalService.createTimesheet(userId, startDate,
+			endDate, status);
+	}
+
 	/**
 	* Deletes the timesheet from the database. Also notifies the appropriate model listeners.
 	*

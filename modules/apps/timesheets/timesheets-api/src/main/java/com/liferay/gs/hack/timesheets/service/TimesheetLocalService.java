@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -80,6 +81,9 @@ public interface TimesheetLocalService extends BaseLocalService,
 	* @return the new timesheet
 	*/
 	public Timesheet createTimesheet(long timesheetId);
+
+	public Timesheet createTimesheet(long userId, Date startDate, Date endDate,
+		java.lang.String status);
 
 	/**
 	* Deletes the timesheet from the database. Also notifies the appropriate model listeners.

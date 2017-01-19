@@ -73,6 +73,9 @@ public interface TimesheetTaskLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public TimesheetTask addTimesheetTask(TimesheetTask timesheetTask);
 
+	public TimesheetTask createTimesheetTask(long timesheetId,
+		long projectTaskId, boolean billable);
+
 	/**
 	* Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	*
