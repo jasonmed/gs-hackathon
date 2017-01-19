@@ -43,10 +43,10 @@ import java.util.List;
 public class ProjectUserLocalServiceImpl
 	extends ProjectUserLocalServiceBaseImpl {
 
-	public List<Long> getEmployeeByProjectId_RoleId(
+	public List<ProjectUser> getProjectUserInfoByProjectId_RoleId(
 		long projectId, long roleId) {
 
-		return null;
+		return projectUserPersistence.findByProject_Role(projectId, roleId);
 	}
 
 	public List<ProjectUser> getProjectUserInfoByEmployeeId(long employeeId) {
