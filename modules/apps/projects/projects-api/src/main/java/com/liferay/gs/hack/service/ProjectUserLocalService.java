@@ -243,14 +243,14 @@ public interface ProjectUserLocalService extends BaseLocalService,
 		int end, OrderByComparator<T> orderByComparator);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<java.lang.Long> getEmployeeByProjectId_RoleId(long projectId,
-		long roleId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<ProjectUser> getProjectUserInfoByEmployeeId(long employeeId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<ProjectUser> getProjectUserInfoByProjectId(long projectId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<ProjectUser> getProjectUserInfoByProjectId_RoleId(
+		long projectId, long roleId);
 
 	/**
 	* Returns a range of all the project users.

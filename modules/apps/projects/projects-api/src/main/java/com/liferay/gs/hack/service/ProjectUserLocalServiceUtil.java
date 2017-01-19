@@ -270,11 +270,6 @@ public class ProjectUserLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
-	public static java.util.List<java.lang.Long> getEmployeeByProjectId_RoleId(
-		long projectId, long roleId) {
-		return getService().getEmployeeByProjectId_RoleId(projectId, roleId);
-	}
-
 	public static java.util.List<com.liferay.gs.hack.model.ProjectUser> getProjectUserInfoByEmployeeId(
 		long employeeId) {
 		return getService().getProjectUserInfoByEmployeeId(employeeId);
@@ -283,6 +278,12 @@ public class ProjectUserLocalServiceUtil {
 	public static java.util.List<com.liferay.gs.hack.model.ProjectUser> getProjectUserInfoByProjectId(
 		long projectId) {
 		return getService().getProjectUserInfoByProjectId(projectId);
+	}
+
+	public static java.util.List<com.liferay.gs.hack.model.ProjectUser> getProjectUserInfoByProjectId_RoleId(
+		long projectId, long roleId) {
+		return getService()
+				   .getProjectUserInfoByProjectId_RoleId(projectId, roleId);
 	}
 
 	/**

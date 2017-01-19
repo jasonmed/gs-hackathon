@@ -284,13 +284,6 @@ public class ProjectUserLocalServiceWrapper implements ProjectUserLocalService,
 	}
 
 	@Override
-	public java.util.List<java.lang.Long> getEmployeeByProjectId_RoleId(
-		long projectId, long roleId) {
-		return _projectUserLocalService.getEmployeeByProjectId_RoleId(projectId,
-			roleId);
-	}
-
-	@Override
 	public java.util.List<com.liferay.gs.hack.model.ProjectUser> getProjectUserInfoByEmployeeId(
 		long employeeId) {
 		return _projectUserLocalService.getProjectUserInfoByEmployeeId(employeeId);
@@ -300,6 +293,13 @@ public class ProjectUserLocalServiceWrapper implements ProjectUserLocalService,
 	public java.util.List<com.liferay.gs.hack.model.ProjectUser> getProjectUserInfoByProjectId(
 		long projectId) {
 		return _projectUserLocalService.getProjectUserInfoByProjectId(projectId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.gs.hack.model.ProjectUser> getProjectUserInfoByProjectId_RoleId(
+		long projectId, long roleId) {
+		return _projectUserLocalService.getProjectUserInfoByProjectId_RoleId(projectId,
+			roleId);
 	}
 
 	/**

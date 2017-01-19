@@ -43,12 +43,6 @@ import java.util.List;
 public class ProjectUserLocalServiceImpl
 	extends ProjectUserLocalServiceBaseImpl {
 
-	public List<ProjectUser> getProjectUserInfoByProjectId_RoleId(
-		long projectId, long roleId) {
-
-		return projectUserPersistence.findByProject_Role(projectId, roleId);
-	}
-
 	public List<ProjectUser> getProjectUserInfoByEmployeeId(long employeeId) {
 		return projectUserPersistence.findByEmployeeId(employeeId);
 	}
@@ -69,6 +63,12 @@ public class ProjectUserLocalServiceImpl
 
 		return projectUserPersistence.fetchByProject_Employee_Role(
 			projectId, employeeId, roleId);
+	}
+
+	public List<ProjectUser> getProjectUserInfoByProjectId_RoleId(
+		long projectId, long roleId) {
+
+		return projectUserPersistence.findByProject_Role(projectId, roleId);
 	}
 
 	/**
