@@ -1,5 +1,5 @@
 Bundle-Name: timesheets-api
-Bundle-SymbolicName: timesheets-api
+Bundle-SymbolicName: com.liferay.gs.hack.timesheets.api
 Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.gs.hack.exception,\
