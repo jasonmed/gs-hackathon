@@ -53,7 +53,7 @@ public class ViewProjectsMVCRenderCommand implements MVCRenderCommand {
 
 		int projectsCount = _projectLocalService.getProjectsCount();
 
-		renderRequest.setAttribute("projects", activeProjects);
+		renderRequest.setAttribute("activeProjectsList", activeProjects);
 		renderRequest.setAttribute("projectsCount", projectsCount);
 		renderRequest.setAttribute("searchContainer", searchContainer);
 	}

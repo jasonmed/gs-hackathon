@@ -11,7 +11,7 @@ int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM, Searc
 int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM, SearchContainer.DEFAULT_DELTA);
 
 int projectsCount = (int)request.getAttribute("projectsCount");
-List<Project> activeProjects = (List<Project>)request.getAttribute("activeProjects");
+List<Project> activeProjects = (List<Project>)request.getAttribute("activeProjectsList");
 
 PortletURL iteratorURL = renderResponse.createRenderURL();
 
@@ -43,7 +43,7 @@ iteratorURL.setParameter("cur", String.valueOf(cur));
 		<c:set scope="request" value="<%= String.valueOf(project.getProjectId()) %>" var="projectId" />
 
 		<portlet:renderURL var="editProjectURL">
-			<portlet:param name="mvcRenderCommandName" value="/project/edit/view" />
+			<portlet:param name="mvcRenderCommandName" value="/project/update/view" />
 			<portlet:param name="projectId" value="<%= String.valueOf(project.getProjectId()) %>" />
 		</portlet:renderURL>
 
