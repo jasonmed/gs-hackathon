@@ -4,6 +4,9 @@
 	<bean class="com.liferay.gs.hack.service.impl.ProjectLocalServiceImpl" id="com.liferay.gs.hack.service.ProjectLocalService" />
 	<bean class="com.liferay.gs.hack.service.impl.ProjectServiceImpl" id="com.liferay.gs.hack.service.ProjectService" />
 	<bean class="com.liferay.gs.hack.service.persistence.impl.ProjectPersistenceImpl" id="com.liferay.gs.hack.service.persistence.ProjectPersistence" parent="basePersistence" />
+	<bean class="com.liferay.gs.hack.service.impl.ProjectTaskLocalServiceImpl" id="com.liferay.gs.hack.service.ProjectTaskLocalService" />
+	<bean class="com.liferay.gs.hack.service.impl.ProjectTaskServiceImpl" id="com.liferay.gs.hack.service.ProjectTaskService" />
+	<bean class="com.liferay.gs.hack.service.persistence.impl.ProjectTaskPersistenceImpl" id="com.liferay.gs.hack.service.persistence.ProjectTaskPersistence" parent="basePersistence" />
 	<bean class="com.liferay.gs.hack.service.impl.ProjectUserLocalServiceImpl" id="com.liferay.gs.hack.service.ProjectUserLocalService" />
 	<bean class="com.liferay.gs.hack.service.impl.ProjectUserServiceImpl" id="com.liferay.gs.hack.service.ProjectUserService" />
 	<bean class="com.liferay.gs.hack.service.persistence.impl.ProjectUserPersistenceImpl" id="com.liferay.gs.hack.service.persistence.ProjectUserPersistence" parent="basePersistence" />

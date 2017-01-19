@@ -25,6 +25,7 @@ import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.gs.hack.model.ProjectUser;
 import com.liferay.gs.hack.service.ProjectUserLocalService;
 import com.liferay.gs.hack.service.persistence.ProjectPersistence;
+import com.liferay.gs.hack.service.persistence.ProjectTaskPersistence;
 import com.liferay.gs.hack.service.persistence.ProjectUserPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -469,6 +470,44 @@ public abstract class ProjectUserLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the project task local service.
+	 *
+	 * @return the project task local service
+	 */
+	public com.liferay.gs.hack.service.ProjectTaskLocalService getProjectTaskLocalService() {
+		return projectTaskLocalService;
+	}
+
+	/**
+	 * Sets the project task local service.
+	 *
+	 * @param projectTaskLocalService the project task local service
+	 */
+	public void setProjectTaskLocalService(
+		com.liferay.gs.hack.service.ProjectTaskLocalService projectTaskLocalService) {
+		this.projectTaskLocalService = projectTaskLocalService;
+	}
+
+	/**
+	 * Returns the project task persistence.
+	 *
+	 * @return the project task persistence
+	 */
+	public ProjectTaskPersistence getProjectTaskPersistence() {
+		return projectTaskPersistence;
+	}
+
+	/**
+	 * Sets the project task persistence.
+	 *
+	 * @param projectTaskPersistence the project task persistence
+	 */
+	public void setProjectTaskPersistence(
+		ProjectTaskPersistence projectTaskPersistence) {
+		this.projectTaskPersistence = projectTaskPersistence;
+	}
+
+	/**
 	 * Returns the project user local service.
 	 *
 	 * @return the project user local service
@@ -675,6 +714,10 @@ public abstract class ProjectUserLocalServiceBaseImpl
 	protected com.liferay.gs.hack.service.ProjectLocalService projectLocalService;
 	@BeanReference(type = ProjectPersistence.class)
 	protected ProjectPersistence projectPersistence;
+	@BeanReference(type = com.liferay.gs.hack.service.ProjectTaskLocalService.class)
+	protected com.liferay.gs.hack.service.ProjectTaskLocalService projectTaskLocalService;
+	@BeanReference(type = ProjectTaskPersistence.class)
+	protected ProjectTaskPersistence projectTaskPersistence;
 	@BeanReference(type = ProjectUserLocalService.class)
 	protected ProjectUserLocalService projectUserLocalService;
 	@BeanReference(type = ProjectUserPersistence.class)
