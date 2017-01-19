@@ -8,6 +8,8 @@ dependencies {
 
 buildService {
 	apiDir = "../projects-api/src/main/java"
+	osgiModule = true
+	propsUtil = "com.liferay.gs.hack.service.util.PropsUtil"
 }
 
 group = "com.liferay.gs.hack"

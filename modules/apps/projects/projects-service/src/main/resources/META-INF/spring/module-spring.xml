@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.liferay.gs.hack.service.impl.ProjectLocalServiceImpl" id="com.liferay.gs.hack.service.ProjectLocalService" />
+	<bean class="com.liferay.gs.hack.service.impl.ProjectServiceImpl" id="com.liferay.gs.hack.service.ProjectService" />
+	<bean class="com.liferay.gs.hack.service.persistence.impl.ProjectPersistenceImpl" id="com.liferay.gs.hack.service.persistence.ProjectPersistence" parent="basePersistence" />
+	<bean class="com.liferay.gs.hack.service.impl.ProjectUserLocalServiceImpl" id="com.liferay.gs.hack.service.ProjectUserLocalService" />
+	<bean class="com.liferay.gs.hack.service.impl.ProjectUserServiceImpl" id="com.liferay.gs.hack.service.ProjectUserService" />
+	<bean class="com.liferay.gs.hack.service.persistence.impl.ProjectUserPersistenceImpl" id="com.liferay.gs.hack.service.persistence.ProjectUserPersistence" parent="basePersistence" />
+</beans>
