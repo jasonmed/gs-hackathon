@@ -63,6 +63,8 @@ public interface ProjectTaskLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ProjectTaskLocalServiceUtil} to access the project task local service. Add custom service methods to {@link com.liferay.gs.hack.projects.service.impl.ProjectTaskLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isExistingTask(long ptojectId, java.lang.String name);
 
 	/**
 	* Adds the project task to the database. Also notifies the appropriate model listeners.
@@ -146,6 +148,9 @@ public interface ProjectTaskLocalService extends BaseLocalService,
 	*/
 	@Indexable(type = IndexableType.REINDEX)
 	public ProjectTask updateProjectTask(ProjectTask projectTask);
+
+	public ProjectTask updateProjectTask(long companyId, long userId,
+		long organizationId, java.lang.String name, java.lang.String description);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();

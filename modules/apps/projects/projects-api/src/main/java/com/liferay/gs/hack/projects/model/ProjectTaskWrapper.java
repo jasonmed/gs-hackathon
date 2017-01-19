@@ -173,6 +173,11 @@ public class ProjectTaskWrapper implements ProjectTask,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.model.Organization getClient() {
+		return _projectTask.getClient();
+	}
+
+	@Override
 	public int compareTo(ProjectTask projectTask) {
 		return _projectTask.compareTo(projectTask);
 	}

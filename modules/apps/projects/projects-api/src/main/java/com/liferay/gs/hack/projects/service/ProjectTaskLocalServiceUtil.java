@@ -41,6 +41,9 @@ public class ProjectTaskLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.gs.hack.projects.service.impl.ProjectTaskLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static boolean isExistingTask(long ptojectId, java.lang.String name) {
+		return getService().isExistingTask(ptojectId, name);
+	}
 
 	/**
 	* Adds the project task to the database. Also notifies the appropriate model listeners.
@@ -141,6 +144,14 @@ public class ProjectTaskLocalServiceUtil {
 	public static com.liferay.gs.hack.projects.model.ProjectTask updateProjectTask(
 		com.liferay.gs.hack.projects.model.ProjectTask projectTask) {
 		return getService().updateProjectTask(projectTask);
+	}
+
+	public static com.liferay.gs.hack.projects.model.ProjectTask updateProjectTask(
+		long companyId, long userId, long organizationId,
+		java.lang.String name, java.lang.String description) {
+		return getService()
+				   .updateProjectTask(companyId, userId, organizationId, name,
+			description);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {

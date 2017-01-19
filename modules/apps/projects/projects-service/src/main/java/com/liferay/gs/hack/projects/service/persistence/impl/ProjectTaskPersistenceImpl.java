@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -1733,6 +1734,274 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	}
 
 	private static final String _FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2 = "projectTask.organizationId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_ORGANIZATION_NAME = new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, ProjectTaskImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByOrganization_Name",
+			new String[] { Long.class.getName(), String.class.getName() },
+			ProjectTaskModelImpl.ORGANIZATIONID_COLUMN_BITMASK |
+			ProjectTaskModelImpl.NAME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ORGANIZATION_NAME = new FinderPath(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
+			ProjectTaskModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByOrganization_Name",
+			new String[] { Long.class.getName(), String.class.getName() });
+
+	/**
+	 * Returns the project task where organizationId = &#63; and name = &#63; or throws a {@link NoSuchProjectTaskException} if it could not be found.
+	 *
+	 * @param organizationId the organization ID
+	 * @param name the name
+	 * @return the matching project task
+	 * @throws NoSuchProjectTaskException if a matching project task could not be found
+	 */
+	@Override
+	public ProjectTask findByOrganization_Name(long organizationId, String name)
+		throws NoSuchProjectTaskException {
+		ProjectTask projectTask = fetchByOrganization_Name(organizationId, name);
+
+		if (projectTask == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("organizationId=");
+			msg.append(organizationId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchProjectTaskException(msg.toString());
+		}
+
+		return projectTask;
+	}
+
+	/**
+	 * Returns the project task where organizationId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param organizationId the organization ID
+	 * @param name the name
+	 * @return the matching project task, or <code>null</code> if a matching project task could not be found
+	 */
+	@Override
+	public ProjectTask fetchByOrganization_Name(long organizationId, String name) {
+		return fetchByOrganization_Name(organizationId, name, true);
+	}
+
+	/**
+	 * Returns the project task where organizationId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param organizationId the organization ID
+	 * @param name the name
+	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @return the matching project task, or <code>null</code> if a matching project task could not be found
+	 */
+	@Override
+	public ProjectTask fetchByOrganization_Name(long organizationId,
+		String name, boolean retrieveFromCache) {
+		Object[] finderArgs = new Object[] { organizationId, name };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = finderCache.getResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME,
+					finderArgs, this);
+		}
+
+		if (result instanceof ProjectTask) {
+			ProjectTask projectTask = (ProjectTask)result;
+
+			if ((organizationId != projectTask.getOrganizationId()) ||
+					!Objects.equals(name, projectTask.getName())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_PROJECTTASK_WHERE);
+
+			query.append(_FINDER_COLUMN_ORGANIZATION_NAME_ORGANIZATIONID_2);
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_ORGANIZATION_NAME_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_ORGANIZATION_NAME_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_ORGANIZATION_NAME_NAME_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organizationId);
+
+				if (bindName) {
+					qPos.add(name);
+				}
+
+				List<ProjectTask> list = q.list();
+
+				if (list.isEmpty()) {
+					finderCache.putResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME,
+						finderArgs, list);
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"ProjectTaskPersistenceImpl.fetchByOrganization_Name(long, String, boolean) with parameters (" +
+								StringUtil.merge(finderArgs) +
+								") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					ProjectTask projectTask = list.get(0);
+
+					result = projectTask;
+
+					cacheResult(projectTask);
+
+					if ((projectTask.getOrganizationId() != organizationId) ||
+							(projectTask.getName() == null) ||
+							!projectTask.getName().equals(name)) {
+						finderCache.putResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME,
+							finderArgs, projectTask);
+					}
+				}
+			}
+			catch (Exception e) {
+				finderCache.removeResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (ProjectTask)result;
+		}
+	}
+
+	/**
+	 * Removes the project task where organizationId = &#63; and name = &#63; from the database.
+	 *
+	 * @param organizationId the organization ID
+	 * @param name the name
+	 * @return the project task that was removed
+	 */
+	@Override
+	public ProjectTask removeByOrganization_Name(long organizationId,
+		String name) throws NoSuchProjectTaskException {
+		ProjectTask projectTask = findByOrganization_Name(organizationId, name);
+
+		return remove(projectTask);
+	}
+
+	/**
+	 * Returns the number of project tasks where organizationId = &#63; and name = &#63;.
+	 *
+	 * @param organizationId the organization ID
+	 * @param name the name
+	 * @return the number of matching project tasks
+	 */
+	@Override
+	public int countByOrganization_Name(long organizationId, String name) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ORGANIZATION_NAME;
+
+		Object[] finderArgs = new Object[] { organizationId, name };
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_PROJECTTASK_WHERE);
+
+			query.append(_FINDER_COLUMN_ORGANIZATION_NAME_ORGANIZATIONID_2);
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_ORGANIZATION_NAME_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_ORGANIZATION_NAME_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_ORGANIZATION_NAME_NAME_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(organizationId);
+
+				if (bindName) {
+					qPos.add(name);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ORGANIZATION_NAME_ORGANIZATIONID_2 =
+		"projectTask.organizationId = ? AND ";
+	private static final String _FINDER_COLUMN_ORGANIZATION_NAME_NAME_1 = "projectTask.name IS NULL";
+	private static final String _FINDER_COLUMN_ORGANIZATION_NAME_NAME_2 = "projectTask.name = ?";
+	private static final String _FINDER_COLUMN_ORGANIZATION_NAME_NAME_3 = "(projectTask.name IS NULL OR projectTask.name = '')";
 
 	public ProjectTaskPersistenceImpl() {
 		setModelClass(ProjectTask.class);
@@ -1747,6 +2016,10 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 	public void cacheResult(ProjectTask projectTask) {
 		entityCache.putResult(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskImpl.class, projectTask.getPrimaryKey(), projectTask);
+
+		finderCache.putResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME,
+			new Object[] { projectTask.getOrganizationId(), projectTask.getName() },
+			projectTask);
 
 		projectTask.resetOriginalValues();
 	}
@@ -1800,6 +2073,8 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache((ProjectTaskModelImpl)projectTask);
 	}
 
 	@Override
@@ -1810,6 +2085,61 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 		for (ProjectTask projectTask : projectTasks) {
 			entityCache.removeResult(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 				ProjectTaskImpl.class, projectTask.getPrimaryKey());
+
+			clearUniqueFindersCache((ProjectTaskModelImpl)projectTask);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		ProjectTaskModelImpl projectTaskModelImpl, boolean isNew) {
+		if (isNew) {
+			Object[] args = new Object[] {
+					projectTaskModelImpl.getOrganizationId(),
+					projectTaskModelImpl.getName()
+				};
+
+			finderCache.putResult(FINDER_PATH_COUNT_BY_ORGANIZATION_NAME, args,
+				Long.valueOf(1));
+			finderCache.putResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME, args,
+				projectTaskModelImpl);
+		}
+		else {
+			if ((projectTaskModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_ORGANIZATION_NAME.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						projectTaskModelImpl.getOrganizationId(),
+						projectTaskModelImpl.getName()
+					};
+
+				finderCache.putResult(FINDER_PATH_COUNT_BY_ORGANIZATION_NAME,
+					args, Long.valueOf(1));
+				finderCache.putResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME,
+					args, projectTaskModelImpl);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		ProjectTaskModelImpl projectTaskModelImpl) {
+		Object[] args = new Object[] {
+				projectTaskModelImpl.getOrganizationId(),
+				projectTaskModelImpl.getName()
+			};
+
+		finderCache.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATION_NAME, args);
+		finderCache.removeResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME, args);
+
+		if ((projectTaskModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_ORGANIZATION_NAME.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					projectTaskModelImpl.getOriginalOrganizationId(),
+					projectTaskModelImpl.getOriginalName()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_ORGANIZATION_NAME,
+				args);
+			finderCache.removeResult(FINDER_PATH_FETCH_BY_ORGANIZATION_NAME,
+				args);
 		}
 	}
 
@@ -2045,6 +2375,9 @@ public class ProjectTaskPersistenceImpl extends BasePersistenceImpl<ProjectTask>
 		entityCache.putResult(ProjectTaskModelImpl.ENTITY_CACHE_ENABLED,
 			ProjectTaskImpl.class, projectTask.getPrimaryKey(), projectTask,
 			false);
+
+		clearUniqueFindersCache(projectTaskModelImpl);
+		cacheUniqueFindersCache(projectTaskModelImpl, isNew);
 
 		projectTask.resetOriginalValues();
 

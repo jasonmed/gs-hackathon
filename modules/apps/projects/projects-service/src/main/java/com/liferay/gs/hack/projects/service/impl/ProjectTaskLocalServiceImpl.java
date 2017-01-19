@@ -57,9 +57,6 @@ public class ProjectTaskLocalServiceImpl extends ProjectTaskLocalServiceBaseImpl
 			projectTaskPersistence.fetchByOrganization_Name(
 				organizationId, name);
 
-<<<<<<< HEAD
-		return null;
-=======
 		if (projectTask == null) {
 
 			projectTask = projectTaskPersistence.create(
@@ -81,6 +78,5 @@ public class ProjectTaskLocalServiceImpl extends ProjectTaskLocalServiceBaseImpl
 		projectTask.setModifiedDate(new Date());
 
 		return projectTaskLocalService.updateProjectTask(projectTask);
->>>>>>> d3d928a... Add implementation for task
 	}
 }
