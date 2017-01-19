@@ -18,7 +18,9 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.gs.hack.projects.model.ProjectTask;
 import com.liferay.gs.hack.projects.service.base.ProjectTaskLocalServiceBaseImpl;
+import com.liferay.portal.kernel.model.User;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,6 +46,41 @@ public class ProjectTaskLocalServiceImpl extends ProjectTaskLocalServiceBaseImpl
 	 */
 
 	public List<ProjectTask> findByOrganizationId(long organizationId) {
-	    return projectTaskPersistence.findByOrganizationId(organizationId);
-    }
+		return projectTaskPersistence.findByOrganizationId(organizationId);
+	}
+
+	public ProjectTask updateProjectTask(
+		long companyId, long userId, long organizationId, String name,
+		String description) {
+
+		ProjectTask projectTask =
+			projectTaskPersistence.fetchByOrganization_Name(
+				organizationId, name);
+
+<<<<<<< HEAD
+		return null;
+=======
+		if (projectTask == null) {
+
+			projectTask = projectTaskPersistence.create(
+				counterLocalService.increment(ProjectTask.class.getName()));
+
+			projectTask.setCreateDate(new Date());
+		}
+
+		User user = userLocalService.fetchUser(userId);
+
+		projectTask.setCompanyId(companyId);
+		projectTask.setUserId(userId);
+		projectTask.setUserName(user.getScreenName());
+
+		projectTask.setOrganizationId(organizationId);
+		projectTask.setName(name);
+		projectTask.setDescription(description);
+
+		projectTask.setModifiedDate(new Date());
+
+		return projectTaskLocalService.updateProjectTask(projectTask);
+>>>>>>> d3d928a... Add implementation for task
+	}
 }

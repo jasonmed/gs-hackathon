@@ -15,6 +15,12 @@
 package com.liferay.gs.hack.projects.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.spring.extender.service.ServiceReference;
+
+import java.security.PublicKey;
 
 /**
  * The extended model implementation for the ProjectTask service. Represents a row in the &quot;PS_ProjectTask&quot; database table, with each column mapped to a property of this class.
@@ -34,4 +40,22 @@ public class ProjectTaskImpl extends ProjectTaskBaseImpl {
 	 */
 	public ProjectTaskImpl() {
 	}
+
+	public Organization getClient() {
+
+		long projectId = super.getOrganizationId();
+
+		Organization project =
+			_organizationLocalService.fetchOrganization(projectId);
+
+		try {
+			return project.getParentOrganization();
+		}
+		catch (PortalException e) {
+			return null;
+		}
+	}
+
+	@ServiceReference
+	private OrganizationLocalService _organizationLocalService;
 }

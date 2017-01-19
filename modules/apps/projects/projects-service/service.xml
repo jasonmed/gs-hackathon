@@ -38,5 +38,10 @@
             <finder-column name="organizationId" />
         </finder>
 
+        <finder name="Organization_Name" return-type="ProjectTask">
+            <finder-column name="organizationId" />
+            <finder-column name="name" />
+        </finder>
+
     </entity>
 </service-builder>
