@@ -79,4 +79,16 @@ public class ProjectTaskLocalServiceImpl extends ProjectTaskLocalServiceBaseImpl
 
 		return projectTaskLocalService.updateProjectTask(projectTask);
 	}
+
+	public boolean isExistingTask(long ptojectId, String name) {
+
+		ProjectTask projectTask =
+			projectTaskPersistence.fetchByOrganization_Name(ptojectId, name);
+
+		if (projectTask == null) {
+			return false;
+		}
+
+		return true;
+	}
 }
