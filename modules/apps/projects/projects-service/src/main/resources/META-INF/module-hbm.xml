@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping auto-import="false" default-lazy="false">
-	<import class="com.liferay.gs.hack.model.Project" />
-	<import class="com.liferay.gs.hack.model.ProjectTask" />
-	<import class="com.liferay.gs.hack.model.ProjectUser" />
-	<class name="com.liferay.gs.hack.model.impl.ProjectImpl" table="GS_Project">
+	<import class="com.liferay.gs.hack.projects.model.Project" />
+	<import class="com.liferay.gs.hack.projects.model.ProjectTask" />
+	<import class="com.liferay.gs.hack.projects.model.ProjectUser" />
+	<class name="com.liferay.gs.hack.projects.model.impl.ProjectImpl" table="PS_Project">
 		<id name="projectId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -22,7 +22,7 @@
 		<property name="endDate" type="org.hibernate.type.TimestampType" />
 		<property column="active_" name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.gs.hack.model.impl.ProjectTaskImpl" table="GS_ProjectTask">
+	<class name="com.liferay.gs.hack.projects.model.impl.ProjectTaskImpl" table="PS_ProjectTask">
 		<id name="projectTaskId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -36,7 +36,7 @@
 		<property name="projectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.liferay.gs.hack.model.impl.ProjectUserImpl" table="GS_ProjectUser">
+	<class name="com.liferay.gs.hack.projects.model.impl.ProjectUserImpl" table="PS_ProjectUser">
 		<id name="projectUserId" type="long">
 			<generator class="assigned" />
 		</id>

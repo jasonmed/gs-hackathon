@@ -1,4 +1,4 @@
-create table gs_Client (
+create table CS_Client (
 	uuid_ VARCHAR(75) null,
 	clientId LONG not null primary key,
 	groupId LONG,

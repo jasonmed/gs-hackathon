@@ -10,4 +10,4 @@ buildService {
 	apiDir = "../clients-api/src/main/java"
 }
 
-group = "com.liferay.gs.hack"
+group = "com.liferay.gs.hack.clients"

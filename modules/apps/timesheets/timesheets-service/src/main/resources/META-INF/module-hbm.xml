@@ -2,11 +2,11 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping auto-import="false" default-lazy="false">
-	<import class="com.liferay.gs.hack.model.Timesheet" />
-	<import class="com.liferay.gs.hack.model.TimesheetApproval" />
-	<import class="com.liferay.gs.hack.model.TimesheetTask" />
-	<import class="com.liferay.gs.hack.model.TimesheetTaskDuration" />
-	<class name="com.liferay.gs.hack.model.impl.TimesheetImpl" table="gw_Timesheet">
+	<import class="com.liferay.gs.hack.timesheets.model.Timesheet" />
+	<import class="com.liferay.gs.hack.timesheets.model.TimesheetApproval" />
+	<import class="com.liferay.gs.hack.timesheets.model.TimesheetTask" />
+	<import class="com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration" />
+	<class name="com.liferay.gs.hack.timesheets.model.impl.TimesheetImpl" table="TS_Timesheet">
 		<id name="timesheetId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -21,7 +21,7 @@
 		<property name="endDate" type="org.hibernate.type.TimestampType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.liferay.gs.hack.model.impl.TimesheetApprovalImpl" table="gw_TimesheetApproval">
+	<class name="com.liferay.gs.hack.timesheets.model.impl.TimesheetApprovalImpl" table="TS_TimesheetApproval">
 		<id name="timesheetApprovalId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -36,8 +36,8 @@
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property column="comment_" name="comment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.liferay.gs.hack.model.impl.TimesheetTaskImpl" table="gw_TimesheetTask">
-		<composite-id class="com.liferay.gs.hack.service.persistence.TimesheetTaskPK" name="primaryKey">
+	<class name="com.liferay.gs.hack.timesheets.model.impl.TimesheetTaskImpl" table="TS_TimesheetTask">
+		<composite-id class="com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK" name="primaryKey">
 			<key-property name="timesheetTaskId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 			<key-property name="timesheetId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 			<key-property name="projectTaskId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -51,8 +51,8 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="billable" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.gs.hack.model.impl.TimesheetTaskDurationImpl" table="gw_TimesheetTaskDuration">
-		<composite-id class="com.liferay.gs.hack.service.persistence.TimesheetTaskDurationPK" name="primaryKey">
+	<class name="com.liferay.gs.hack.timesheets.model.impl.TimesheetTaskDurationImpl" table="TS_TimesheetTaskDuration">
+		<composite-id class="com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK" name="primaryKey">
 			<key-property name="timesheetTaskDurationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 			<key-property name="timesheetId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 			<key-property name="timesheetTaskId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

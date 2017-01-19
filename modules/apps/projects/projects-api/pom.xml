@@ -10,7 +10,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<parent>
-		<groupId>com.liferay.gs.hack</groupId>
+		<groupId>com.liferay.gs.hack.projects</groupId>
 		<artifactId>projects</artifactId>
 		<version>1.0.0</version>
 	</parent>

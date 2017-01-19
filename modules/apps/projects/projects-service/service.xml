@@ -1,162 +1,162 @@
 <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
 
-<service-builder package-path="com.liferay.gs.hack">
-	<namespace>GS</namespace>
-	<entity local-service="true" name="Project" remote-service="true" uuid="true">
+<service-builder package-path="com.liferay.gs.hack.projects">
+    <namespace>PS</namespace>
+    <entity local-service="true" name="Project" remote-service="true" uuid="true">
 
-		<!-- PK fields -->
+        <!-- PK fields -->
 
-		<column name="projectId" primary="true" type="long" />
+        <column name="projectId" primary="true" type="long" />
 
-		<!-- Group instance -->
+        <!-- Group instance -->
 
-		<column name="groupId" type="long" />
+        <column name="groupId" type="long" />
 
-		<!-- Audit fields -->
+        <!-- Audit fields -->
 
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="userName" type="String" />
+        <column name="createDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
 
-		<!-- Other fields -->
+        <!-- Other fields -->
 
-		<column name="clientId" type="long" />
-		<column name="name" type="String" />
-		<column name="startDate" type="Date" />
-		<column name="endDate" type="Date" />
-		<column name="active" type="boolean" />
+        <column name="clientId" type="long" />
+        <column name="name" type="String" />
+        <column name="startDate" type="Date" />
+        <column name="endDate" type="Date" />
+        <column name="active" type="boolean" />
 
-		<!-- Order -->
+        <!-- Order -->
 
-		<order by="asc">
-			<order-column name="startDate" />
-		</order>
+        <order by="asc">
+            <order-column name="startDate" />
+        </order>
 
-		<!-- Finder methods -->
+        <!-- Finder methods -->
 
-		<finder name="ClientId" return-type="Collection">
-			<finder-column name="clientId" />
-		</finder>
+        <finder name="ClientId" return-type="Collection">
+            <finder-column name="clientId" />
+        </finder>
 
-		<finder name="Name" return-type="Project">
-			<finder-column name="name" />
-		</finder>
+        <finder name="Name" return-type="Project">
+            <finder-column name="name" />
+        </finder>
 
-		<finder name="active" return-type="Collection">
-			<finder-column name="active" />
-		</finder>
+        <finder name="active" return-type="Collection">
+            <finder-column name="active" />
+        </finder>
 
-		<finder name="clientId_active" return-type="Collection">
-			<finder-column name="clientId" />
-			<finder-column name="active" />
-		</finder>
+        <finder name="clientId_active" return-type="Collection">
+            <finder-column name="clientId" />
+            <finder-column name="active" />
+        </finder>
 
-		<!-- References -->
+        <!-- References -->
 
-		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
-		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
-	</entity>
+        <reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+        <reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+    </entity>
 
-	<entity local-service="true" name="ProjectUser" remote-service="true" uuid="true">
+    <entity local-service="true" name="ProjectUser" remote-service="true" uuid="true">
 
-		<!-- PK fields -->
+        <!-- PK fields -->
 
-		<column name="projectUserId" primary="true" type="long" />
+        <column name="projectUserId" primary="true" type="long" />
 
-		<!-- Group instance -->
+        <!-- Group instance -->
 
-		<column name="groupId" type="long" />
+        <column name="groupId" type="long" />
 
-		<!-- Audit fields -->
+        <!-- Audit fields -->
 
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="userName" type="String" />
+        <column name="createDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
 
-		<!-- Other fields -->
+        <!-- Other fields -->
 
-		<column name="projectId" type="long" />
-		<column name="employeeId" type="long" />
-		<column name="roleId" type="long" />
+        <column name="projectId" type="long" />
+        <column name="employeeId" type="long" />
+        <column name="roleId" type="long" />
 
-		<column name="billRate" type="double" />
+        <column name="billRate" type="double" />
 
-		<!-- Order -->
+        <!-- Order -->
 
-		<order by="asc">
-			<order-column name="projectId" />
-		</order>
+        <order by="asc">
+            <order-column name="projectId" />
+        </order>
 
-		<!-- Finder methods -->
+        <!-- Finder methods -->
 
-		<finder name="ProjectId" return-type="Collection">
-			<finder-column name="projectId" />
-		</finder>
+        <finder name="ProjectId" return-type="Collection">
+            <finder-column name="projectId" />
+        </finder>
 
-		<finder name="EmployeeId" return-type="Collection">
-			<finder-column name="employeeId" />
-		</finder>
+        <finder name="EmployeeId" return-type="Collection">
+            <finder-column name="employeeId" />
+        </finder>
 
-		<finder name="RoleId" return-type="Collection">
-			<finder-column name="roleId" />
-		</finder>
+        <finder name="RoleId" return-type="Collection">
+            <finder-column name="roleId" />
+        </finder>
 
-		<finder name="Project_Employee" return-type="ProjectUser">
-			<finder-column name="projectId" />
-			<finder-column name="employeeId" />
-		</finder>
+        <finder name="Project_Employee" return-type="ProjectUser">
+            <finder-column name="projectId" />
+            <finder-column name="employeeId" />
+        </finder>
 
-		<finder name="Project_Role" return-type="Collection">
-			<finder-column name="projectId" />
-			<finder-column name="roleId" />
-		</finder>
+        <finder name="Project_Role" return-type="Collection">
+            <finder-column name="projectId" />
+            <finder-column name="roleId" />
+        </finder>
 
-		<finder name="Project_Employee_Role" return-type="ProjectUser">
-			<finder-column name="projectId" />
-			<finder-column name="employeeId" />
-			<finder-column name="roleId" />
-		</finder>
-	</entity>
+        <finder name="Project_Employee_Role" return-type="ProjectUser">
+            <finder-column name="projectId" />
+            <finder-column name="employeeId" />
+            <finder-column name="roleId" />
+        </finder>
+    </entity>
 
-	<entity local-service="true" name="ProjectTask" remote-service="true" uuid="true">
+    <entity local-service="true" name="ProjectTask" remote-service="true" uuid="true">
 
-		<!-- PK fields -->
+        <!-- PK fields -->
 
-		<column name="projectTaskId" primary="true" type="long" />
+        <column name="projectTaskId" primary="true" type="long" />
 
-		<!-- Group instance -->
+        <!-- Group instance -->
 
-		<column name="groupId" type="long" />
+        <column name="groupId" type="long" />
 
-		<!-- Audit fields -->
+        <!-- Audit fields -->
 
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="userName" type="String" />
+        <column name="createDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
 
-		<!-- Other fields -->
+        <!-- Other fields -->
 
-		<column name="projectId" type="long" />
-		<column name="name" type="String" />
+        <column name="projectId" type="long" />
+        <column name="name" type="String" />
 
-		<!-- Order -->
+        <!-- Order -->
 
-		<order by="asc">
-			<order-column name="name" />
-		</order>
+        <order by="asc">
+            <order-column name="name" />
+        </order>
 
-		<!-- Finder methods -->
+        <!-- Finder methods -->
 
-		<finder name="ProjectId" return-type="Collection">
-			<finder-column name="projectId" />
-		</finder>
+        <finder name="ProjectId" return-type="Collection">
+            <finder-column name="projectId" />
+        </finder>
 
-	</entity>
+    </entity>
 </service-builder>

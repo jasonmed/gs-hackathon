@@ -1,4 +1,4 @@
-create table gw_Timesheet (
+create table TS_Timesheet (
 	uuid_ VARCHAR(75) null,
 	timesheetId LONG not null primary key,
 	groupId LONG,
@@ -12,7 +12,7 @@ create table gw_Timesheet (
 	status VARCHAR(75) null
 );
 
-create table gw_TimesheetApproval (
+create table TS_TimesheetApproval (
 	uuid_ VARCHAR(75) null,
 	timesheetApprovalId LONG not null primary key,
 	groupId LONG,
@@ -26,7 +26,7 @@ create table gw_TimesheetApproval (
 	comment_ VARCHAR(75) null
 );
 
-create table gw_TimesheetTask (
+create table TS_TimesheetTask (
 	uuid_ VARCHAR(75) null,
 	timesheetTaskId LONG not null,
 	groupId LONG,
@@ -41,7 +41,7 @@ create table gw_TimesheetTask (
 	primary key (timesheetTaskId, timesheetId, projectTaskId)
 );
 
-create table gw_TimesheetTaskDuration (
+create table TS_TimesheetTaskDuration (
 	uuid_ VARCHAR(75) null,
 	timesheetTaskDurationId LONG not null,
 	groupId LONG,

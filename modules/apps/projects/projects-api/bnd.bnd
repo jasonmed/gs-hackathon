@@ -1,9 +1,9 @@
-Bundle-Name: GS HACK - Projects API
-Bundle-SymbolicName: com.liferay.gs.hack.project.api
+Bundle-Name: projects-api
+Bundle-SymbolicName: com.liferay.gs.hack.projects.api
 Bundle-Version: 1.0.0
 Export-Package:\
-	com.liferay.gs.hack.exception,\
-	com.liferay.gs.hack.model,\
-	com.liferay.gs.hack.service,\
-	com.liferay.gs.hack.service.persistence
+	com.liferay.gs.hack.projects.exception,\
+	com.liferay.gs.hack.projects.model,\
+	com.liferay.gs.hack.projects.service,\
+	com.liferay.gs.hack.projects.service.persistence
 -includeresource: META-INF/service.xml=../projects-service/service.xml

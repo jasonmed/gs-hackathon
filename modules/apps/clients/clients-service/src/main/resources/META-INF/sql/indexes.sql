@@ -1,2 +1,2 @@
-create index IX_88C393D8 on gs_Client (uuid_[$COLUMN_LENGTH:75$], companyId);
-create unique index IX_D94F305A on gs_Client (uuid_[$COLUMN_LENGTH:75$], groupId);
+create index IX_9F6685D4 on CS_Client (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_8EBE7156 on CS_Client (uuid_[$COLUMN_LENGTH:75$], groupId);

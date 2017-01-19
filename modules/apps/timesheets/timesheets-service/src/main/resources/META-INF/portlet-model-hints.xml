@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="com.liferay.gs.hack.model.Timesheet">
+	<model name="com.liferay.gs.hack.timesheets.model.Timesheet">
 		<field name="uuid" type="String" />
 		<field name="timesheetId" type="long" />
 		<field name="groupId" type="long" />
@@ -14,7 +14,7 @@
 		<field name="endDate" type="Date" />
 		<field name="status" type="String" />
 	</model>
-	<model name="com.liferay.gs.hack.model.TimesheetApproval">
+	<model name="com.liferay.gs.hack.timesheets.model.TimesheetApproval">
 		<field name="uuid" type="String" />
 		<field name="timesheetApprovalId" type="long" />
 		<field name="groupId" type="long" />
@@ -27,7 +27,7 @@
 		<field name="status" type="String" />
 		<field name="comment" type="String" />
 	</model>
-	<model name="com.liferay.gs.hack.model.TimesheetTask">
+	<model name="com.liferay.gs.hack.timesheets.model.TimesheetTask">
 		<field name="uuid" type="String" />
 		<field name="timesheetTaskId" type="long" />
 		<field name="groupId" type="long" />
@@ -40,7 +40,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="billable" type="boolean" />
 	</model>
-	<model name="com.liferay.gs.hack.model.TimesheetTaskDuration">
+	<model name="com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration">
 		<field name="uuid" type="String" />
 		<field name="timesheetTaskDurationId" type="long" />
 		<field name="groupId" type="long" />

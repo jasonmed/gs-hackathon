@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="com.liferay.gs.hack.model.Client">
+	<model name="com.liferay.gs.hack.clients.model.Client">
 		<field name="uuid" type="String" />
 		<field name="clientId" type="long" />
 		<field name="groupId" type="long" />

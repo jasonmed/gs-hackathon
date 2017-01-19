@@ -1,4 +1,4 @@
-create table GS_Project (
+create table PS_Project (
 	uuid_ VARCHAR(75) null,
 	projectId LONG not null primary key,
 	groupId LONG,
@@ -14,7 +14,7 @@ create table GS_Project (
 	active_ BOOLEAN
 );
 
-create table GS_ProjectTask (
+create table PS_ProjectTask (
 	uuid_ VARCHAR(75) null,
 	projectTaskId LONG not null primary key,
 	groupId LONG,
@@ -27,7 +27,7 @@ create table GS_ProjectTask (
 	name VARCHAR(75) null
 );
 
-create table GS_ProjectUser (
+create table PS_ProjectUser (
 	uuid_ VARCHAR(75) null,
 	projectUserId LONG not null primary key,
 	groupId LONG,

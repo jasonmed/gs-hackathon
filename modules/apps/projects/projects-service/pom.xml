@@ -10,7 +10,7 @@
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<parent>
-		<groupId>com.liferay.gs.hack</groupId>
+		<groupId>com.liferay.gs.hack.projects</groupId>
 		<artifactId>projects</artifactId>
 		<version>1.0.0</version>
 	</parent>
@@ -28,7 +28,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.liferay.gs.hack</groupId>
+			<groupId>com.liferay.gs.hack.projects</groupId>
 			<artifactId>projects-api</artifactId>
 			<version>1.0.0</version>
 		</dependency>
@@ -59,7 +59,7 @@
 					<implDirName>src/main/java</implDirName>
 					<modelHintsFileName>src/main/resources/META-INF/portlet-model-hints.xml</modelHintsFileName>
 					<osgiModule>true</osgiModule>
-					<propsUtil>com.liferay.gs.hack.service.util.ServiceProps</propsUtil>
+					<propsUtil>com.liferay.gs.hack.projects.service.util.ServiceProps</propsUtil>
 					<resourcesDirName>src/main/resources</resourcesDirName>
 					<springFileName>src/main/resources/META-INF/spring/module-spring.xml</springFileName>
 					<sqlDirName>src/main/resources/META-INF/sql</sqlDirName>
