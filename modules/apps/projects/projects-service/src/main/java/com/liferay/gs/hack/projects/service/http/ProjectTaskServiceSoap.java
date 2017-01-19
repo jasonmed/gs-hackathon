@@ -16,9 +16,16 @@ package com.liferay.gs.hack.projects.service.http;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.gs.hack.projects.service.ProjectTaskServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * {@link com.liferay.gs.hack.projects.service.ProjectTaskServiceUtil} service utility. The
+ * {@link ProjectTaskServiceUtil} service utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
@@ -53,9 +60,40 @@ import aQute.bnd.annotation.ProviderType;
  * @author Brian Wing Shun Chan
  * @see ProjectTaskServiceHttp
  * @see com.liferay.gs.hack.projects.model.ProjectTaskSoap
- * @see com.liferay.gs.hack.projects.service.ProjectTaskServiceUtil
+ * @see ProjectTaskServiceUtil
  * @generated
  */
 @ProviderType
 public class ProjectTaskServiceSoap {
+	public static com.liferay.portal.kernel.model.OrganizationSoap[] getAllClients()
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.kernel.model.Organization> returnValue =
+				ProjectTaskServiceUtil.getAllClients();
+
+			return com.liferay.portal.kernel.model.OrganizationSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.model.OrganizationSoap[] getAllProjects(
+		long companyId, long clientId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.kernel.model.Organization> returnValue =
+				ProjectTaskServiceUtil.getAllProjects(companyId, clientId);
+
+			return com.liferay.portal.kernel.model.OrganizationSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(ProjectTaskServiceSoap.class);
 }

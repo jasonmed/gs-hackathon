@@ -51,6 +51,15 @@ public class ProjectTaskServiceUtil {
 		return getService().getOSGiServiceIdentifier();
 	}
 
+	public static java.util.List<com.liferay.portal.kernel.model.Organization> getAllClients() {
+		return getService().getAllClients();
+	}
+
+	public static java.util.List<com.liferay.portal.kernel.model.Organization> getAllProjects(
+		long companyId, long clientId) {
+		return getService().getAllProjects(companyId, clientId);
+	}
+
 	public static ProjectTaskService getService() {
 		return _serviceTracker.getService();
 	}

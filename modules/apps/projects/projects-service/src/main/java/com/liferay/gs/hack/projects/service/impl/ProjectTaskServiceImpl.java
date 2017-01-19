@@ -17,6 +17,14 @@ package com.liferay.gs.hack.projects.service.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.gs.hack.projects.service.base.ProjectTaskServiceBaseImpl;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.spring.extender.service.ServiceReference;
+import org.osgi.service.component.annotations.Reference;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * The implementation of the project task remote service.
@@ -39,4 +47,31 @@ public class ProjectTaskServiceImpl extends ProjectTaskServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.gs.hack.projects.service.ProjectTaskServiceUtil} to access the project task remote service.
 	 */
+
+	public List<Organization> getAllClients() {
+
+		List<Organization> clients = Collections.emptyList();
+
+		List<Organization> organizations =
+			_organizationLocalService.getOrganizations(-1, -1);
+
+		for (Organization organization : organizations) {
+			if (!organization.isParentable()) {
+
+				clients.add(organization);
+			}
+		}
+
+		return clients;
+	}
+
+	public List<Organization> getAllProjects(
+		long companyId, long clientId) {
+
+		return _organizationLocalService.getSuborganizations(
+			companyId, clientId);
+	}
+
+	@ServiceReference
+	private OrganizationLocalService _organizationLocalService;
 }
