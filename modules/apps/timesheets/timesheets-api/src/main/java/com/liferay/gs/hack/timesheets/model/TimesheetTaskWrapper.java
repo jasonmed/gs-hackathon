@@ -289,6 +289,11 @@ public class TimesheetTaskWrapper implements TimesheetTask,
 		return _timesheetTask.getModifiedDate();
 	}
 
+	@Override
+	public java.util.List<TimesheetTaskDuration> getTimesheetTaskDurations() {
+		return _timesheetTask.getTimesheetTaskDurations();
+	}
+
 	/**
 	* Returns the company ID of this timesheet task.
 	*
@@ -464,6 +469,12 @@ public class TimesheetTaskWrapper implements TimesheetTask,
 	@Override
 	public void setTimesheetId(long timesheetId) {
 		_timesheetTask.setTimesheetId(timesheetId);
+	}
+
+	@Override
+	public void setTimesheetTaskDurations(
+		java.util.List<TimesheetTaskDuration> timesheetTaskDurations) {
+		_timesheetTask.setTimesheetTaskDurations(timesheetTaskDurations);
 	}
 
 	/**

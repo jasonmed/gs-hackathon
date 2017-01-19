@@ -15,6 +15,9 @@
 package com.liferay.gs.hack.timesheets.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
+import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
+
+import java.util.List;
 
 /**
  * The extended model implementation for the TimesheetTask service. Represents a row in the &quot;TS_TimesheetTask&quot; database table, with each column mapped to a property of this class.
@@ -34,4 +37,14 @@ public class TimesheetTaskImpl extends TimesheetTaskBaseImpl {
 	 */
 	public TimesheetTaskImpl() {
 	}
+
+	public List<TimesheetTaskDuration> getTimesheetTaskDurations() {
+		return timesheetTaskDurations;
+	}
+
+	public void setTimesheetTaskDurations(List<TimesheetTaskDuration> timesheetTaskDurations) {
+		this.timesheetTaskDurations = timesheetTaskDurations;
+	}
+
+	private List<TimesheetTaskDuration> timesheetTaskDurations;
 }

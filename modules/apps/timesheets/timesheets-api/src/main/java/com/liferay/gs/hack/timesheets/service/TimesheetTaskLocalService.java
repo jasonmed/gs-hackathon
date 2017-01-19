@@ -226,6 +226,8 @@ public interface TimesheetTaskLocalService extends BaseLocalService,
 	public <T> List<T> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end, OrderByComparator<T> orderByComparator);
 
+	public List<TimesheetTask> findByTimesheetId(long timesheetId);
+
 	/**
 	* Returns a range of all the timesheet tasks.
 	*

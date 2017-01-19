@@ -2975,7 +2975,7 @@ public class TimesheetTaskDurationPersistenceImpl extends BasePersistenceImpl<Ti
 		timesheetTaskDurationImpl.setModifiedDate(timesheetTaskDuration.getModifiedDate());
 		timesheetTaskDurationImpl.setDuration(timesheetTaskDuration.getDuration());
 		timesheetTaskDurationImpl.setComment(timesheetTaskDuration.getComment());
-		timesheetTaskDurationImpl.setTaskDate(timesheetTaskDuration.getTaskDate());
+		timesheetTaskDurationImpl.setDay(timesheetTaskDuration.getDay());
 
 		return timesheetTaskDurationImpl;
 	}

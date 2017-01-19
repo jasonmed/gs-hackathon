@@ -66,6 +66,6 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="duration" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property column="comment_" name="comment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="taskDate" type="org.hibernate.type.TimestampType" />
+		<property name="day" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 </hibernate-mapping>

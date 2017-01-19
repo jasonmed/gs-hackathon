@@ -83,7 +83,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "duration", Types.DOUBLE },
 			{ "comment_", Types.VARCHAR },
-			{ "taskDate", Types.TIMESTAMP }
+			{ "day", Types.INTEGER }
 		};
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP = new HashMap<String, Integer>();
 
@@ -100,10 +100,10 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("duration", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("comment_", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("taskDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("day", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table TS_TimesheetTaskDuration (uuid_ VARCHAR(75) null,timesheetTaskDurationId LONG not null,groupId LONG,timesheetId LONG not null,timesheetTaskId LONG not null,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,duration DOUBLE,comment_ VARCHAR(75) null,taskDate DATE null,primary key (timesheetTaskDurationId, timesheetId, timesheetTaskId))";
+	public static final String TABLE_SQL_CREATE = "create table TS_TimesheetTaskDuration (uuid_ VARCHAR(75) null,timesheetTaskDurationId LONG not null,groupId LONG,timesheetId LONG not null,timesheetTaskId LONG not null,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,duration DOUBLE,comment_ VARCHAR(75) null,day INTEGER,primary key (timesheetTaskDurationId, timesheetId, timesheetTaskId))";
 	public static final String TABLE_SQL_DROP = "drop table TS_TimesheetTaskDuration";
 	public static final String ORDER_BY_JPQL = " ORDER BY timesheetTaskDuration.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TS_TimesheetTaskDuration.createDate ASC";
@@ -152,7 +152,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setDuration(soapModel.getDuration());
 		model.setComment(soapModel.getComment());
-		model.setTaskDate(soapModel.getTaskDate());
+		model.setDay(soapModel.getDay());
 
 		return model;
 	}
@@ -234,7 +234,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("duration", getDuration());
 		attributes.put("comment", getComment());
-		attributes.put("taskDate", getTaskDate());
+		attributes.put("day", getDay());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -317,10 +317,10 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 			setComment(comment);
 		}
 
-		Date taskDate = (Date)attributes.get("taskDate");
+		Integer day = (Integer)attributes.get("day");
 
-		if (taskDate != null) {
-			setTaskDate(taskDate);
+		if (day != null) {
+			setDay(day);
 		}
 	}
 
@@ -553,13 +553,13 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 
 	@JSON
 	@Override
-	public Date getTaskDate() {
-		return _taskDate;
+	public int getDay() {
+		return _day;
 	}
 
 	@Override
-	public void setTaskDate(Date taskDate) {
-		_taskDate = taskDate;
+	public void setDay(int day) {
+		_day = day;
 	}
 
 	@Override
@@ -598,7 +598,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 		timesheetTaskDurationImpl.setModifiedDate(getModifiedDate());
 		timesheetTaskDurationImpl.setDuration(getDuration());
 		timesheetTaskDurationImpl.setComment(getComment());
-		timesheetTaskDurationImpl.setTaskDate(getTaskDate());
+		timesheetTaskDurationImpl.setDay(getDay());
 
 		timesheetTaskDurationImpl.resetOriginalValues();
 
@@ -745,14 +745,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 			timesheetTaskDurationCacheModel.comment = null;
 		}
 
-		Date taskDate = getTaskDate();
-
-		if (taskDate != null) {
-			timesheetTaskDurationCacheModel.taskDate = taskDate.getTime();
-		}
-		else {
-			timesheetTaskDurationCacheModel.taskDate = Long.MIN_VALUE;
-		}
+		timesheetTaskDurationCacheModel.day = getDay();
 
 		return timesheetTaskDurationCacheModel;
 	}
@@ -785,8 +778,8 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 		sb.append(getDuration());
 		sb.append(", comment=");
 		sb.append(getComment());
-		sb.append(", taskDate=");
-		sb.append(getTaskDate());
+		sb.append(", day=");
+		sb.append(getDay());
 		sb.append("}");
 
 		return sb.toString();
@@ -849,8 +842,8 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 		sb.append(getComment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>taskDate</column-name><column-value><![CDATA[");
-		sb.append(getTaskDate());
+			"<column><column-name>day</column-name><column-value><![CDATA[");
+		sb.append(getDay());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -884,7 +877,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 	private boolean _setModifiedDate;
 	private double _duration;
 	private String _comment;
-	private Date _taskDate;
+	private int _day;
 	private long _columnBitmask;
 	private TimesheetTaskDuration _escapedModel;
 }

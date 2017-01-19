@@ -49,7 +49,7 @@ public class TimesheetTaskDurationSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setDuration(model.getDuration());
 		soapModel.setComment(model.getComment());
-		soapModel.setTaskDate(model.getTaskDate());
+		soapModel.setDay(model.getDay());
 
 		return soapModel;
 	}
@@ -204,12 +204,12 @@ public class TimesheetTaskDurationSoap implements Serializable {
 		_comment = comment;
 	}
 
-	public Date getTaskDate() {
-		return _taskDate;
+	public int getDay() {
+		return _day;
 	}
 
-	public void setTaskDate(Date taskDate) {
-		_taskDate = taskDate;
+	public void setDay(int day) {
+		_day = day;
 	}
 
 	private String _uuid;
@@ -224,5 +224,5 @@ public class TimesheetTaskDurationSoap implements Serializable {
 	private Date _modifiedDate;
 	private double _duration;
 	private String _comment;
-	private Date _taskDate;
+	private int _day;
 }

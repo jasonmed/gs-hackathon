@@ -94,8 +94,8 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 		sb.append(duration);
 		sb.append(", comment=");
 		sb.append(comment);
-		sb.append(", taskDate=");
-		sb.append(taskDate);
+		sb.append(", day=");
+		sb.append(day);
 		sb.append("}");
 
 		return sb.toString();
@@ -149,12 +149,7 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 			timesheetTaskDurationImpl.setComment(comment);
 		}
 
-		if (taskDate == Long.MIN_VALUE) {
-			timesheetTaskDurationImpl.setTaskDate(null);
-		}
-		else {
-			timesheetTaskDurationImpl.setTaskDate(new Date(taskDate));
-		}
+		timesheetTaskDurationImpl.setDay(day);
 
 		timesheetTaskDurationImpl.resetOriginalValues();
 
@@ -182,7 +177,8 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 
 		duration = objectInput.readDouble();
 		comment = objectInput.readUTF();
-		taskDate = objectInput.readLong();
+
+		day = objectInput.readInt();
 
 		timesheetTaskDurationPK = new TimesheetTaskDurationPK(timesheetTaskDurationId,
 				timesheetId, timesheetTaskId);
@@ -229,7 +225,7 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 			objectOutput.writeUTF(comment);
 		}
 
-		objectOutput.writeLong(taskDate);
+		objectOutput.writeInt(day);
 	}
 
 	public String uuid;
@@ -244,6 +240,6 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 	public long modifiedDate;
 	public double duration;
 	public String comment;
-	public long taskDate;
+	public int day;
 	public transient TimesheetTaskDurationPK timesheetTaskDurationPK;
 }

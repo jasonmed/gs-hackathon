@@ -255,6 +255,12 @@ public class TimesheetLocalServiceWrapper implements TimesheetLocalService,
 			orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.gs.hack.timesheets.model.Timesheet> findByUserId(
+		long userId) {
+		return _timesheetLocalService.findByUserId(userId);
+	}
+
 	/**
 	* Returns a range of all the timesheets.
 	*

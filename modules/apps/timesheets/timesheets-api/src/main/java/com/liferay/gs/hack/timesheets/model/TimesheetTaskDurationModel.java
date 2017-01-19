@@ -270,18 +270,18 @@ public interface TimesheetTaskDurationModel extends BaseModel<TimesheetTaskDurat
 	public void setComment(String comment);
 
 	/**
-	 * Returns the task date of this timesheet task duration.
+	 * Returns the day of this timesheet task duration.
 	 *
-	 * @return the task date of this timesheet task duration
+	 * @return the day of this timesheet task duration
 	 */
-	public Date getTaskDate();
+	public int getDay();
 
 	/**
-	 * Sets the task date of this timesheet task duration.
+	 * Sets the day of this timesheet task duration.
 	 *
-	 * @param taskDate the task date of this timesheet task duration
+	 * @param day the day of this timesheet task duration
 	 */
-	public void setTaskDate(Date taskDate);
+	public void setDay(int day);
 
 	@Override
 	public boolean isNew();

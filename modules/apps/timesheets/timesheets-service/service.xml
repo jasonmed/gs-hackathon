@@ -127,7 +127,7 @@
 		<!-- Other fields -->
 		<column name="duration" type="double" />
 		<column name="comment" type="String" />
-		<column name="taskDate" type="Date" />
+		<column name="day" type="int" />
 
 		<!-- Order -->
 		<order by="asc">

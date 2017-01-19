@@ -53,6 +53,6 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="duration" type="double" />
 		<field name="comment" type="String" />
-		<field name="taskDate" type="Date" />
+		<field name="day" type="int" />
 	</model>
 </model-hints>

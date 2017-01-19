@@ -88,4 +88,9 @@ public interface TimesheetTask extends TimesheetTaskModel, PersistedModel {
 				return TimesheetTask.class;
 			}
 		};
+
+	public java.util.List<TimesheetTaskDuration> getTimesheetTaskDurations();
+
+	public void setTimesheetTaskDurations(
+		java.util.List<TimesheetTaskDuration> timesheetTaskDurations);
 }

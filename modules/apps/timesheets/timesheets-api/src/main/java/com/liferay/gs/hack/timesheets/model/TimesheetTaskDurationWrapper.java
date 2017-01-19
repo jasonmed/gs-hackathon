@@ -73,7 +73,7 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("duration", getDuration());
 		attributes.put("comment", getComment());
-		attributes.put("taskDate", getTaskDate());
+		attributes.put("day", getDay());
 
 		return attributes;
 	}
@@ -153,10 +153,10 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 			setComment(comment);
 		}
 
-		Date taskDate = (Date)attributes.get("taskDate");
+		Integer day = (Integer)attributes.get("day");
 
-		if (taskDate != null) {
-			setTaskDate(taskDate);
+		if (day != null) {
+			setDay(day);
 		}
 	}
 
@@ -218,6 +218,16 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 	@Override
 	public int compareTo(TimesheetTaskDuration timesheetTaskDuration) {
 		return _timesheetTaskDuration.compareTo(timesheetTaskDuration);
+	}
+
+	/**
+	* Returns the day of this timesheet task duration.
+	*
+	* @return the day of this timesheet task duration
+	*/
+	@Override
+	public int getDay() {
+		return _timesheetTaskDuration.getDay();
 	}
 
 	@Override
@@ -303,16 +313,6 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 	@Override
 	public Date getModifiedDate() {
 		return _timesheetTaskDuration.getModifiedDate();
-	}
-
-	/**
-	* Returns the task date of this timesheet task duration.
-	*
-	* @return the task date of this timesheet task duration
-	*/
-	@Override
-	public Date getTaskDate() {
-		return _timesheetTaskDuration.getTaskDate();
 	}
 
 	/**
@@ -416,6 +416,16 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 	}
 
 	/**
+	* Sets the day of this timesheet task duration.
+	*
+	* @param day the day of this timesheet task duration
+	*/
+	@Override
+	public void setDay(int day) {
+		_timesheetTaskDuration.setDay(day);
+	}
+
+	/**
 	* Sets the duration of this timesheet task duration.
 	*
 	* @param duration the duration of this timesheet task duration
@@ -480,16 +490,6 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_timesheetTaskDuration.setPrimaryKeyObj(primaryKeyObj);
-	}
-
-	/**
-	* Sets the task date of this timesheet task duration.
-	*
-	* @param taskDate the task date of this timesheet task duration
-	*/
-	@Override
-	public void setTaskDate(Date taskDate) {
-		_timesheetTaskDuration.setTaskDate(taskDate);
 	}
 
 	/**

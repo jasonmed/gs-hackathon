@@ -16,7 +16,10 @@ package com.liferay.gs.hack.timesheets.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
 import com.liferay.gs.hack.timesheets.service.base.TimesheetTaskDurationLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the timesheet task duration local service.
@@ -40,4 +43,12 @@ public class TimesheetTaskDurationLocalServiceImpl
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.gs.hack.timesheets.service.TimesheetTaskDurationLocalServiceUtil} to access the timesheet task duration local service.
 	 */
+
+	public List<TimesheetTaskDuration> findByTimesheetId(long timesheetId) {
+		return timesheetTaskDurationPersistence.findByTimesheetId(timesheetId);
+	}
+
+	public List<TimesheetTaskDuration> findByTimesheetTaskId(long timesheetTaskId) {
+		return timesheetTaskDurationPersistence.findByTimesheetTaskId(timesheetTaskId);
+	}
 }

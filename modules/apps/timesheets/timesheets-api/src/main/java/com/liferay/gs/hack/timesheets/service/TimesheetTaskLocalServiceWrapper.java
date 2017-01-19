@@ -257,6 +257,12 @@ public class TimesheetTaskLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.gs.hack.timesheets.model.TimesheetTask> findByTimesheetId(
+		long timesheetId) {
+		return _timesheetTaskLocalService.findByTimesheetId(timesheetId);
+	}
+
 	/**
 	* Returns a range of all the timesheet tasks.
 	*

@@ -16,7 +16,10 @@ package com.liferay.gs.hack.timesheets.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.gs.hack.timesheets.model.Timesheet;
 import com.liferay.gs.hack.timesheets.service.base.TimesheetLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the timesheet local service.
@@ -39,4 +42,8 @@ public class TimesheetLocalServiceImpl extends TimesheetLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link com.liferay.gs.hack.timesheets.service.TimesheetLocalServiceUtil} to access the timesheet local service.
 	 */
+
+	public List<Timesheet> findByUserId(long userId) {
+	    return timesheetPersistence.findByUserId(userId);
+    }
 }

@@ -243,6 +243,11 @@ public class TimesheetLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.gs.hack.timesheets.model.Timesheet> findByUserId(
+		long userId) {
+		return getService().findByUserId(userId);
+	}
+
 	/**
 	* Returns a range of all the timesheets.
 	*

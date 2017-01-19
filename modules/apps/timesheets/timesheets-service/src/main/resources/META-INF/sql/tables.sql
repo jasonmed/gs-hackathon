@@ -54,6 +54,6 @@ create table TS_TimesheetTaskDuration (
 	modifiedDate DATE null,
 	duration DOUBLE,
 	comment_ VARCHAR(75) null,
-	taskDate DATE null,
+	day INTEGER,
 	primary key (timesheetTaskDurationId, timesheetId, timesheetTaskId)
 );
