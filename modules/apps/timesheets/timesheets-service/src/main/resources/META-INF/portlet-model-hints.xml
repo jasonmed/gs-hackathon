@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.gs.hack.model.Timesheet">
+		<field name="uuid" type="String" />
+		<field name="timesheetId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="status" type="String" />
+	</model>
+	<model name="com.liferay.gs.hack.model.TimesheetApproval">
+		<field name="uuid" type="String" />
+		<field name="timesheetApprovalId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="timesheetId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="status" type="String" />
+		<field name="comment" type="String" />
+	</model>
+	<model name="com.liferay.gs.hack.model.TimesheetTask">
+		<field name="uuid" type="String" />
+		<field name="timesheetTaskId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="timesheetId" type="long" />
+		<field name="projectTaskId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="billable" type="boolean" />
+	</model>
+	<model name="com.liferay.gs.hack.model.TimesheetTaskDuration">
+		<field name="uuid" type="String" />
+		<field name="timesheetTaskDurationId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="timesheetId" type="long" />
+		<field name="timesheetTaskId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="duration" type="double" />
+		<field name="comment" type="String" />
+		<field name="taskDate" type="Date" />
+	</model>
+</model-hints>

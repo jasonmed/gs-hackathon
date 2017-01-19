@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetLocalServiceImpl" id="com.liferay.gs.hack.service.TimesheetLocalService" />
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetServiceImpl" id="com.liferay.gs.hack.service.TimesheetService" />
+	<bean class="com.liferay.gs.hack.service.persistence.impl.TimesheetPersistenceImpl" id="com.liferay.gs.hack.service.persistence.TimesheetPersistence" parent="basePersistence" />
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetApprovalLocalServiceImpl" id="com.liferay.gs.hack.service.TimesheetApprovalLocalService" />
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetApprovalServiceImpl" id="com.liferay.gs.hack.service.TimesheetApprovalService" />
+	<bean class="com.liferay.gs.hack.service.persistence.impl.TimesheetApprovalPersistenceImpl" id="com.liferay.gs.hack.service.persistence.TimesheetApprovalPersistence" parent="basePersistence" />
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetTaskLocalServiceImpl" id="com.liferay.gs.hack.service.TimesheetTaskLocalService" />
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetTaskServiceImpl" id="com.liferay.gs.hack.service.TimesheetTaskService" />
+	<bean class="com.liferay.gs.hack.service.persistence.impl.TimesheetTaskPersistenceImpl" id="com.liferay.gs.hack.service.persistence.TimesheetTaskPersistence" parent="basePersistence" />
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetTaskDurationLocalServiceImpl" id="com.liferay.gs.hack.service.TimesheetTaskDurationLocalService" />
+	<bean class="com.liferay.gs.hack.service.impl.TimesheetTaskDurationServiceImpl" id="com.liferay.gs.hack.service.TimesheetTaskDurationService" />
+	<bean class="com.liferay.gs.hack.service.persistence.impl.TimesheetTaskDurationPersistenceImpl" id="com.liferay.gs.hack.service.persistence.TimesheetTaskDurationPersistence" parent="basePersistence" />
+</beans>

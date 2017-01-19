@@ -2,20 +2,62 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
 
 <service-builder package-path="com.liferay.gs.hack">
-	<namespace>FOO</namespace>
-	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
-	<entity local-service="true" name="Foo" remote-service="true" uuid="true">
+	<namespace>gw</namespace>
+	<entity local-service="true" name="Timesheet" remote-service="true" uuid="true">
 
 		<!-- PK fields -->
+		<column name="timesheetId" primary="true" type="long" />
 
-		<column name="fooId" primary="true" type="long" />
-
-		<!-- Group instance -->
-
+		<!-- FK's -->
 		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
 
 		<!-- Audit fields -->
+		<column name="companyId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
 
+		<!-- Other fields -->
+		<column name="startDate" type="Date" />
+		<column name="endDate" type="Date" />
+		<column name="status" type="String" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="startDate" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="StartDate" return-type="Collection">
+			<finder-column name="startDate" />
+		</finder>
+		<finder name="EndDate" return-type="Collection">
+			<finder-column name="endDate" />
+		</finder>
+		<finder name="Status" return-type="Collection">
+			<finder-column name="status" />
+		</finder>
+		<finder name="UserId_StartDate" return-type="Timesheet">
+			<finder-column name="userId" />
+			<finder-column name="startDate" />
+		</finder>
+
+	</entity>
+
+	<entity local-service="true" name="TimesheetApproval" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+		<column name="timesheetApprovalId" primary="true" type="long" />
+
+		<!-- FK's -->
+		<column name="groupId" type="long" />
+		<column name="timesheetId" type="long" />
+
+		<!-- Audit fields -->
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
@@ -23,28 +65,83 @@
 		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
-
-		<column name="field1" type="String" />
-		<column name="field2" type="boolean" />
-		<column name="field3" type="int" />
-		<column name="field4" type="Date" />
-		<column name="field5" type="String" />
+		<column name="status" type="String" />
+		<column name="comment" type="String" />
 
 		<!-- Order -->
-
 		<order by="asc">
-			<order-column name="field1" />
+			<order-column name="createDate" />
+		</order>
+
+	</entity>
+
+	<entity local-service="true" name="TimesheetTask" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+		<column name="timesheetTaskId" primary="true" type="long" />
+
+		<!-- FK's -->
+		<column name="groupId" type="long" />
+		<column name="timesheetId" primary="true" type="long" />
+		<column name="projectTaskId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="billable" type="boolean" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="createDate" />
 		</order>
 
 		<!-- Finder methods -->
-
-		<finder name="Field2" return-type="Collection">
-			<finder-column name="field2" />
+		<finder name="TimesheetId" return-type="Collection">
+			<finder-column name="timesheetId" />
 		</finder>
 
-		<!-- References -->
-
-		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
-		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
 	</entity>
+
+	<entity local-service="true" name="TimesheetTaskDuration" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+		<column name="timesheetTaskDurationId" primary="true" type="long" />
+
+		<!-- FK's -->
+		<column name="groupId" type="long" />
+		<column name="timesheetId" primary="true" type="long" />
+		<column name="timesheetTaskId" primary="true" type="long" />
+
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+		<column name="duration" type="double" />
+		<column name="comment" type="String" />
+		<column name="taskDate" type="Date" />
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="TimesheetId" return-type="Collection">
+			<finder-column name="timesheetId" />
+		</finder>
+		<finder name="TimesheetTaskId" return-type="Collection">
+			<finder-column name="timesheetTaskId" />
+		</finder>
+
+	</entity>
+
 </service-builder>
