@@ -5,6 +5,8 @@ import com.liferay.portal.kernel.service.OrganizationLocalService;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ public class ClientProjectProvider {
 
 	public List<Organization> getAllClients() {
 
-		List<Organization> clients = null;
+		List<Organization> clients = Collections.emptyList();
 
 		List<Organization> organizations =
 			_organizationLocalService.getOrganizations(-1, -1);
