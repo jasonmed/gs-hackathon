@@ -17,7 +17,6 @@ package com.liferay.gs.hack.timesheets.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK;
 
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -53,8 +52,7 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 
 		TimesheetTaskDurationCacheModel timesheetTaskDurationCacheModel = (TimesheetTaskDurationCacheModel)obj;
 
-		if (timesheetTaskDurationPK.equals(
-					timesheetTaskDurationCacheModel.timesheetTaskDurationPK)) {
+		if (timesheetTaskDurationId == timesheetTaskDurationCacheModel.timesheetTaskDurationId) {
 			return true;
 		}
 
@@ -63,7 +61,7 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, timesheetTaskDurationPK);
+		return HashUtil.hash(0, timesheetTaskDurationId);
 	}
 
 	@Override
@@ -179,9 +177,6 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 		comment = objectInput.readUTF();
 
 		day = objectInput.readInt();
-
-		timesheetTaskDurationPK = new TimesheetTaskDurationPK(timesheetTaskDurationId,
-				timesheetId, timesheetTaskId);
 	}
 
 	@Override
@@ -241,5 +236,4 @@ public class TimesheetTaskDurationCacheModel implements CacheModel<TimesheetTask
 	public double duration;
 	public String comment;
 	public int day;
-	public transient TimesheetTaskDurationPK timesheetTaskDurationPK;
 }

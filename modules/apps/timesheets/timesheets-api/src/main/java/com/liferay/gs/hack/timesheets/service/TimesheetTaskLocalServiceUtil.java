@@ -56,12 +56,12 @@ public class TimesheetTaskLocalServiceUtil {
 	/**
 	* Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	*
-	* @param timesheetTaskPK the primary key for the new timesheet task
+	* @param timesheetTaskId the primary key for the new timesheet task
 	* @return the new timesheet task
 	*/
 	public static com.liferay.gs.hack.timesheets.model.TimesheetTask createTimesheetTask(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK timesheetTaskPK) {
-		return getService().createTimesheetTask(timesheetTaskPK);
+		long timesheetTaskId) {
+		return getService().createTimesheetTask(timesheetTaskId);
 	}
 
 	/**
@@ -78,19 +78,19 @@ public class TimesheetTaskLocalServiceUtil {
 	/**
 	* Deletes the timesheet task with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task that was removed
 	* @throws PortalException if a timesheet task with the primary key could not be found
 	*/
 	public static com.liferay.gs.hack.timesheets.model.TimesheetTask deleteTimesheetTask(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK timesheetTaskPK)
+		long timesheetTaskId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().deleteTimesheetTask(timesheetTaskPK);
+		return getService().deleteTimesheetTask(timesheetTaskId);
 	}
 
 	public static com.liferay.gs.hack.timesheets.model.TimesheetTask fetchTimesheetTask(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK timesheetTaskPK) {
-		return getService().fetchTimesheetTask(timesheetTaskPK);
+		long timesheetTaskId) {
+		return getService().fetchTimesheetTask(timesheetTaskId);
 	}
 
 	/**
@@ -108,14 +108,14 @@ public class TimesheetTaskLocalServiceUtil {
 	/**
 	* Returns the timesheet task with the primary key.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task
 	* @throws PortalException if a timesheet task with the primary key could not be found
 	*/
 	public static com.liferay.gs.hack.timesheets.model.TimesheetTask getTimesheetTask(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK timesheetTaskPK)
+		long timesheetTaskId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getTimesheetTask(timesheetTaskPK);
+		return getService().getTimesheetTask(timesheetTaskId);
 	}
 
 	/**

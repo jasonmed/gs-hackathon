@@ -19,7 +19,6 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 
 import com.liferay.gs.hack.timesheets.model.TimesheetTask;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -77,10 +76,10 @@ public interface TimesheetTaskLocalService extends BaseLocalService,
 	/**
 	* Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	*
-	* @param timesheetTaskPK the primary key for the new timesheet task
+	* @param timesheetTaskId the primary key for the new timesheet task
 	* @return the new timesheet task
 	*/
-	public TimesheetTask createTimesheetTask(TimesheetTaskPK timesheetTaskPK);
+	public TimesheetTask createTimesheetTask(long timesheetTaskId);
 
 	/**
 	* Deletes the timesheet task from the database. Also notifies the appropriate model listeners.
@@ -94,16 +93,16 @@ public interface TimesheetTaskLocalService extends BaseLocalService,
 	/**
 	* Deletes the timesheet task with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task that was removed
 	* @throws PortalException if a timesheet task with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public TimesheetTask deleteTimesheetTask(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask deleteTimesheetTask(long timesheetTaskId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public TimesheetTask fetchTimesheetTask(TimesheetTaskPK timesheetTaskPK);
+	public TimesheetTask fetchTimesheetTask(long timesheetTaskId);
 
 	/**
 	* Returns the timesheet task matching the UUID and group.
@@ -119,12 +118,12 @@ public interface TimesheetTaskLocalService extends BaseLocalService,
 	/**
 	* Returns the timesheet task with the primary key.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task
 	* @throws PortalException if a timesheet task with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public TimesheetTask getTimesheetTask(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask getTimesheetTask(long timesheetTaskId)
 		throws PortalException;
 
 	/**

@@ -27,7 +27,6 @@ import com.liferay.gs.hack.timesheets.service.TimesheetTaskLocalService;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetApprovalPersistence;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetPersistence;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPersistence;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -101,26 +100,26 @@ public abstract class TimesheetTaskLocalServiceBaseImpl
 	/**
 	 * Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	 *
-	 * @param timesheetTaskPK the primary key for the new timesheet task
+	 * @param timesheetTaskId the primary key for the new timesheet task
 	 * @return the new timesheet task
 	 */
 	@Override
-	public TimesheetTask createTimesheetTask(TimesheetTaskPK timesheetTaskPK) {
-		return timesheetTaskPersistence.create(timesheetTaskPK);
+	public TimesheetTask createTimesheetTask(long timesheetTaskId) {
+		return timesheetTaskPersistence.create(timesheetTaskId);
 	}
 
 	/**
 	 * Deletes the timesheet task with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param timesheetTaskPK the primary key of the timesheet task
+	 * @param timesheetTaskId the primary key of the timesheet task
 	 * @return the timesheet task that was removed
 	 * @throws PortalException if a timesheet task with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public TimesheetTask deleteTimesheetTask(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask deleteTimesheetTask(long timesheetTaskId)
 		throws PortalException {
-		return timesheetTaskPersistence.remove(timesheetTaskPK);
+		return timesheetTaskPersistence.remove(timesheetTaskId);
 	}
 
 	/**
@@ -219,8 +218,8 @@ public abstract class TimesheetTaskLocalServiceBaseImpl
 	}
 
 	@Override
-	public TimesheetTask fetchTimesheetTask(TimesheetTaskPK timesheetTaskPK) {
-		return timesheetTaskPersistence.fetchByPrimaryKey(timesheetTaskPK);
+	public TimesheetTask fetchTimesheetTask(long timesheetTaskId) {
+		return timesheetTaskPersistence.fetchByPrimaryKey(timesheetTaskId);
 	}
 
 	/**
@@ -239,14 +238,14 @@ public abstract class TimesheetTaskLocalServiceBaseImpl
 	/**
 	 * Returns the timesheet task with the primary key.
 	 *
-	 * @param timesheetTaskPK the primary key of the timesheet task
+	 * @param timesheetTaskId the primary key of the timesheet task
 	 * @return the timesheet task
 	 * @throws PortalException if a timesheet task with the primary key could not be found
 	 */
 	@Override
-	public TimesheetTask getTimesheetTask(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask getTimesheetTask(long timesheetTaskId)
 		throws PortalException {
-		return timesheetTaskPersistence.findByPrimaryKey(timesheetTaskPK);
+		return timesheetTaskPersistence.findByPrimaryKey(timesheetTaskId);
 	}
 
 	@Override
@@ -257,8 +256,7 @@ public abstract class TimesheetTaskLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(TimesheetTask.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.timesheetTaskId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("timesheetTaskId");
 
 		return actionableDynamicQuery;
 	}
@@ -272,7 +270,7 @@ public abstract class TimesheetTaskLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setModelClass(TimesheetTask.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.timesheetTaskId");
+			"timesheetTaskId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -283,8 +281,7 @@ public abstract class TimesheetTaskLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(TimesheetTask.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.timesheetTaskId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("timesheetTaskId");
 	}
 
 	@Override

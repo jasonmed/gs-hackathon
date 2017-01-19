@@ -16,12 +16,14 @@ package com.liferay.gs.hack.timesheets.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.expando.kernel.model.ExpandoBridge;
+import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
+
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 
 import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
 import com.liferay.gs.hack.timesheets.model.TimesheetTaskDurationModel;
 import com.liferay.gs.hack.timesheets.model.TimesheetTaskDurationSoap;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -29,6 +31,7 @@ import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -103,7 +106,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 		TABLE_COLUMNS_MAP.put("day", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table TS_TimesheetTaskDuration (uuid_ VARCHAR(75) null,timesheetTaskDurationId LONG not null,groupId LONG,timesheetId LONG not null,timesheetTaskId LONG not null,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,duration DOUBLE,comment_ VARCHAR(75) null,day INTEGER,primary key (timesheetTaskDurationId, timesheetId, timesheetTaskId))";
+	public static final String TABLE_SQL_CREATE = "create table TS_TimesheetTaskDuration (uuid_ VARCHAR(75) null,timesheetTaskDurationId LONG not null primary key,groupId LONG,timesheetId LONG,timesheetTaskId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,duration DOUBLE,comment_ VARCHAR(75) null,day INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table TS_TimesheetTaskDuration";
 	public static final String ORDER_BY_JPQL = " ORDER BY timesheetTaskDuration.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TS_TimesheetTaskDuration.createDate ASC";
@@ -185,27 +188,23 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 	}
 
 	@Override
-	public TimesheetTaskDurationPK getPrimaryKey() {
-		return new TimesheetTaskDurationPK(_timesheetTaskDurationId,
-			_timesheetId, _timesheetTaskId);
+	public long getPrimaryKey() {
+		return _timesheetTaskDurationId;
 	}
 
 	@Override
-	public void setPrimaryKey(TimesheetTaskDurationPK primaryKey) {
-		setTimesheetTaskDurationId(primaryKey.timesheetTaskDurationId);
-		setTimesheetId(primaryKey.timesheetId);
-		setTimesheetTaskId(primaryKey.timesheetTaskId);
+	public void setPrimaryKey(long primaryKey) {
+		setTimesheetTaskDurationId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return new TimesheetTaskDurationPK(_timesheetTaskDurationId,
-			_timesheetId, _timesheetTaskId);
+		return _timesheetTaskDurationId;
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey((TimesheetTaskDurationPK)primaryKeyObj);
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -573,6 +572,19 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 	}
 
 	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+			TimesheetTaskDuration.class.getName(), getPrimaryKey());
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+	}
+
+	@Override
 	public TimesheetTaskDuration toEscapedModel() {
 		if (_escapedModel == null) {
 			_escapedModel = (TimesheetTaskDuration)ProxyUtil.newProxyInstance(_classLoader,
@@ -631,9 +643,9 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 
 		TimesheetTaskDuration timesheetTaskDuration = (TimesheetTaskDuration)obj;
 
-		TimesheetTaskDurationPK primaryKey = timesheetTaskDuration.getPrimaryKey();
+		long primaryKey = timesheetTaskDuration.getPrimaryKey();
 
-		if (getPrimaryKey().equals(primaryKey)) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {
@@ -643,7 +655,7 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
 	@Override
@@ -686,8 +698,6 @@ public class TimesheetTaskDurationModelImpl extends BaseModelImpl<TimesheetTaskD
 	@Override
 	public CacheModel<TimesheetTaskDuration> toCacheModel() {
 		TimesheetTaskDurationCacheModel timesheetTaskDurationCacheModel = new TimesheetTaskDurationCacheModel();
-
-		timesheetTaskDurationCacheModel.timesheetTaskDurationPK = getPrimaryKey();
 
 		timesheetTaskDurationCacheModel.uuid = getUuid();
 

@@ -148,14 +148,14 @@ public interface TimesheetTaskDurationPersistence extends BasePersistence<Timesh
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where uuid = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public TimesheetTaskDuration[] findByUuid_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, java.lang.String uuid,
+		long timesheetTaskDurationId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws NoSuchTimesheetTaskDurationException;
 
@@ -344,7 +344,7 @@ public interface TimesheetTaskDurationPersistence extends BasePersistence<Timesh
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where uuid = &#63; and companyId = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param uuid the uuid
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -352,8 +352,7 @@ public interface TimesheetTaskDurationPersistence extends BasePersistence<Timesh
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public TimesheetTaskDuration[] findByUuid_C_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, java.lang.String uuid,
-		long companyId,
+		long timesheetTaskDurationId, java.lang.String uuid, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws NoSuchTimesheetTaskDurationException;
 
@@ -481,14 +480,14 @@ public interface TimesheetTaskDurationPersistence extends BasePersistence<Timesh
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where timesheetId = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param timesheetId the timesheet ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public TimesheetTaskDuration[] findByTimesheetId_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, long timesheetId,
+		long timesheetTaskDurationId, long timesheetId,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws NoSuchTimesheetTaskDurationException;
 
@@ -618,14 +617,14 @@ public interface TimesheetTaskDurationPersistence extends BasePersistence<Timesh
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where timesheetTaskId = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param timesheetTaskId the timesheet task ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public TimesheetTaskDuration[] findByTimesheetTaskId_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, long timesheetTaskId,
+		long timesheetTaskDurationId, long timesheetTaskId,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws NoSuchTimesheetTaskDurationException;
 
@@ -662,21 +661,19 @@ public interface TimesheetTaskDurationPersistence extends BasePersistence<Timesh
 	/**
 	* Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	*
-	* @param timesheetTaskDurationPK the primary key for the new timesheet task duration
+	* @param timesheetTaskDurationId the primary key for the new timesheet task duration
 	* @return the new timesheet task duration
 	*/
-	public TimesheetTaskDuration create(
-		TimesheetTaskDurationPK timesheetTaskDurationPK);
+	public TimesheetTaskDuration create(long timesheetTaskDurationId);
 
 	/**
 	* Removes the timesheet task duration with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration that was removed
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
-	public TimesheetTaskDuration remove(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
+	public TimesheetTaskDuration remove(long timesheetTaskDurationId)
 		throws NoSuchTimesheetTaskDurationException;
 
 	public TimesheetTaskDuration updateImpl(
@@ -685,22 +682,20 @@ public interface TimesheetTaskDurationPersistence extends BasePersistence<Timesh
 	/**
 	* Returns the timesheet task duration with the primary key or throws a {@link NoSuchTimesheetTaskDurationException} if it could not be found.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
-	public TimesheetTaskDuration findByPrimaryKey(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
+	public TimesheetTaskDuration findByPrimaryKey(long timesheetTaskDurationId)
 		throws NoSuchTimesheetTaskDurationException;
 
 	/**
 	* Returns the timesheet task duration with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration, or <code>null</code> if a timesheet task duration with the primary key could not be found
 	*/
-	public TimesheetTaskDuration fetchByPrimaryKey(
-		TimesheetTaskDurationPK timesheetTaskDurationPK);
+	public TimesheetTaskDuration fetchByPrimaryKey(long timesheetTaskDurationId);
 
 	@Override
 	public java.util.Map<java.io.Serializable, TimesheetTaskDuration> fetchByPrimaryKeys(

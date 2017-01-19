@@ -20,7 +20,6 @@ import com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskException;
 import com.liferay.gs.hack.timesheets.model.TimesheetTask;
 import com.liferay.gs.hack.timesheets.model.impl.TimesheetTaskImpl;
 import com.liferay.gs.hack.timesheets.model.impl.TimesheetTaskModelImpl;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPersistence;
 
 import com.liferay.portal.kernel.dao.orm.EntityCache;
@@ -50,6 +49,8 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -398,18 +399,17 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Returns the timesheet tasks before and after the current timesheet task in the ordered set where uuid = &#63;.
 	 *
-	 * @param timesheetTaskPK the primary key of the current timesheet task
+	 * @param timesheetTaskId the primary key of the current timesheet task
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next timesheet task
 	 * @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	 */
 	@Override
-	public TimesheetTask[] findByUuid_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, String uuid,
-		OrderByComparator<TimesheetTask> orderByComparator)
+	public TimesheetTask[] findByUuid_PrevAndNext(long timesheetTaskId,
+		String uuid, OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException {
-		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskPK);
+		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskId);
 
 		Session session = null;
 
@@ -1229,7 +1229,7 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Returns the timesheet tasks before and after the current timesheet task in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param timesheetTaskPK the primary key of the current timesheet task
+	 * @param timesheetTaskId the primary key of the current timesheet task
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -1237,11 +1237,11 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	 * @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	 */
 	@Override
-	public TimesheetTask[] findByUuid_C_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, String uuid, long companyId,
+	public TimesheetTask[] findByUuid_C_PrevAndNext(long timesheetTaskId,
+		String uuid, long companyId,
 		OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException {
-		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskPK);
+		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskId);
 
 		Session session = null;
 
@@ -1781,18 +1781,17 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Returns the timesheet tasks before and after the current timesheet task in the ordered set where timesheetId = &#63;.
 	 *
-	 * @param timesheetTaskPK the primary key of the current timesheet task
+	 * @param timesheetTaskId the primary key of the current timesheet task
 	 * @param timesheetId the timesheet ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next timesheet task
 	 * @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	 */
 	@Override
-	public TimesheetTask[] findByTimesheetId_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, long timesheetId,
-		OrderByComparator<TimesheetTask> orderByComparator)
+	public TimesheetTask[] findByTimesheetId_PrevAndNext(long timesheetTaskId,
+		long timesheetId, OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException {
-		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskPK);
+		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskId);
 
 		Session session = null;
 
@@ -1989,7 +1988,7 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_TIMESHEETID_TIMESHEETID_2 = "timesheetTask.id.timesheetId = ?";
+	private static final String _FINDER_COLUMN_TIMESHEETID_TIMESHEETID_2 = "timesheetTask.timesheetId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PROJECTTASKID =
 		new FinderPath(TimesheetTaskModelImpl.ENTITY_CACHE_ENABLED,
 			TimesheetTaskModelImpl.FINDER_CACHE_ENABLED,
@@ -2295,7 +2294,7 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Returns the timesheet tasks before and after the current timesheet task in the ordered set where projectTaskId = &#63;.
 	 *
-	 * @param timesheetTaskPK the primary key of the current timesheet task
+	 * @param timesheetTaskId the primary key of the current timesheet task
 	 * @param projectTaskId the project task ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next timesheet task
@@ -2303,10 +2302,10 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	 */
 	@Override
 	public TimesheetTask[] findByProjectTaskId_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, long projectTaskId,
+		long timesheetTaskId, long projectTaskId,
 		OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException {
-		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskPK);
+		TimesheetTask timesheetTask = findByPrimaryKey(timesheetTaskId);
 
 		Session session = null;
 
@@ -2503,7 +2502,7 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_PROJECTTASKID_PROJECTTASKID_2 = "timesheetTask.id.projectTaskId = ?";
+	private static final String _FINDER_COLUMN_PROJECTTASKID_PROJECTTASKID_2 = "timesheetTask.projectTaskId = ?";
 
 	public TimesheetTaskPersistenceImpl() {
 		setModelClass(TimesheetTask.class);
@@ -2647,15 +2646,15 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	 *
-	 * @param timesheetTaskPK the primary key for the new timesheet task
+	 * @param timesheetTaskId the primary key for the new timesheet task
 	 * @return the new timesheet task
 	 */
 	@Override
-	public TimesheetTask create(TimesheetTaskPK timesheetTaskPK) {
+	public TimesheetTask create(long timesheetTaskId) {
 		TimesheetTask timesheetTask = new TimesheetTaskImpl();
 
 		timesheetTask.setNew(true);
-		timesheetTask.setPrimaryKey(timesheetTaskPK);
+		timesheetTask.setPrimaryKey(timesheetTaskId);
 
 		String uuid = PortalUUIDUtil.generate();
 
@@ -2669,14 +2668,14 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Removes the timesheet task with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param timesheetTaskPK the primary key of the timesheet task
+	 * @param timesheetTaskId the primary key of the timesheet task
 	 * @return the timesheet task that was removed
 	 * @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	 */
 	@Override
-	public TimesheetTask remove(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask remove(long timesheetTaskId)
 		throws NoSuchTimesheetTaskException {
-		return remove((Serializable)timesheetTaskPK);
+		return remove((Serializable)timesheetTaskId);
 	}
 
 	/**
@@ -2955,14 +2954,14 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Returns the timesheet task with the primary key or throws a {@link NoSuchTimesheetTaskException} if it could not be found.
 	 *
-	 * @param timesheetTaskPK the primary key of the timesheet task
+	 * @param timesheetTaskId the primary key of the timesheet task
 	 * @return the timesheet task
 	 * @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	 */
 	@Override
-	public TimesheetTask findByPrimaryKey(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask findByPrimaryKey(long timesheetTaskId)
 		throws NoSuchTimesheetTaskException {
-		return findByPrimaryKey((Serializable)timesheetTaskPK);
+		return findByPrimaryKey((Serializable)timesheetTaskId);
 	}
 
 	/**
@@ -3016,12 +3015,12 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	/**
 	 * Returns the timesheet task with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param timesheetTaskPK the primary key of the timesheet task
+	 * @param timesheetTaskId the primary key of the timesheet task
 	 * @return the timesheet task, or <code>null</code> if a timesheet task with the primary key could not be found
 	 */
 	@Override
-	public TimesheetTask fetchByPrimaryKey(TimesheetTaskPK timesheetTaskPK) {
-		return fetchByPrimaryKey((Serializable)timesheetTaskPK);
+	public TimesheetTask fetchByPrimaryKey(long timesheetTaskId) {
+		return fetchByPrimaryKey((Serializable)timesheetTaskId);
 	}
 
 	@Override
@@ -3033,12 +3032,86 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 
 		Map<Serializable, TimesheetTask> map = new HashMap<Serializable, TimesheetTask>();
 
-		for (Serializable primaryKey : primaryKeys) {
+		if (primaryKeys.size() == 1) {
+			Iterator<Serializable> iterator = primaryKeys.iterator();
+
+			Serializable primaryKey = iterator.next();
+
 			TimesheetTask timesheetTask = fetchByPrimaryKey(primaryKey);
 
 			if (timesheetTask != null) {
 				map.put(primaryKey, timesheetTask);
 			}
+
+			return map;
+		}
+
+		Set<Serializable> uncachedPrimaryKeys = null;
+
+		for (Serializable primaryKey : primaryKeys) {
+			Serializable serializable = entityCache.getResult(TimesheetTaskModelImpl.ENTITY_CACHE_ENABLED,
+					TimesheetTaskImpl.class, primaryKey);
+
+			if (serializable != nullModel) {
+				if (serializable == null) {
+					if (uncachedPrimaryKeys == null) {
+						uncachedPrimaryKeys = new HashSet<Serializable>();
+					}
+
+					uncachedPrimaryKeys.add(primaryKey);
+				}
+				else {
+					map.put(primaryKey, (TimesheetTask)serializable);
+				}
+			}
+		}
+
+		if (uncachedPrimaryKeys == null) {
+			return map;
+		}
+
+		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
+				1);
+
+		query.append(_SQL_SELECT_TIMESHEETTASK_WHERE_PKS_IN);
+
+		for (Serializable primaryKey : uncachedPrimaryKeys) {
+			query.append(String.valueOf(primaryKey));
+
+			query.append(StringPool.COMMA);
+		}
+
+		query.setIndex(query.index() - 1);
+
+		query.append(StringPool.CLOSE_PARENTHESIS);
+
+		String sql = query.toString();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createQuery(sql);
+
+			for (TimesheetTask timesheetTask : (List<TimesheetTask>)q.list()) {
+				map.put(timesheetTask.getPrimaryKeyObj(), timesheetTask);
+
+				cacheResult(timesheetTask);
+
+				uncachedPrimaryKeys.remove(timesheetTask.getPrimaryKeyObj());
+			}
+
+			for (Serializable primaryKey : uncachedPrimaryKeys) {
+				entityCache.putResult(TimesheetTaskModelImpl.ENTITY_CACHE_ENABLED,
+					TimesheetTaskImpl.class, primaryKey, nullModel);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 
 		return map;
@@ -3265,6 +3338,7 @@ public class TimesheetTaskPersistenceImpl extends BasePersistenceImpl<TimesheetT
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
 	private static final String _SQL_SELECT_TIMESHEETTASK = "SELECT timesheetTask FROM TimesheetTask timesheetTask";
+	private static final String _SQL_SELECT_TIMESHEETTASK_WHERE_PKS_IN = "SELECT timesheetTask FROM TimesheetTask timesheetTask WHERE timesheetTaskId IN (";
 	private static final String _SQL_SELECT_TIMESHEETTASK_WHERE = "SELECT timesheetTask FROM TimesheetTask timesheetTask WHERE ";
 	private static final String _SQL_COUNT_TIMESHEETTASK = "SELECT COUNT(timesheetTask) FROM TimesheetTask timesheetTask";
 	private static final String _SQL_COUNT_TIMESHEETTASK_WHERE = "SELECT COUNT(timesheetTask) FROM TimesheetTask timesheetTask WHERE ";

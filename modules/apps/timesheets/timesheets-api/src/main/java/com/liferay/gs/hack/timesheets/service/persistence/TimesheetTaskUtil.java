@@ -233,18 +233,18 @@ public class TimesheetTaskUtil {
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where uuid = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public static TimesheetTask[] findByUuid_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, java.lang.String uuid,
+	public static TimesheetTask[] findByUuid_PrevAndNext(long timesheetTaskId,
+		java.lang.String uuid,
 		OrderByComparator<TimesheetTask> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskException {
 		return getPersistence()
-				   .findByUuid_PrevAndNext(timesheetTaskPK, uuid,
+				   .findByUuid_PrevAndNext(timesheetTaskId, uuid,
 			orderByComparator);
 	}
 
@@ -467,7 +467,7 @@ public class TimesheetTaskUtil {
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where uuid = &#63; and companyId = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param uuid the uuid
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -475,11 +475,11 @@ public class TimesheetTaskUtil {
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
 	public static TimesheetTask[] findByUuid_C_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, java.lang.String uuid, long companyId,
+		long timesheetTaskId, java.lang.String uuid, long companyId,
 		OrderByComparator<TimesheetTask> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskException {
 		return getPersistence()
-				   .findByUuid_C_PrevAndNext(timesheetTaskPK, uuid, companyId,
+				   .findByUuid_C_PrevAndNext(timesheetTaskId, uuid, companyId,
 			orderByComparator);
 	}
 
@@ -631,18 +631,18 @@ public class TimesheetTaskUtil {
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where timesheetId = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param timesheetId the timesheet ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
 	public static TimesheetTask[] findByTimesheetId_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, long timesheetId,
+		long timesheetTaskId, long timesheetId,
 		OrderByComparator<TimesheetTask> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskException {
 		return getPersistence()
-				   .findByTimesheetId_PrevAndNext(timesheetTaskPK, timesheetId,
+				   .findByTimesheetId_PrevAndNext(timesheetTaskId, timesheetId,
 			orderByComparator);
 	}
 
@@ -793,18 +793,18 @@ public class TimesheetTaskUtil {
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where projectTaskId = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param projectTaskId the project task ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
 	public static TimesheetTask[] findByProjectTaskId_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, long projectTaskId,
+		long timesheetTaskId, long projectTaskId,
 		OrderByComparator<TimesheetTask> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskException {
 		return getPersistence()
-				   .findByProjectTaskId_PrevAndNext(timesheetTaskPK,
+				   .findByProjectTaskId_PrevAndNext(timesheetTaskId,
 			projectTaskId, orderByComparator);
 	}
 
@@ -848,23 +848,23 @@ public class TimesheetTaskUtil {
 	/**
 	* Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	*
-	* @param timesheetTaskPK the primary key for the new timesheet task
+	* @param timesheetTaskId the primary key for the new timesheet task
 	* @return the new timesheet task
 	*/
-	public static TimesheetTask create(TimesheetTaskPK timesheetTaskPK) {
-		return getPersistence().create(timesheetTaskPK);
+	public static TimesheetTask create(long timesheetTaskId) {
+		return getPersistence().create(timesheetTaskId);
 	}
 
 	/**
 	* Removes the timesheet task with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task that was removed
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public static TimesheetTask remove(TimesheetTaskPK timesheetTaskPK)
+	public static TimesheetTask remove(long timesheetTaskId)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskException {
-		return getPersistence().remove(timesheetTaskPK);
+		return getPersistence().remove(timesheetTaskId);
 	}
 
 	public static TimesheetTask updateImpl(TimesheetTask timesheetTask) {
@@ -874,25 +874,23 @@ public class TimesheetTaskUtil {
 	/**
 	* Returns the timesheet task with the primary key or throws a {@link NoSuchTimesheetTaskException} if it could not be found.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public static TimesheetTask findByPrimaryKey(
-		TimesheetTaskPK timesheetTaskPK)
+	public static TimesheetTask findByPrimaryKey(long timesheetTaskId)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskException {
-		return getPersistence().findByPrimaryKey(timesheetTaskPK);
+		return getPersistence().findByPrimaryKey(timesheetTaskId);
 	}
 
 	/**
 	* Returns the timesheet task with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task, or <code>null</code> if a timesheet task with the primary key could not be found
 	*/
-	public static TimesheetTask fetchByPrimaryKey(
-		TimesheetTaskPK timesheetTaskPK) {
-		return getPersistence().fetchByPrimaryKey(timesheetTaskPK);
+	public static TimesheetTask fetchByPrimaryKey(long timesheetTaskId) {
+		return getPersistence().fetchByPrimaryKey(timesheetTaskId);
 	}
 
 	public static java.util.Map<java.io.Serializable, TimesheetTask> fetchByPrimaryKeys(

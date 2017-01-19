@@ -147,14 +147,14 @@ public interface TimesheetTaskPersistence extends BasePersistence<TimesheetTask>
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where uuid = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public TimesheetTask[] findByUuid_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, java.lang.String uuid,
+	public TimesheetTask[] findByUuid_PrevAndNext(long timesheetTaskId,
+		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException;
 
@@ -342,15 +342,15 @@ public interface TimesheetTaskPersistence extends BasePersistence<TimesheetTask>
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where uuid = &#63; and companyId = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param uuid the uuid
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public TimesheetTask[] findByUuid_C_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, java.lang.String uuid, long companyId,
+	public TimesheetTask[] findByUuid_C_PrevAndNext(long timesheetTaskId,
+		java.lang.String uuid, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException;
 
@@ -477,14 +477,14 @@ public interface TimesheetTaskPersistence extends BasePersistence<TimesheetTask>
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where timesheetId = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param timesheetId the timesheet ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public TimesheetTask[] findByTimesheetId_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, long timesheetId,
+	public TimesheetTask[] findByTimesheetId_PrevAndNext(long timesheetTaskId,
+		long timesheetId,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException;
 
@@ -609,14 +609,14 @@ public interface TimesheetTaskPersistence extends BasePersistence<TimesheetTask>
 	/**
 	* Returns the timesheet tasks before and after the current timesheet task in the ordered set where projectTaskId = &#63;.
 	*
-	* @param timesheetTaskPK the primary key of the current timesheet task
+	* @param timesheetTaskId the primary key of the current timesheet task
 	* @param projectTaskId the project task ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
 	public TimesheetTask[] findByProjectTaskId_PrevAndNext(
-		TimesheetTaskPK timesheetTaskPK, long projectTaskId,
+		long timesheetTaskId, long projectTaskId,
 		com.liferay.portal.kernel.util.OrderByComparator<TimesheetTask> orderByComparator)
 		throws NoSuchTimesheetTaskException;
 
@@ -652,19 +652,19 @@ public interface TimesheetTaskPersistence extends BasePersistence<TimesheetTask>
 	/**
 	* Creates a new timesheet task with the primary key. Does not add the timesheet task to the database.
 	*
-	* @param timesheetTaskPK the primary key for the new timesheet task
+	* @param timesheetTaskId the primary key for the new timesheet task
 	* @return the new timesheet task
 	*/
-	public TimesheetTask create(TimesheetTaskPK timesheetTaskPK);
+	public TimesheetTask create(long timesheetTaskId);
 
 	/**
 	* Removes the timesheet task with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task that was removed
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public TimesheetTask remove(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask remove(long timesheetTaskId)
 		throws NoSuchTimesheetTaskException;
 
 	public TimesheetTask updateImpl(TimesheetTask timesheetTask);
@@ -672,20 +672,20 @@ public interface TimesheetTaskPersistence extends BasePersistence<TimesheetTask>
 	/**
 	* Returns the timesheet task with the primary key or throws a {@link NoSuchTimesheetTaskException} if it could not be found.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task
 	* @throws NoSuchTimesheetTaskException if a timesheet task with the primary key could not be found
 	*/
-	public TimesheetTask findByPrimaryKey(TimesheetTaskPK timesheetTaskPK)
+	public TimesheetTask findByPrimaryKey(long timesheetTaskId)
 		throws NoSuchTimesheetTaskException;
 
 	/**
 	* Returns the timesheet task with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param timesheetTaskPK the primary key of the timesheet task
+	* @param timesheetTaskId the primary key of the timesheet task
 	* @return the timesheet task, or <code>null</code> if a timesheet task with the primary key could not be found
 	*/
-	public TimesheetTask fetchByPrimaryKey(TimesheetTaskPK timesheetTaskPK);
+	public TimesheetTask fetchByPrimaryKey(long timesheetTaskId);
 
 	@Override
 	public java.util.Map<java.io.Serializable, TimesheetTask> fetchByPrimaryKeys(

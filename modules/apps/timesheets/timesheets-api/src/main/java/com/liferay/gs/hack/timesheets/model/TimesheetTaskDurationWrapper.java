@@ -190,16 +190,6 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 		return _timesheetTaskDuration.getExpandoBridge();
 	}
 
-	/**
-	* Returns the primary key of this timesheet task duration.
-	*
-	* @return the primary key of this timesheet task duration
-	*/
-	@Override
-	public com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK getPrimaryKey() {
-		return _timesheetTaskDuration.getPrimaryKey();
-	}
-
 	@Override
 	public com.liferay.portal.kernel.model.CacheModel<TimesheetTaskDuration> toCacheModel() {
 		return _timesheetTaskDuration.toCacheModel();
@@ -333,6 +323,16 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 	@Override
 	public long getGroupId() {
 		return _timesheetTaskDuration.getGroupId();
+	}
+
+	/**
+	* Returns the primary key of this timesheet task duration.
+	*
+	* @return the primary key of this timesheet task duration
+	*/
+	@Override
+	public long getPrimaryKey() {
+		return _timesheetTaskDuration.getPrimaryKey();
 	}
 
 	/**
@@ -482,8 +482,7 @@ public class TimesheetTaskDurationWrapper implements TimesheetTaskDuration,
 	* @param primaryKey the primary key of this timesheet task duration
 	*/
 	@Override
-	public void setPrimaryKey(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		_timesheetTaskDuration.setPrimaryKey(primaryKey);
 	}
 

@@ -26,7 +26,6 @@ import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
 import com.liferay.gs.hack.timesheets.service.TimesheetTaskDurationLocalService;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetApprovalPersistence;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetPersistence;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPersistence;
 import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPersistence;
 
@@ -102,28 +101,27 @@ public abstract class TimesheetTaskDurationLocalServiceBaseImpl
 	/**
 	 * Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	 *
-	 * @param timesheetTaskDurationPK the primary key for the new timesheet task duration
+	 * @param timesheetTaskDurationId the primary key for the new timesheet task duration
 	 * @return the new timesheet task duration
 	 */
 	@Override
 	public TimesheetTaskDuration createTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK) {
-		return timesheetTaskDurationPersistence.create(timesheetTaskDurationPK);
+		long timesheetTaskDurationId) {
+		return timesheetTaskDurationPersistence.create(timesheetTaskDurationId);
 	}
 
 	/**
 	 * Deletes the timesheet task duration with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	 * @param timesheetTaskDurationId the primary key of the timesheet task duration
 	 * @return the timesheet task duration that was removed
 	 * @throws PortalException if a timesheet task duration with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public TimesheetTaskDuration deleteTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
-		throws PortalException {
-		return timesheetTaskDurationPersistence.remove(timesheetTaskDurationPK);
+		long timesheetTaskDurationId) throws PortalException {
+		return timesheetTaskDurationPersistence.remove(timesheetTaskDurationId);
 	}
 
 	/**
@@ -224,8 +222,8 @@ public abstract class TimesheetTaskDurationLocalServiceBaseImpl
 
 	@Override
 	public TimesheetTaskDuration fetchTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK) {
-		return timesheetTaskDurationPersistence.fetchByPrimaryKey(timesheetTaskDurationPK);
+		long timesheetTaskDurationId) {
+		return timesheetTaskDurationPersistence.fetchByPrimaryKey(timesheetTaskDurationId);
 	}
 
 	/**
@@ -244,15 +242,14 @@ public abstract class TimesheetTaskDurationLocalServiceBaseImpl
 	/**
 	 * Returns the timesheet task duration with the primary key.
 	 *
-	 * @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	 * @param timesheetTaskDurationId the primary key of the timesheet task duration
 	 * @return the timesheet task duration
 	 * @throws PortalException if a timesheet task duration with the primary key could not be found
 	 */
 	@Override
 	public TimesheetTaskDuration getTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
-		throws PortalException {
-		return timesheetTaskDurationPersistence.findByPrimaryKey(timesheetTaskDurationPK);
+		long timesheetTaskDurationId) throws PortalException {
+		return timesheetTaskDurationPersistence.findByPrimaryKey(timesheetTaskDurationId);
 	}
 
 	@Override
@@ -264,7 +261,7 @@ public abstract class TimesheetTaskDurationLocalServiceBaseImpl
 		actionableDynamicQuery.setModelClass(TimesheetTaskDuration.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.timesheetTaskDurationId");
+			"timesheetTaskDurationId");
 
 		return actionableDynamicQuery;
 	}
@@ -278,7 +275,7 @@ public abstract class TimesheetTaskDurationLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setModelClass(TimesheetTaskDuration.class);
 
 		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.timesheetTaskDurationId");
+			"timesheetTaskDurationId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -290,7 +287,7 @@ public abstract class TimesheetTaskDurationLocalServiceBaseImpl
 		actionableDynamicQuery.setModelClass(TimesheetTaskDuration.class);
 
 		actionableDynamicQuery.setPrimaryKeyPropertyName(
-			"primaryKey.timesheetTaskDurationId");
+			"timesheetTaskDurationId");
 	}
 
 	@Override

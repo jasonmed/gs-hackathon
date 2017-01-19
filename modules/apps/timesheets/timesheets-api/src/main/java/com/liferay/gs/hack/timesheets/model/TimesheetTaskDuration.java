@@ -55,40 +55,4 @@ public interface TimesheetTaskDuration extends TimesheetTaskDurationModel,
 				return TimesheetTaskDuration.class;
 			}
 		};
-
-	public static final Accessor<TimesheetTaskDuration, Long> TIMESHEET_ID_ACCESSOR =
-		new Accessor<TimesheetTaskDuration, Long>() {
-			@Override
-			public Long get(TimesheetTaskDuration timesheetTaskDuration) {
-				return timesheetTaskDuration.getTimesheetId();
-			}
-
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
-
-			@Override
-			public Class<TimesheetTaskDuration> getTypeClass() {
-				return TimesheetTaskDuration.class;
-			}
-		};
-
-	public static final Accessor<TimesheetTaskDuration, Long> TIMESHEET_TASK_ID_ACCESSOR =
-		new Accessor<TimesheetTaskDuration, Long>() {
-			@Override
-			public Long get(TimesheetTaskDuration timesheetTaskDuration) {
-				return timesheetTaskDuration.getTimesheetTaskId();
-			}
-
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
-
-			@Override
-			public Class<TimesheetTaskDuration> getTypeClass() {
-				return TimesheetTaskDuration.class;
-			}
-		};
 }

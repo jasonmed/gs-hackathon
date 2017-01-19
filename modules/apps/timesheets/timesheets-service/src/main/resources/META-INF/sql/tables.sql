@@ -28,25 +28,24 @@ create table TS_TimesheetApproval (
 
 create table TS_TimesheetTask (
 	uuid_ VARCHAR(75) null,
-	timesheetTaskId LONG not null,
+	timesheetTaskId LONG not null primary key,
 	groupId LONG,
-	timesheetId LONG not null,
-	projectTaskId LONG not null,
+	timesheetId LONG,
+	projectTaskId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	billable BOOLEAN,
-	primary key (timesheetTaskId, timesheetId, projectTaskId)
+	billable BOOLEAN
 );
 
 create table TS_TimesheetTaskDuration (
 	uuid_ VARCHAR(75) null,
-	timesheetTaskDurationId LONG not null,
+	timesheetTaskDurationId LONG not null primary key,
 	groupId LONG,
-	timesheetId LONG not null,
-	timesheetTaskId LONG not null,
+	timesheetId LONG,
+	timesheetTaskId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -54,6 +53,5 @@ create table TS_TimesheetTaskDuration (
 	modifiedDate DATE null,
 	duration DOUBLE,
 	comment_ VARCHAR(75) null,
-	day INTEGER,
-	primary key (timesheetTaskDurationId, timesheetId, timesheetTaskId)
+	day INTEGER
 );

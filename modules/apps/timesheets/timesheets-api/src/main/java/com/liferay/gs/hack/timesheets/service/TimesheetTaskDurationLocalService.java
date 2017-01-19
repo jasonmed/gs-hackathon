@@ -19,7 +19,6 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 
 import com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -78,11 +77,11 @@ public interface TimesheetTaskDurationLocalService extends BaseLocalService,
 	/**
 	* Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	*
-	* @param timesheetTaskDurationPK the primary key for the new timesheet task duration
+	* @param timesheetTaskDurationId the primary key for the new timesheet task duration
 	* @return the new timesheet task duration
 	*/
 	public TimesheetTaskDuration createTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK);
+		long timesheetTaskDurationId);
 
 	/**
 	* Deletes the timesheet task duration from the database. Also notifies the appropriate model listeners.
@@ -97,18 +96,17 @@ public interface TimesheetTaskDurationLocalService extends BaseLocalService,
 	/**
 	* Deletes the timesheet task duration with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration that was removed
 	* @throws PortalException if a timesheet task duration with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
 	public TimesheetTaskDuration deleteTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
-		throws PortalException;
+		long timesheetTaskDurationId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public TimesheetTaskDuration fetchTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK);
+		long timesheetTaskDurationId);
 
 	/**
 	* Returns the timesheet task duration matching the UUID and group.
@@ -124,14 +122,13 @@ public interface TimesheetTaskDurationLocalService extends BaseLocalService,
 	/**
 	* Returns the timesheet task duration with the primary key.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration
 	* @throws PortalException if a timesheet task duration with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public TimesheetTaskDuration getTimesheetTaskDuration(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
-		throws PortalException;
+		long timesheetTaskDurationId) throws PortalException;
 
 	/**
 	* Returns the timesheet task duration matching the UUID and group.

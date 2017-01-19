@@ -18,8 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK;
-
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.CacheModel;
@@ -59,14 +57,14 @@ public interface TimesheetTaskModel extends BaseModel<TimesheetTask>,
 	 *
 	 * @return the primary key of this timesheet task
 	 */
-	public TimesheetTaskPK getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this timesheet task.
 	 *
 	 * @param primaryKey the primary key of this timesheet task
 	 */
-	public void setPrimaryKey(TimesheetTaskPK primaryKey);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Returns the uuid of this timesheet task.

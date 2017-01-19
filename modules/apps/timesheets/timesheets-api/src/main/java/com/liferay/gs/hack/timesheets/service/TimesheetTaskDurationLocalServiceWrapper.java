@@ -49,13 +49,13 @@ public class TimesheetTaskDurationLocalServiceWrapper
 	/**
 	* Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	*
-	* @param timesheetTaskDurationPK the primary key for the new timesheet task duration
+	* @param timesheetTaskDurationId the primary key for the new timesheet task duration
 	* @return the new timesheet task duration
 	*/
 	@Override
 	public com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration createTimesheetTaskDuration(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK timesheetTaskDurationPK) {
-		return _timesheetTaskDurationLocalService.createTimesheetTaskDuration(timesheetTaskDurationPK);
+		long timesheetTaskDurationId) {
+		return _timesheetTaskDurationLocalService.createTimesheetTaskDuration(timesheetTaskDurationId);
 	}
 
 	/**
@@ -73,21 +73,21 @@ public class TimesheetTaskDurationLocalServiceWrapper
 	/**
 	* Deletes the timesheet task duration with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration that was removed
 	* @throws PortalException if a timesheet task duration with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration deleteTimesheetTaskDuration(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK timesheetTaskDurationPK)
+		long timesheetTaskDurationId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _timesheetTaskDurationLocalService.deleteTimesheetTaskDuration(timesheetTaskDurationPK);
+		return _timesheetTaskDurationLocalService.deleteTimesheetTaskDuration(timesheetTaskDurationId);
 	}
 
 	@Override
 	public com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration fetchTimesheetTaskDuration(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK timesheetTaskDurationPK) {
-		return _timesheetTaskDurationLocalService.fetchTimesheetTaskDuration(timesheetTaskDurationPK);
+		long timesheetTaskDurationId) {
+		return _timesheetTaskDurationLocalService.fetchTimesheetTaskDuration(timesheetTaskDurationId);
 	}
 
 	/**
@@ -107,15 +107,15 @@ public class TimesheetTaskDurationLocalServiceWrapper
 	/**
 	* Returns the timesheet task duration with the primary key.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration
 	* @throws PortalException if a timesheet task duration with the primary key could not be found
 	*/
 	@Override
 	public com.liferay.gs.hack.timesheets.model.TimesheetTaskDuration getTimesheetTaskDuration(
-		com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK timesheetTaskDurationPK)
+		long timesheetTaskDurationId)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _timesheetTaskDurationLocalService.getTimesheetTaskDuration(timesheetTaskDurationPK);
+		return _timesheetTaskDurationLocalService.getTimesheetTaskDuration(timesheetTaskDurationId);
 	}
 
 	/**

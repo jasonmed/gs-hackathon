@@ -55,40 +55,6 @@ public interface TimesheetTask extends TimesheetTaskModel, PersistedModel {
 			}
 		};
 
-	public static final Accessor<TimesheetTask, Long> TIMESHEET_ID_ACCESSOR = new Accessor<TimesheetTask, Long>() {
-			@Override
-			public Long get(TimesheetTask timesheetTask) {
-				return timesheetTask.getTimesheetId();
-			}
-
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
-
-			@Override
-			public Class<TimesheetTask> getTypeClass() {
-				return TimesheetTask.class;
-			}
-		};
-
-	public static final Accessor<TimesheetTask, Long> PROJECT_TASK_ID_ACCESSOR = new Accessor<TimesheetTask, Long>() {
-			@Override
-			public Long get(TimesheetTask timesheetTask) {
-				return timesheetTask.getProjectTaskId();
-			}
-
-			@Override
-			public Class<Long> getAttributeClass() {
-				return Long.class;
-			}
-
-			@Override
-			public Class<TimesheetTask> getTypeClass() {
-				return TimesheetTask.class;
-			}
-		};
-
 	public java.util.List<TimesheetTaskDuration> getTimesheetTaskDurations();
 
 	public void setTimesheetTaskDurations(

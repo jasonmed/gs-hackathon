@@ -17,7 +17,6 @@ package com.liferay.gs.hack.timesheets.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.gs.hack.timesheets.model.TimesheetTask;
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskPK;
 
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -53,7 +52,7 @@ public class TimesheetTaskCacheModel implements CacheModel<TimesheetTask>,
 
 		TimesheetTaskCacheModel timesheetTaskCacheModel = (TimesheetTaskCacheModel)obj;
 
-		if (timesheetTaskPK.equals(timesheetTaskCacheModel.timesheetTaskPK)) {
+		if (timesheetTaskId == timesheetTaskCacheModel.timesheetTaskId) {
 			return true;
 		}
 
@@ -62,7 +61,7 @@ public class TimesheetTaskCacheModel implements CacheModel<TimesheetTask>,
 
 	@Override
 	public int hashCode() {
-		return HashUtil.hash(0, timesheetTaskPK);
+		return HashUtil.hash(0, timesheetTaskId);
 	}
 
 	@Override
@@ -162,9 +161,6 @@ public class TimesheetTaskCacheModel implements CacheModel<TimesheetTask>,
 		modifiedDate = objectInput.readLong();
 
 		billable = objectInput.readBoolean();
-
-		timesheetTaskPK = new TimesheetTaskPK(timesheetTaskId, timesheetId,
-				projectTaskId);
 	}
 
 	@Override
@@ -213,5 +209,4 @@ public class TimesheetTaskCacheModel implements CacheModel<TimesheetTask>,
 	public long createDate;
 	public long modifiedDate;
 	public boolean billable;
-	public transient TimesheetTaskPK timesheetTaskPK;
 }

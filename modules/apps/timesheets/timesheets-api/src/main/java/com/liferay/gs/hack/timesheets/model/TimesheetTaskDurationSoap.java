@@ -16,8 +16,6 @@ package com.liferay.gs.hack.timesheets.model;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.gs.hack.timesheets.service.persistence.TimesheetTaskDurationPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -97,15 +95,12 @@ public class TimesheetTaskDurationSoap implements Serializable {
 	public TimesheetTaskDurationSoap() {
 	}
 
-	public TimesheetTaskDurationPK getPrimaryKey() {
-		return new TimesheetTaskDurationPK(_timesheetTaskDurationId,
-			_timesheetId, _timesheetTaskId);
+	public long getPrimaryKey() {
+		return _timesheetTaskDurationId;
 	}
 
-	public void setPrimaryKey(TimesheetTaskDurationPK pk) {
-		setTimesheetTaskDurationId(pk.timesheetTaskDurationId);
-		setTimesheetId(pk.timesheetId);
-		setTimesheetTaskId(pk.timesheetTaskId);
+	public void setPrimaryKey(long pk) {
+		setTimesheetTaskDurationId(pk);
 	}
 
 	public String getUuid() {

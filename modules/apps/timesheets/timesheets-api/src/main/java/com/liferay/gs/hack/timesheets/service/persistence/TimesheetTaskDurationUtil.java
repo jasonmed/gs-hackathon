@@ -240,18 +240,18 @@ public class TimesheetTaskDurationUtil {
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where uuid = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param uuid the uuid
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public static TimesheetTaskDuration[] findByUuid_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, java.lang.String uuid,
+		long timesheetTaskDurationId, java.lang.String uuid,
 		OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskDurationException {
 		return getPersistence()
-				   .findByUuid_PrevAndNext(timesheetTaskDurationPK, uuid,
+				   .findByUuid_PrevAndNext(timesheetTaskDurationId, uuid,
 			orderByComparator);
 	}
 
@@ -479,7 +479,7 @@ public class TimesheetTaskDurationUtil {
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where uuid = &#63; and companyId = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param uuid the uuid
 	* @param companyId the company ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -487,12 +487,11 @@ public class TimesheetTaskDurationUtil {
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public static TimesheetTaskDuration[] findByUuid_C_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, java.lang.String uuid,
-		long companyId,
+		long timesheetTaskDurationId, java.lang.String uuid, long companyId,
 		OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskDurationException {
 		return getPersistence()
-				   .findByUuid_C_PrevAndNext(timesheetTaskDurationPK, uuid,
+				   .findByUuid_C_PrevAndNext(timesheetTaskDurationId, uuid,
 			companyId, orderByComparator);
 	}
 
@@ -651,18 +650,18 @@ public class TimesheetTaskDurationUtil {
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where timesheetId = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param timesheetId the timesheet ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public static TimesheetTaskDuration[] findByTimesheetId_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, long timesheetId,
+		long timesheetTaskDurationId, long timesheetId,
 		OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskDurationException {
 		return getPersistence()
-				   .findByTimesheetId_PrevAndNext(timesheetTaskDurationPK,
+				   .findByTimesheetId_PrevAndNext(timesheetTaskDurationId,
 			timesheetId, orderByComparator);
 	}
 
@@ -825,18 +824,18 @@ public class TimesheetTaskDurationUtil {
 	/**
 	* Returns the timesheet task durations before and after the current timesheet task duration in the ordered set where timesheetTaskId = &#63;.
 	*
-	* @param timesheetTaskDurationPK the primary key of the current timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the current timesheet task duration
 	* @param timesheetTaskId the timesheet task ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public static TimesheetTaskDuration[] findByTimesheetTaskId_PrevAndNext(
-		TimesheetTaskDurationPK timesheetTaskDurationPK, long timesheetTaskId,
+		long timesheetTaskDurationId, long timesheetTaskId,
 		OrderByComparator<TimesheetTaskDuration> orderByComparator)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskDurationException {
 		return getPersistence()
-				   .findByTimesheetTaskId_PrevAndNext(timesheetTaskDurationPK,
+				   .findByTimesheetTaskId_PrevAndNext(timesheetTaskDurationId,
 			timesheetTaskId, orderByComparator);
 	}
 
@@ -881,25 +880,23 @@ public class TimesheetTaskDurationUtil {
 	/**
 	* Creates a new timesheet task duration with the primary key. Does not add the timesheet task duration to the database.
 	*
-	* @param timesheetTaskDurationPK the primary key for the new timesheet task duration
+	* @param timesheetTaskDurationId the primary key for the new timesheet task duration
 	* @return the new timesheet task duration
 	*/
-	public static TimesheetTaskDuration create(
-		TimesheetTaskDurationPK timesheetTaskDurationPK) {
-		return getPersistence().create(timesheetTaskDurationPK);
+	public static TimesheetTaskDuration create(long timesheetTaskDurationId) {
+		return getPersistence().create(timesheetTaskDurationId);
 	}
 
 	/**
 	* Removes the timesheet task duration with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration that was removed
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
-	public static TimesheetTaskDuration remove(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
+	public static TimesheetTaskDuration remove(long timesheetTaskDurationId)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskDurationException {
-		return getPersistence().remove(timesheetTaskDurationPK);
+		return getPersistence().remove(timesheetTaskDurationId);
 	}
 
 	public static TimesheetTaskDuration updateImpl(
@@ -910,25 +907,25 @@ public class TimesheetTaskDurationUtil {
 	/**
 	* Returns the timesheet task duration with the primary key or throws a {@link NoSuchTimesheetTaskDurationException} if it could not be found.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration
 	* @throws NoSuchTimesheetTaskDurationException if a timesheet task duration with the primary key could not be found
 	*/
 	public static TimesheetTaskDuration findByPrimaryKey(
-		TimesheetTaskDurationPK timesheetTaskDurationPK)
+		long timesheetTaskDurationId)
 		throws com.liferay.gs.hack.timesheets.exception.NoSuchTimesheetTaskDurationException {
-		return getPersistence().findByPrimaryKey(timesheetTaskDurationPK);
+		return getPersistence().findByPrimaryKey(timesheetTaskDurationId);
 	}
 
 	/**
 	* Returns the timesheet task duration with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param timesheetTaskDurationPK the primary key of the timesheet task duration
+	* @param timesheetTaskDurationId the primary key of the timesheet task duration
 	* @return the timesheet task duration, or <code>null</code> if a timesheet task duration with the primary key could not be found
 	*/
 	public static TimesheetTaskDuration fetchByPrimaryKey(
-		TimesheetTaskDurationPK timesheetTaskDurationPK) {
-		return getPersistence().fetchByPrimaryKey(timesheetTaskDurationPK);
+		long timesheetTaskDurationId) {
+		return getPersistence().fetchByPrimaryKey(timesheetTaskDurationId);
 	}
 
 	public static java.util.Map<java.io.Serializable, TimesheetTaskDuration> fetchByPrimaryKeys(

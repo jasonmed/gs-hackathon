@@ -85,8 +85,8 @@
 
 		<!-- FK's -->
 		<column name="groupId" type="long" />
-		<column name="timesheetId" primary="true" type="long" />
-		<column name="projectTaskId" primary="true" type="long" />
+		<column name="timesheetId" type="long" />
+		<column name="projectTaskId" type="long" />
 
 		<!-- Audit fields -->
 		<column name="companyId" type="long" />
@@ -120,8 +120,8 @@
 
 		<!-- FK's -->
 		<column name="groupId" type="long" />
-		<column name="timesheetId" primary="true" type="long" />
-		<column name="timesheetTaskId" primary="true" type="long" />
+		<column name="timesheetId" type="long" />
+		<column name="timesheetTaskId" type="long" />
 
 		<!-- Audit fields -->
 		<column name="companyId" type="long" />
