@@ -1,4 +1,4 @@
-package com.liferay.gs.hack.timesheets.portlet.portlet;
+package com.liferay.gs.hack.timesheets.portlet;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
@@ -14,10 +14,12 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.display-name=timesheets-web Portlet",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
+		"javax.portlet.name=" + TimesheetPortletKeys.TIMESHEET,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = Portlet.class
 )
 public class TimesheetPortlet extends MVCPortlet {
+
 }
