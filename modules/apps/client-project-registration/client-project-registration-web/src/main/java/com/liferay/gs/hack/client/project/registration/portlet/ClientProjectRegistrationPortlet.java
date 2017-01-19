@@ -16,6 +16,7 @@ import org.osgi.service.component.annotations.Component;
 		"com.liferay.portlet.display-category=GS HACK",
 		"com.liferay.portlet.instanceable=true",
 		"javax.portlet.display-name=client-project-registration Portlet",
+		"javax.portlet.init-param.copy-request-parameters=true",
 		"javax.portlet.init-param.mvc-command-names-default-views=/project/view",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.name=" + ClientProjectRegistrationConstants.PORTLET_NAME,
